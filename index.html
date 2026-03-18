@@ -9,18 +9,17 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --black: #0a0a0a; --dark: #111111; --card: #181818;
-      --gold: #c9a84c; --gold-light: #e8c96e;
-      --white: #f4f1ec; --muted: #888;
+      --black: #000000;
+      --dark:  #0d0d0d;
+      --card:  #161616;
+      --white: #ffffff;
+      --off-white: #e8e8e8;
+      --muted: #666666;
+      --accent: #ffffff;
       --font-display: 'Bebas Neue', sans-serif;
       --font-body: 'Raleway', sans-serif;
-      /* ========================================================
-         GITHUB IMAGE BASE URL
-         All images must be uploaded to GitHub at:
-         github.com/mikesavagewebsite/mikesavageweb
-         inside the "images" folder
-         ======================================================== */
-      --base: 'https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/';
+      /* GitHub base URL — images uploaded to root of repo */
+      --GITHUB_BASE: 'https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/';
     }
     html { scroll-behavior: smooth; }
     body { background: var(--black); color: var(--white); font-family: var(--font-body); line-height: 1.6; }
@@ -29,19 +28,25 @@
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(10,10,10,0.93); backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(201,168,76,0.18);
+      background: rgba(0,0,0,0.95); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 40px; height: 70px;
     }
     .nav-logo { display: flex; align-items: center; gap: 12px; }
-    .nav-logo-mark { width: 44px; height: 44px; background: var(--gold); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 22px; color: var(--black); }
+    .nav-logo-img {
+      width: 46px; height: 46px;
+      object-fit: contain;
+      /* logo has black bg so it blends into nav naturally */
+    }
     .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
     .nav-logo-text span:first-child { font-family: var(--font-display); font-size: 18px; letter-spacing: 2px; color: var(--white); }
-    .nav-logo-text span:last-child { font-size: 10px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; }
+    .nav-logo-text span:last-child { font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.45); text-transform: uppercase; }
+
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+
     .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); }
 
@@ -49,107 +54,71 @@
     .hero { position: relative; height: 100vh; min-height: 600px; overflow: hidden; margin-top: 70px; }
     .hero-slides { display: flex; width: 100%; height: 100%; transition: transform 0.8s cubic-bezier(0.4,0,0.2,1); }
     .hero-slide { min-width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; }
-
-    /* Hero background — image loaded via JS so it's easy to update */
-    .hero-bg {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center; background-repeat: no-repeat;
-      filter: brightness(0.4);
-      transition: opacity 0.5s;
-    }
+    .hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; filter: brightness(0.38); }
 
     .hero-content { position: relative; z-index: 1; text-align: center; padding: 0 24px; }
+    .hero-logo-big {
+      width: 100px; height: 100px; object-fit: contain;
+      margin: 0 auto 20px; display: block;
+      filter: invert(0); /* logo is already white on black */
+    }
     .hero-studio-name { font-family: var(--font-display); font-size: clamp(48px, 9vw, 108px); letter-spacing: 6px; line-height: 1; color: var(--white); }
-    .hero-studio-name span { color: var(--gold); }
-    .hero-tagline { font-size: clamp(11px, 1.8vw, 15px); letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin: 16px 0 40px; font-weight: 300; }
-    .hero-cta { display: inline-block; padding: 14px 42px; border: 1px solid var(--gold); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; color: var(--gold); transition: all 0.25s; }
-    .hero-cta:hover { background: var(--gold); color: var(--black); }
+    .hero-tagline { font-size: clamp(11px, 1.8vw, 15px); letter-spacing: 6px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin: 16px 0 40px; font-weight: 300; }
+    .hero-cta { display: inline-block; padding: 14px 42px; border: 1px solid var(--white); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; color: var(--white); transition: all 0.25s; }
+    .hero-cta:hover { background: var(--white); color: var(--black); }
 
-    .hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; background: rgba(0,0,0,0.5); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; transition: all 0.2s; }
-    .hero-arrow:hover { background: var(--gold); color: var(--black); }
+    .hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: var(--white); width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; transition: all 0.2s; }
+    .hero-arrow:hover { background: var(--white); color: var(--black); }
     .hero-arrow.prev { left: 24px; }
     .hero-arrow.next { right: 24px; }
     .hero-dots { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: 280px; }
-    .hero-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(201,168,76,0.3); cursor: pointer; transition: all 0.2s; }
-    .hero-dot.active { background: var(--gold); transform: scale(1.3); }
-    .hero-counter { position: absolute; bottom: 28px; right: 28px; z-index: 2; font-family: var(--font-display); font-size: 14px; letter-spacing: 2px; color: rgba(201,168,76,0.7); }
+    .hero-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25); cursor: pointer; transition: all 0.2s; }
+    .hero-dot.active { background: var(--white); transform: scale(1.3); }
+    .hero-counter { position: absolute; bottom: 28px; right: 28px; z-index: 2; font-family: var(--font-display); font-size: 14px; letter-spacing: 2px; color: rgba(255,255,255,0.5); }
 
     /* ── SHARED ── */
-    .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 12px; }
+    .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.4); font-weight: 700; margin-bottom: 12px; }
     h2 { font-family: var(--font-display); font-size: clamp(30px, 5vw, 50px); letter-spacing: 3px; color: var(--white); margin-bottom: 40px; }
 
     /* ── NEWS ── */
     #news { max-width: 1160px; margin: 0 auto; padding: 80px 40px; }
-    .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px; }
-    .news-card { background: var(--card); border: 1px solid rgba(255,255,255,0.05); overflow: hidden; transition: transform 0.25s, border-color 0.25s; display: block; }
-    .news-card:hover { transform: translateY(-4px); border-color: rgba(201,168,76,0.3); }
-    .news-card-img { width: 100%; aspect-ratio: 16/9; background: #1e1e1e; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 18px; color: rgba(201,168,76,0.25); letter-spacing: 3px; overflow: hidden; }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+    .news-card { background: var(--card); border: 1px solid rgba(255,255,255,0.07); overflow: hidden; transition: transform 0.25s, border-color 0.25s; display: block; }
+    .news-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.25); }
+    .news-card-img { width: 100%; aspect-ratio: 16/9; background: #1a1a1a; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 14px; letter-spacing: 3px; color: rgba(255,255,255,0.1); overflow: hidden; }
     .news-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .news-card-body { padding: 20px; }
     .news-card-meta { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
     .news-card-title { font-weight: 700; font-size: 15px; margin-bottom: 8px; line-height: 1.4; }
-    .news-card-excerpt { font-size: 13px; color: #bbb; line-height: 1.6; }
-    .news-card-link { display: inline-block; margin-top: 14px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+    .news-card-excerpt { font-size: 13px; color: #888; line-height: 1.6; }
+    .news-card-link { display: inline-block; margin-top: 14px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--white); border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 2px; }
     .see-all-wrap { text-align: right; margin-top: 32px; }
-    .see-all-link { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+    .see-all-link { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--white); border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 2px; }
 
-    /* ── OUR PRODUCTIONS ──
-       Each card = one YouTube video/series
-       Thumbnail is the YouTube video thumbnail (16:9)
-       Upload thumbnail images to GitHub as: images/thumb-[title].jpeg
-    */
+    /* ── OUR PRODUCTIONS ── */
     #productions { background: var(--dark); }
     .productions-inner { max-width: 1160px; margin: 0 auto; padding: 80px 40px; }
     .productions-slider-wrap { position: relative; overflow: hidden; }
     .productions-track { display: flex; gap: 20px; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
 
-    .prod-card {
-      min-width: 280px; background: var(--card);
-      border: 1px solid rgba(255,255,255,0.06);
-      overflow: hidden; flex-shrink: 0;
-      transition: border-color 0.2s, transform 0.2s;
-      display: block;
-    }
-    .prod-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-4px); }
-
-    /* Thumbnail area — 16:9 like YouTube */
-    .prod-thumb {
-      width: 100%; aspect-ratio: 16/9;
-      background: #1e1e1e; overflow: hidden; position: relative;
-      display: flex; align-items: center; justify-content: center;
-    }
+    .prod-card { min-width: 280px; background: var(--card); border: 1px solid rgba(255,255,255,0.07); overflow: hidden; flex-shrink: 0; transition: border-color 0.2s, transform 0.2s; display: block; }
+    .prod-card:hover { border-color: rgba(255,255,255,0.3); transform: translateY(-4px); }
+    .prod-thumb { width: 100%; aspect-ratio: 16/9; background: #1a1a1a; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; }
     .prod-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
     .prod-card:hover .prod-thumb img { transform: scale(1.04); }
-
-    /* Play button overlay */
-    .prod-play {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(0,0,0,0.35);
-      opacity: 0; transition: opacity 0.25s;
-    }
+    .prod-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); opacity: 0; transition: opacity 0.25s; }
     .prod-card:hover .prod-play { opacity: 1; }
-    .prod-play-btn {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: var(--gold); display: flex; align-items: center; justify-content: center;
-      font-size: 20px; color: var(--black);
-    }
-
-    /* Placeholder when no thumbnail yet */
-    .prod-thumb-placeholder {
-      width: 100%; height: 100%;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
-    }
-    .prod-thumb-placeholder .ph-icon { font-size: 32px; opacity: 0.15; }
-    .prod-thumb-placeholder .ph-label { font-family: var(--font-display); font-size: 11px; letter-spacing: 3px; color: rgba(201,168,76,0.25); }
-
+    .prod-play-btn { width: 52px; height: 52px; border-radius: 50%; background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--black); }
+    .prod-thumb-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+    .prod-thumb-placeholder .ph-icon { font-size: 32px; opacity: 0.12; }
+    .prod-thumb-placeholder .ph-label { font-family: var(--font-display); font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.15); }
     .prod-info { padding: 14px 16px; }
-    .prod-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 4px; }
-    .prod-title { font-family: var(--font-display); font-size: 20px; letter-spacing: 2px; color: var(--white); line-height: 1.1; margin-bottom: 6px; }
+    .prod-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); font-weight: 700; margin-bottom: 4px; }
+    .prod-title { font-family: var(--font-display); font-size: 20px; letter-spacing: 2px; color: var(--white); margin-bottom: 6px; }
     .prod-watch { font-size: 11px; color: var(--muted); font-weight: 600; }
 
-    .prod-arrow { position: absolute; top: 40%; transform: translateY(-50%); background: rgba(0,0,0,0.75); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; z-index: 2; transition: all 0.2s; }
-    .prod-arrow:hover { background: var(--gold); color: var(--black); }
+    .prod-arrow { position: absolute; top: 40%; transform: translateY(-50%); background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.15); color: var(--white); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; z-index: 2; transition: all 0.2s; }
+    .prod-arrow:hover { background: var(--white); color: var(--black); }
     .prod-arrow.prev { left: 0; }
     .prod-arrow.next { right: 0; }
 
@@ -157,48 +126,48 @@
     #contact { max-width: 1160px; margin: 0 auto; padding: 80px 40px; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
     .contact-info h3 { font-family: var(--font-display); font-size: 28px; letter-spacing: 2px; margin-bottom: 16px; }
-    .contact-info p { color: #aaa; font-size: 14px; line-height: 1.8; margin-bottom: 24px; }
-    .contact-info a { color: var(--gold); }
+    .contact-info p { color: #888; font-size: 14px; line-height: 1.8; margin-bottom: 24px; }
+    .contact-info a { color: var(--white); }
     .form-group { margin-bottom: 18px; }
     .form-group label { display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; color: var(--muted); }
     .form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--card); border: 1px solid rgba(255,255,255,0.1); color: var(--white); font-family: var(--font-body); font-size: 14px; padding: 12px 16px; outline: none; transition: border-color 0.2s; appearance: none; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--white); }
     .form-group textarea { height: 120px; resize: vertical; }
     .form-group select option { background: var(--dark); }
-    .btn-submit { display: block; width: 100%; padding: 14px; background: var(--gold); color: var(--black); font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.2s; }
-    .btn-submit:hover { background: var(--gold-light); }
-    .form-success { display: none; margin-top: 14px; padding: 12px 16px; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); font-size: 13px; color: var(--gold); }
+    .btn-submit { display: block; width: 100%; padding: 14px; background: var(--white); color: var(--black); font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.2s; }
+    .btn-submit:hover { background: var(--off-white); }
+    .form-success { display: none; margin-top: 14px; padding: 12px 16px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.2); font-size: 13px; color: var(--white); }
 
     /* ── FAQ ── */
     #faq { max-width: 1160px; margin: 0 auto; padding: 80px 40px; }
     .faq-list { list-style: none; }
     .faq-item { border-bottom: 1px solid rgba(255,255,255,0.08); }
     .faq-question { width: 100%; text-align: left; background: none; border: none; color: var(--white); font-family: var(--font-body); font-size: 15px; font-weight: 600; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; gap: 16px; }
-    .faq-question::after { content: '+'; font-size: 22px; color: var(--gold); flex-shrink: 0; transition: transform 0.25s; }
+    .faq-question::after { content: '+'; font-size: 22px; color: rgba(255,255,255,0.4); flex-shrink: 0; transition: transform 0.25s; }
     .faq-item.open .faq-question::after { transform: rotate(45deg); }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; font-size: 14px; color: #aaa; line-height: 1.8; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; font-size: 14px; color: #888; line-height: 1.8; }
     .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 20px; }
 
     /* ── FOOTER ── */
-    footer { background: var(--dark); border-top: 1px solid rgba(201,168,76,0.15); padding: 60px 40px 30px; }
+    footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.08); padding: 60px 40px 30px; }
     .footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-    .footer-brand p { color: #888; font-size: 13px; margin-top: 12px; line-height: 1.7; }
-    .footer-logo { display: flex; align-items: center; gap: 10px; }
-    .footer-logo-mark { width: 36px; height: 36px; background: var(--gold); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 18px; color: var(--black); }
+    .footer-brand p { color: #666; font-size: 13px; margin-top: 12px; line-height: 1.7; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; }
+    .footer-logo-img { width: 40px; height: 40px; object-fit: contain; }
     .footer-logo-name { font-family: var(--font-display); font-size: 16px; letter-spacing: 2px; }
-    .footer-col h4 { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 16px; }
+    .footer-col h4 { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); font-weight: 700; margin-bottom: 16px; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 10px; }
-    .footer-col ul a { font-size: 13px; color: #888; transition: color 0.2s; }
-    .footer-col ul a:hover { color: var(--gold); }
-    .footer-bottom { max-width: 1160px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); }
+    .footer-col ul a { font-size: 13px; color: #666; transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--white); }
+    .footer-bottom { max-width: 1160px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #555; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .nav-links { display: none; flex-direction: column; gap: 0; position: fixed; top: 70px; left: 0; right: 0; background: rgba(10,10,10,0.97); border-bottom: 1px solid rgba(201,168,76,0.15); }
+      .nav-links { display: none; flex-direction: column; gap: 0; position: fixed; top: 70px; left: 0; right: 0; background: rgba(0,0,0,0.98); border-bottom: 1px solid rgba(255,255,255,0.08); }
       .nav-links.open { display: flex; }
-      .nav-links li { border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .nav-links li { border-bottom: 1px solid rgba(255,255,255,0.05); }
       .nav-links a { display: block; padding: 16px 20px; }
       .nav-toggle { display: flex; }
       #news, #contact, #faq { padding: 60px 20px; }
@@ -216,7 +185,10 @@
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">
-    <div class="nav-logo-mark">MS</div>
+    <!-- Logo uploaded to GitHub root as: logo.jpeg -->
+    <img class="nav-logo-img"
+         src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg"
+         alt="Mike Savage Studios" />
     <div class="nav-logo-text">
       <span>MIKE SAVAGE STUDIOS</span>
       <span>Crafting Stories That Last</span>
@@ -233,30 +205,20 @@
   <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- ══════════════════════════════════════════
-     HERO SLIDER
-     Images are loaded from GitHub via JavaScript below.
-     To update hero images:
-       1. Upload images to GitHub → images/ folder
-       2. Name them: hero-01.jpeg, hero-02.jpeg ... hero-10.jpeg
-══════════════════════════════════════════ -->
+<!-- HERO SLIDER -->
 <div class="hero" id="hero">
-  <div class="hero-slides" id="heroSlides">
-    <!-- Slides are built by JavaScript below -->
-  </div>
+  <div class="hero-slides" id="heroSlides"></div>
   <button class="hero-arrow prev" id="heroPrev">&#8592;</button>
   <button class="hero-arrow next" id="heroNext">&#8594;</button>
   <div class="hero-dots" id="heroDots"></div>
   <div class="hero-counter" id="heroCounter">1 / 10</div>
 </div>
 
-
 <!-- FEATURED NEWS -->
 <section id="news">
   <div class="section-label">Latest Updates</div>
   <h2>Featured News</h2>
   <div class="news-grid">
-
     <a href="#" class="news-card">
       <div class="news-card-img">NEWS IMAGE</div>
       <div class="news-card-body">
@@ -266,17 +228,15 @@
         <span class="news-card-link">Read More</span>
       </div>
     </a>
-
     <a href="#" class="news-card">
       <div class="news-card-img">NEWS IMAGE</div>
       <div class="news-card-body">
         <div class="news-card-meta">📅 March 10, 2026 &nbsp;🕐 3 min read</div>
         <div class="news-card-title">Behind the Scenes: Our Upcoming Production — FLATLINE</div>
-        <div class="news-card-excerpt">Get an exclusive first look at the production of FLATLINE, currently in production. Directed by Danny Praiz.</div>
+        <div class="news-card-excerpt">Get an exclusive first look at the production of FLATLINE. Directed by Danny Praiz.</div>
         <span class="news-card-link">Read More</span>
       </div>
     </a>
-
     <a href="#" class="news-card">
       <div class="news-card-img">NEWS IMAGE</div>
       <div class="news-card-body">
@@ -286,7 +246,6 @@
         <span class="news-card-link">Read More</span>
       </div>
     </a>
-
     <a href="#" class="news-card">
       <div class="news-card-img">NEWS IMAGE</div>
       <div class="news-card-body">
@@ -296,7 +255,6 @@
         <span class="news-card-link">See More</span>
       </div>
     </a>
-
     <a href="#" class="news-card">
       <div class="news-card-img">NEWS IMAGE</div>
       <div class="news-card-body">
@@ -306,21 +264,11 @@
         <span class="news-card-link">Read More</span>
       </div>
     </a>
-
   </div>
   <div class="see-all-wrap"><a href="news.html" class="see-all-link">See All News →</a></div>
 </section>
 
-
-<!-- ══════════════════════════════════════════
-     OUR PRODUCTIONS
-     Each card = one YouTube series or film
-     HOW TO ADD A PRODUCTION:
-       1. Upload the YouTube video thumbnail to GitHub → images/ folder
-          Name it: thumb-[title].jpeg  e.g. thumb-flatline.jpeg
-       2. Copy one <a class="prod-card"> block below
-       3. Replace the YouTube link, thumbnail src, tag, and title
-══════════════════════════════════════════ -->
+<!-- OUR PRODUCTIONS -->
 <div id="productions" style="background:var(--dark);">
   <div class="productions-inner">
     <div class="section-label">What We've Made</div>
@@ -328,9 +276,6 @@
     <div class="productions-slider-wrap">
       <div class="productions-track" id="prodTrack">
 
-        <!-- PRODUCTION 1 — FLATLINE
-             Replace href with actual YouTube playlist/video URL
-             Replace thumb src with: images/thumb-flatline.jpeg on GitHub -->
         <a href="https://www.youtube.com/@mikesavagestudios" target="_blank" class="prod-card">
           <div class="prod-thumb">
             <div class="prod-thumb-placeholder">
@@ -346,68 +291,36 @@
           </div>
         </a>
 
-        <!-- PRODUCTION 2 — Add your next title here -->
         <a href="#" class="prod-card">
           <div class="prod-thumb">
-            <div class="prod-thumb-placeholder">
-              <div class="ph-icon">🎬</div>
-              <div class="ph-label">UPLOAD THUMBNAIL</div>
-            </div>
+            <div class="prod-thumb-placeholder"><div class="ph-icon">🎬</div><div class="ph-label">UPLOAD THUMBNAIL</div></div>
             <div class="prod-play"><div class="prod-play-btn">▶</div></div>
           </div>
-          <div class="prod-info">
-            <div class="prod-tag">Series</div>
-            <div class="prod-title">TITLE HERE</div>
-            <div class="prod-watch">▶ Watch on YouTube</div>
-          </div>
+          <div class="prod-info"><div class="prod-tag">Series</div><div class="prod-title">TITLE HERE</div><div class="prod-watch">▶ Watch on YouTube</div></div>
         </a>
 
-        <!-- PRODUCTION 3 -->
         <a href="#" class="prod-card">
           <div class="prod-thumb">
-            <div class="prod-thumb-placeholder">
-              <div class="ph-icon">🎬</div>
-              <div class="ph-label">UPLOAD THUMBNAIL</div>
-            </div>
+            <div class="prod-thumb-placeholder"><div class="ph-icon">🎬</div><div class="ph-label">UPLOAD THUMBNAIL</div></div>
             <div class="prod-play"><div class="prod-play-btn">▶</div></div>
           </div>
-          <div class="prod-info">
-            <div class="prod-tag">Film</div>
-            <div class="prod-title">TITLE HERE</div>
-            <div class="prod-watch">▶ Watch on YouTube</div>
-          </div>
+          <div class="prod-info"><div class="prod-tag">Film</div><div class="prod-title">TITLE HERE</div><div class="prod-watch">▶ Watch on YouTube</div></div>
         </a>
 
-        <!-- PRODUCTION 4 -->
         <a href="#" class="prod-card">
           <div class="prod-thumb">
-            <div class="prod-thumb-placeholder">
-              <div class="ph-icon">🎬</div>
-              <div class="ph-label">UPLOAD THUMBNAIL</div>
-            </div>
+            <div class="prod-thumb-placeholder"><div class="ph-icon">🎬</div><div class="ph-label">UPLOAD THUMBNAIL</div></div>
             <div class="prod-play"><div class="prod-play-btn">▶</div></div>
           </div>
-          <div class="prod-info">
-            <div class="prod-tag">Series</div>
-            <div class="prod-title">TITLE HERE</div>
-            <div class="prod-watch">▶ Watch on YouTube</div>
-          </div>
+          <div class="prod-info"><div class="prod-tag">Series</div><div class="prod-title">TITLE HERE</div><div class="prod-watch">▶ Watch on YouTube</div></div>
         </a>
 
-        <!-- PRODUCTION 5 -->
         <a href="#" class="prod-card">
           <div class="prod-thumb">
-            <div class="prod-thumb-placeholder">
-              <div class="ph-icon">🎬</div>
-              <div class="ph-label">UPLOAD THUMBNAIL</div>
-            </div>
+            <div class="prod-thumb-placeholder"><div class="ph-icon">🎬</div><div class="ph-label">UPLOAD THUMBNAIL</div></div>
             <div class="prod-play"><div class="prod-play-btn">▶</div></div>
           </div>
-          <div class="prod-info">
-            <div class="prod-tag">Film</div>
-            <div class="prod-title">TITLE HERE</div>
-            <div class="prod-watch">▶ Watch on YouTube</div>
-          </div>
+          <div class="prod-info"><div class="prod-tag">Film</div><div class="prod-title">TITLE HERE</div><div class="prod-watch">▶ Watch on YouTube</div></div>
         </a>
 
       </div>
@@ -416,7 +329,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- CONTACT -->
 <section id="contact">
@@ -431,12 +343,8 @@
     <div>
       <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your full name" id="cfName" /></div>
       <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com" id="cfEmail" /></div>
-      <div class="form-group">
-        <label>Subject</label>
-        <select id="cfSubject">
-          <option>General Enquiry</option><option>Collaboration</option>
-          <option>Auditions</option><option>Press &amp; Media</option><option>Other</option>
-        </select>
+      <div class="form-group"><label>Subject</label>
+        <select id="cfSubject"><option>General Enquiry</option><option>Collaboration</option><option>Auditions</option><option>Press &amp; Media</option><option>Other</option></select>
       </div>
       <div class="form-group"><label>Message</label><textarea placeholder="Your message..." id="cfMessage"></textarea></div>
       <button class="btn-submit" id="cfSubmit">Send Message</button>
@@ -444,7 +352,6 @@
     </div>
   </div>
 </section>
-
 
 <!-- FAQ -->
 <section id="faq">
@@ -459,12 +366,16 @@
   </ul>
 </section>
 
-
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo"><div class="footer-logo-mark">MS</div><div class="footer-logo-name">MIKE SAVAGE STUDIOS</div></div>
+      <div class="footer-logo">
+        <img class="footer-logo-img"
+             src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg"
+             alt="Mike Savage Studios" />
+        <div class="footer-logo-name">MIKE SAVAGE STUDIOS</div>
+      </div>
       <p>Crafting stories through films &amp; series.</p>
     </div>
     <div class="footer-col"><h4>Navigate</h4><ul>
@@ -480,47 +391,32 @@
   <div class="footer-bottom"><span>© 2026 Mike Savage Studios. All Rights Reserved.</span></div>
 </footer>
 
-
 <script>
-  // ══════════════════════════════════════════
-  // CONFIGURATION — edit this section only
-  // ══════════════════════════════════════════
+  // ── CONFIGURATION ──
   const GITHUB_BASE = 'https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/';
-
-  // Hero images — must be uploaded to GitHub as images/hero-01.jpeg ... hero-10.jpeg
   const HERO_IMAGES = [
-    'hero-01.jpeg',
-    'hero-02.jpeg',
-    'hero-03.jpeg',
-    'hero-04.jpeg',
-    'hero-05.jpeg',
-    'hero-06.jpeg',
-    'hero-07.jpeg',
-    'hero-08.jpeg',
-    'hero-09.jpeg',
-    'hero-10.jpeg'
+    'hero-01.jpeg','hero-02.jpeg','hero-03.jpeg','hero-04.jpeg','hero-05.jpeg',
+    'hero-06.jpeg','hero-07.jpeg','hero-08.jpeg','hero-09.jpeg','hero-10.jpeg'
   ];
-  // ══════════════════════════════════════════
 
-  // Build hero slides from the array above
+  // Build hero slides
   const slidesWrap = document.getElementById('heroSlides');
   const dotsWrap   = document.getElementById('heroDots');
   const counter    = document.getElementById('heroCounter');
 
   HERO_IMAGES.forEach((img, i) => {
-    // Slide
     const slide = document.createElement('div');
     slide.className = 'hero-slide';
     slide.innerHTML = `
       <div class="hero-bg" style="background-image:url('${GITHUB_BASE}${img}')"></div>
       <div class="hero-content">
-        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
+        <img class="hero-logo-big" src="${GITHUB_BASE}logo.jpeg" alt="Mike Savage Studios" />
+        <h1 class="hero-studio-name">MIKE SAVAGE STUDIOS</h1>
         <p class="hero-tagline">Crafting Stories That Last</p>
         <a href="#productions" class="hero-cta">Our Productions</a>
       </div>`;
     slidesWrap.appendChild(slide);
 
-    // Dot
     const dot = document.createElement('div');
     dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
     dot.addEventListener('click', () => { goTo(i); resetAuto(); });
@@ -539,10 +435,9 @@
   document.getElementById('heroPrev').addEventListener('click', () => { goTo(current - 1); resetAuto(); });
   document.getElementById('heroNext').addEventListener('click', () => { goTo(current + 1); resetAuto(); });
 
-  // Touch swipe
   let tx = 0;
   document.getElementById('hero').addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
-  document.getElementById('hero').addEventListener('touchend',   e => {
+  document.getElementById('hero').addEventListener('touchend', e => {
     const diff = tx - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 50) { goTo(diff > 0 ? current + 1 : current - 1); resetAuto(); }
   }, {passive:true});
@@ -562,11 +457,7 @@
   document.getElementById('prodPrev').addEventListener('click', () => slideProd(-1));
   document.getElementById('prodNext').addEventListener('click', () => slideProd(1));
 
-  let px = 0;
-  track.addEventListener('touchstart', e => { px = e.touches[0].clientX; }, {passive:true});
-  track.addEventListener('touchend',   e => { const d = px - e.changedTouches[0].clientX; if (Math.abs(d) > 40) slideProd(d > 0 ? 1 : -1); }, {passive:true});
-
-  // Nav
+  // Nav toggle
   document.getElementById('navToggle').addEventListener('click', () => {
     document.getElementById('navLinks').classList.toggle('open');
   });
