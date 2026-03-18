@@ -8,505 +8,176 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --black: #0a0a0a;
-      --dark: #111111;
-      --card: #181818;
-      --gold: #c9a84c;
-      --gold-light: #e8c96e;
-      --white: #f4f1ec;
-      --muted: #888;
+      --black: #0a0a0a; --dark: #111111; --card: #181818;
+      --gold: #c9a84c; --gold-light: #e8c96e;
+      --white: #f4f1ec; --muted: #888;
       --font-display: 'Bebas Neue', sans-serif;
       --font-body: 'Raleway', sans-serif;
+      --gh: 'https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/';
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: var(--font-body);
-      font-weight: 400;
-      line-height: 1.6;
-    }
-
+    body { background: var(--black); color: var(--white); font-family: var(--font-body); line-height: 1.6; }
     a { color: inherit; text-decoration: none; }
 
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(10,10,10,0.92);
-      backdrop-filter: blur(12px);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,10,10,0.93); backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(201,168,76,0.18);
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px;
-      height: 70px;
+      padding: 0 40px; height: 70px;
     }
-
-    .nav-logo {
-      display: flex; align-items: center; gap: 12px;
-    }
-    .nav-logo-mark {
-      width: 44px; height: 44px;
-      background: var(--gold);
-      border-radius: 4px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-display);
-      font-size: 22px;
-      color: var(--black);
-      font-weight: 700;
-    }
-    .nav-logo-text {
-      display: flex; flex-direction: column;
-      line-height: 1.1;
-    }
-    .nav-logo-text span:first-child {
-      font-family: var(--font-display);
-      font-size: 18px;
-      letter-spacing: 2px;
-      color: var(--white);
-    }
-    .nav-logo-text span:last-child {
-      font-size: 10px;
-      letter-spacing: 3px;
-      color: var(--gold);
-      text-transform: uppercase;
-    }
-
-    .nav-links {
-      display: flex; gap: 32px; list-style: none;
-    }
-    .nav-links a {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--muted);
-      transition: color 0.2s;
-    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo-mark { width: 44px; height: 44px; background: var(--gold); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 22px; color: var(--black); }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-text span:first-child { font-family: var(--font-display); font-size: 18px; letter-spacing: 2px; color: var(--white); }
+    .nav-logo-text span:last-child { font-size: 10px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
     .nav-links a:hover, .nav-links a.active { color: var(--gold); }
-
-    .nav-toggle {
-      display: none;
-      flex-direction: column; gap: 5px; cursor: pointer;
-      background: none; border: none; padding: 4px;
-    }
-    .nav-toggle span {
-      display: block; width: 24px; height: 2px;
-      background: var(--white); transition: all 0.3s;
-    }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); }
 
     /* ── HERO SLIDER ── */
-    .hero {
-      position: relative;
-      height: 100vh; min-height: 600px;
-      overflow: hidden;
-    }
-
-    .hero-slides {
-      display: flex;
-      width: 100%; height: 100%;
-      transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
-    }
-
-    .hero-slide {
-      min-width: 100%; height: 100%;
-      position: relative;
-      display: flex; align-items: center; justify-content: center;
-    }
-
+    .hero { position: relative; height: 100vh; min-height: 600px; overflow: hidden; margin-top: 70px; }
+    .hero-slides { display: flex; width: 100%; height: 100%; transition: transform 0.8s cubic-bezier(0.4,0,0.2,1); }
+    .hero-slide { min-width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; }
     .hero-bg {
       position: absolute; inset: 0;
-      background-size: cover; background-position: center;
-      filter: brightness(0.35);
+      background-size: cover; background-position: center; background-repeat: no-repeat;
+      filter: brightness(0.38);
     }
-    .hero-slide:nth-child(1) .hero-bg { background: linear-gradient(135deg, #1a0a00 0%, #2d1a00 50%, #0a0a0a 100%); }
-    .hero-slide:nth-child(2) .hero-bg { background: linear-gradient(135deg, #0a0a1a 0%, #0d1a2d 50%, #0a0a0a 100%); }
-    .hero-slide:nth-child(3) .hero-bg { background: linear-gradient(135deg, #0a1a0a 0%, #0d2d0d 50%, #0a0a0a 100%); }
-    .hero-slide:nth-child(4) .hero-bg { background: linear-gradient(135deg, #1a0a1a 0%, #2d0d2d 50%, #0a0a0a 100%); }
-    .hero-slide:nth-child(5) .hero-bg { background: linear-gradient(135deg, #1a1a0a 0%, #2d2a00 50%, #0a0a0a 100%); }
-
-    .hero-content {
-      position: relative; z-index: 1;
-      text-align: center;
-      padding: 0 24px;
-      animation: heroFadeIn 1s ease both;
-    }
-
-    @keyframes heroFadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-studio-name {
-      font-family: var(--font-display);
-      font-size: clamp(52px, 10vw, 110px);
-      letter-spacing: 6px;
-      line-height: 1;
-      color: var(--white);
-    }
+    .hero-content { position: relative; z-index: 1; text-align: center; padding: 0 24px; }
+    .hero-studio-name { font-family: var(--font-display); font-size: clamp(48px, 9vw, 108px); letter-spacing: 6px; line-height: 1; color: var(--white); }
     .hero-studio-name span { color: var(--gold); }
-
-    .hero-tagline {
-      font-size: clamp(12px, 2vw, 16px);
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin: 16px 0 40px;
-      font-weight: 300;
-    }
-
-    .hero-cta {
-      display: inline-block;
-      padding: 14px 40px;
-      border: 1px solid var(--gold);
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--gold);
-      transition: all 0.25s;
-    }
-    .hero-cta:hover {
-      background: var(--gold);
-      color: var(--black);
-    }
-
-    .hero-arrow {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      z-index: 2;
-      background: rgba(0,0,0,0.5);
-      border: 1px solid rgba(201,168,76,0.3);
-      color: var(--gold);
-      width: 44px; height: 44px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; font-size: 20px;
-      transition: all 0.2s;
-    }
+    .hero-tagline { font-size: clamp(11px, 1.8vw, 15px); letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin: 16px 0 40px; font-weight: 300; }
+    .hero-cta { display: inline-block; padding: 14px 42px; border: 1px solid var(--gold); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; color: var(--gold); transition: all 0.25s; }
+    .hero-cta:hover { background: var(--gold); color: var(--black); }
+    .hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; background: rgba(0,0,0,0.5); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; transition: all 0.2s; }
     .hero-arrow:hover { background: var(--gold); color: var(--black); }
     .hero-arrow.prev { left: 24px; }
     .hero-arrow.next { right: 24px; }
-
-    .hero-dots {
-      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
-      z-index: 2; display: flex; gap: 8px;
-    }
-    .hero-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(201,168,76,0.3);
-      cursor: pointer; transition: all 0.2s;
-    }
+    .hero-dots { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: 280px; }
+    .hero-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(201,168,76,0.3); cursor: pointer; transition: all 0.2s; }
     .hero-dot.active { background: var(--gold); transform: scale(1.3); }
+    .hero-counter { position: absolute; bottom: 28px; right: 28px; z-index: 2; font-family: var(--font-display); font-size: 14px; letter-spacing: 2px; color: rgba(201,168,76,0.7); }
 
-    /* ── SECTIONS ── */
-    section { padding: 80px 40px; max-width: 1160px; margin: 0 auto; }
-    .section-full { max-width: 100%; padding: 80px 40px; }
+    /* ── SECTION SHARED ── */
+    .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 12px; }
+    h2 { font-family: var(--font-display); font-size: clamp(30px, 5vw, 50px); letter-spacing: 3px; color: var(--white); margin-bottom: 40px; }
 
-    .section-label {
-      font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
-      color: var(--gold); font-weight: 700; margin-bottom: 12px;
-    }
-
-    h2 {
-      font-family: var(--font-display);
-      font-size: clamp(32px, 5vw, 52px);
-      letter-spacing: 3px;
-      color: var(--white);
-      margin-bottom: 40px;
-    }
-
-    .divider {
-      width: 60px; height: 2px; background: var(--gold);
-      margin-bottom: 40px;
-    }
-
-    /* ── NEWS GRID ── */
+    /* ── NEWS ── */
     #news { max-width: 1160px; margin: 0 auto; padding: 80px 40px; }
-
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 28px;
-    }
-
-    .news-card {
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.05);
-      overflow: hidden;
-      transition: transform 0.25s, border-color 0.25s;
-      display: block;
-    }
-    .news-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(201,168,76,0.3);
-    }
-
-    .news-card-img {
-      width: 100%; aspect-ratio: 16/9;
-      background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-display);
-      font-size: 24px;
-      color: var(--gold);
-      letter-spacing: 2px;
-      overflow: hidden;
-    }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px; }
+    .news-card { background: var(--card); border: 1px solid rgba(255,255,255,0.05); overflow: hidden; transition: transform 0.25s, border-color 0.25s; display: block; }
+    .news-card:hover { transform: translateY(-4px); border-color: rgba(201,168,76,0.3); }
+    .news-card-img { width: 100%; aspect-ratio: 16/9; background: #1a1a1a; overflow: hidden; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 20px; color: rgba(201,168,76,0.35); letter-spacing: 2px; }
     .news-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
     .news-card-body { padding: 20px; }
-    .news-card-meta { font-size: 11px; color: var(--muted); margin-bottom: 8px; letter-spacing: 1px; }
+    .news-card-meta { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
     .news-card-title { font-weight: 700; font-size: 15px; margin-bottom: 8px; line-height: 1.4; }
     .news-card-excerpt { font-size: 13px; color: #bbb; line-height: 1.6; }
-    .news-card-link {
-      display: inline-block; margin-top: 14px;
-      font-size: 11px; font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--gold);
-    }
-
+    .news-card-link { display: inline-block; margin-top: 14px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
     .see-all-wrap { text-align: right; margin-top: 32px; }
-    .see-all-link {
-      font-size: 12px; font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--gold);
-      border-bottom: 1px solid var(--gold); padding-bottom: 2px;
-    }
+    .see-all-link { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
 
     /* ── PRODUCTIONS ── */
     #productions { background: var(--dark); }
     .productions-inner { max-width: 1160px; margin: 0 auto; padding: 80px 40px; }
-
     .productions-slider-wrap { position: relative; overflow: hidden; }
-    .productions-track {
-      display: flex; gap: 20px;
-      transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
-    }
+    .productions-track { display: flex; gap: 20px; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
 
-    .prod-card {
-      min-width: 260px;
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.05);
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: border-color 0.2s;
-    }
-    .prod-card:hover { border-color: rgba(201,168,76,0.4); }
-
-    .prod-card-img {
-      width: 100%; aspect-ratio: 2/3;
-      background: linear-gradient(160deg, #1e1e1e, #2e2e2e);
+    /* Poster cards — portrait 2:3 ratio like movie posters */
+    .prod-card { min-width: 200px; background: var(--card); border: 1px solid rgba(255,255,255,0.06); overflow: hidden; flex-shrink: 0; transition: border-color 0.2s, transform 0.2s; display: block; }
+    .prod-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-4px); }
+    .prod-card-poster {
+      width: 100%; aspect-ratio: 2/3; overflow: hidden; position: relative;
+      background: #1e1e1e;
       display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-display);
-      font-size: 20px;
-      color: rgba(201,168,76,0.5);
-      letter-spacing: 2px;
-      overflow: hidden; position: relative;
     }
-    .prod-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .prod-card-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 55%);
-      display: flex; flex-direction: column;
-      justify-content: flex-end; padding: 20px;
-      opacity: 0; transition: opacity 0.25s;
+    .prod-card-poster img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+    .prod-card:hover .prod-card-poster img { transform: scale(1.04); }
+    /* Placeholder state when no image yet */
+    .prod-card-poster-placeholder {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 10px; padding: 20px; text-align: center;
+      width: 100%; height: 100%;
     }
+    .prod-card-poster-placeholder span:first-child { font-size: 36px; opacity: 0.2; }
+    .prod-card-poster-placeholder span:last-child { font-family: var(--font-display); font-size: 13px; letter-spacing: 2px; color: rgba(201,168,76,0.3); }
+    .prod-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.93) 0%, rgba(0,0,0,0.1) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; opacity: 0; transition: opacity 0.25s; }
     .prod-card:hover .prod-card-overlay { opacity: 1; }
-
-    .prod-card-tag {
-      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--gold); font-weight: 700; margin-bottom: 4px;
-    }
-    .prod-card-title { font-weight: 700; font-size: 15px; }
-    .prod-card-watch {
-      display: inline-flex; align-items: center; gap: 6px;
-      margin-top: 10px; font-size: 11px; color: var(--gold);
-      font-weight: 700; letter-spacing: 1px;
-    }
-
-    .prod-arrow {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      background: rgba(0,0,0,0.7);
-      border: 1px solid rgba(201,168,76,0.3);
-      color: var(--gold);
-      width: 40px; height: 40px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; font-size: 18px; z-index: 2;
-      transition: all 0.2s;
-    }
+    .prod-card-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 4px; }
+    .prod-card-title { font-family: var(--font-display); font-size: 20px; letter-spacing: 2px; color: var(--white); line-height: 1.1; }
+    .prod-card-watch { display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 1px; }
+    .prod-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.75); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; z-index: 2; transition: all 0.2s; }
     .prod-arrow:hover { background: var(--gold); color: var(--black); }
     .prod-arrow.prev { left: 0; }
     .prod-arrow.next { right: 0; }
 
     /* ── CONTACT ── */
     #contact { max-width: 1160px; margin: 0 auto; padding: 80px 40px; }
-
-    .contact-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
-      align-items: start;
-    }
-
-    .contact-info h3 {
-      font-family: var(--font-display);
-      font-size: 28px; letter-spacing: 2px; margin-bottom: 16px;
-    }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .contact-info h3 { font-family: var(--font-display); font-size: 28px; letter-spacing: 2px; margin-bottom: 16px; }
     .contact-info p { color: #aaa; font-size: 14px; line-height: 1.8; margin-bottom: 24px; }
     .contact-info a { color: var(--gold); }
-
     .form-group { margin-bottom: 18px; }
-    .form-group label {
-      display: block; font-size: 11px; letter-spacing: 2px;
-      text-transform: uppercase; font-weight: 600;
-      margin-bottom: 6px; color: var(--muted);
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: 14px;
-      padding: 12px 16px;
-      outline: none;
-      transition: border-color 0.2s;
-      appearance: none;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group label { display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; color: var(--muted); }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--card); border: 1px solid rgba(255,255,255,0.1); color: var(--white); font-family: var(--font-body); font-size: 14px; padding: 12px 16px; outline: none; transition: border-color 0.2s; appearance: none; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
     .form-group textarea { height: 120px; resize: vertical; }
     .form-group select option { background: var(--dark); }
-
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-    .btn-submit {
-      display: inline-block; width: 100%;
-      padding: 14px;
-      background: var(--gold);
-      color: var(--black);
-      font-family: var(--font-body);
-      font-size: 12px; font-weight: 700;
-      letter-spacing: 3px; text-transform: uppercase;
-      border: none; cursor: pointer;
-      transition: background 0.2s;
-    }
+    .btn-submit { display: block; width: 100%; padding: 14px; background: var(--gold); color: var(--black); font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.2s; }
     .btn-submit:hover { background: var(--gold-light); }
-
-    .form-success {
-      display: none;
-      margin-top: 14px;
-      padding: 12px 16px;
-      background: rgba(201,168,76,0.12);
-      border: 1px solid rgba(201,168,76,0.3);
-      font-size: 13px; color: var(--gold);
-    }
+    .form-success { display: none; margin-top: 14px; padding: 12px 16px; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); font-size: 13px; color: var(--gold); }
 
     /* ── FAQ ── */
     #faq { max-width: 1160px; margin: 0 auto; padding: 80px 40px; }
-
     .faq-list { list-style: none; }
-    .faq-item {
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .faq-question {
-      width: 100%; text-align: left;
-      background: none; border: none; color: var(--white);
-      font-family: var(--font-body); font-size: 15px; font-weight: 600;
-      padding: 20px 0;
-      display: flex; justify-content: space-between; align-items: center;
-      cursor: pointer; gap: 16px;
-    }
-    .faq-question::after {
-      content: '+'; font-size: 22px; color: var(--gold);
-      flex-shrink: 0; transition: transform 0.25s;
-    }
+    .faq-item { border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .faq-question { width: 100%; text-align: left; background: none; border: none; color: var(--white); font-family: var(--font-body); font-size: 15px; font-weight: 600; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; gap: 16px; }
+    .faq-question::after { content: '+'; font-size: 22px; color: var(--gold); flex-shrink: 0; transition: transform 0.25s; }
     .faq-item.open .faq-question::after { transform: rotate(45deg); }
-    .faq-answer {
-      max-height: 0; overflow: hidden;
-      transition: max-height 0.35s ease;
-      font-size: 14px; color: #aaa; line-height: 1.8;
-    }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; font-size: 14px; color: #aaa; line-height: 1.8; }
     .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 20px; }
 
     /* ── FOOTER ── */
-    footer {
-      background: var(--dark);
-      border-top: 1px solid rgba(201,168,76,0.15);
-      padding: 60px 40px 30px;
-    }
-    .footer-inner {
-      max-width: 1160px; margin: 0 auto;
-      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
-      margin-bottom: 40px;
-    }
-    .footer-brand p {
-      color: #888; font-size: 13px; margin-top: 12px; line-height: 1.7;
-    }
-    .footer-logo {
-      display: flex; align-items: center; gap: 10px;
-    }
-    .footer-logo-mark {
-      width: 36px; height: 36px; background: var(--gold); border-radius: 3px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-display); font-size: 18px; color: var(--black);
-    }
-    .footer-logo-name {
-      font-family: var(--font-display);
-      font-size: 16px; letter-spacing: 2px;
-    }
-
-    .footer-col h4 {
-      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--gold); font-weight: 700; margin-bottom: 16px;
-    }
+    footer { background: var(--dark); border-top: 1px solid rgba(201,168,76,0.15); padding: 60px 40px 30px; }
+    .footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand p { color: #888; font-size: 13px; margin-top: 12px; line-height: 1.7; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; }
+    .footer-logo-mark { width: 36px; height: 36px; background: var(--gold); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 18px; color: var(--black); }
+    .footer-logo-name { font-family: var(--font-display); font-size: 16px; letter-spacing: 2px; }
+    .footer-col h4 { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 16px; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 10px; }
-    .footer-col ul a {
-      font-size: 13px; color: #888; transition: color 0.2s;
-    }
+    .footer-col ul a { font-size: 13px; color: #888; transition: color 0.2s; }
     .footer-col ul a:hover { color: var(--gold); }
-
-    .footer-bottom {
-      max-width: 1160px; margin: 0 auto;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding-top: 24px;
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 12px; color: var(--muted);
-    }
+    .footer-bottom { max-width: 1160px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .nav-links { display: none; flex-direction: column; gap: 0;
-        position: fixed; top: 70px; left: 0; right: 0;
-        background: rgba(10,10,10,0.97);
-        border-bottom: 1px solid rgba(201,168,76,0.15);
-      }
+      .nav-links { display: none; flex-direction: column; gap: 0; position: fixed; top: 70px; left: 0; right: 0; background: rgba(10,10,10,0.97); border-bottom: 1px solid rgba(201,168,76,0.15); }
       .nav-links.open { display: flex; }
       .nav-links li { border-bottom: 1px solid rgba(255,255,255,0.06); }
       .nav-links a { display: block; padding: 16px 20px; }
       .nav-toggle { display: flex; }
-
-      section, #news, #contact, #faq { padding: 60px 20px; }
+      #news, #contact, #faq { padding: 60px 20px; }
       .productions-inner { padding: 60px 20px; }
-
       .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-      .form-row { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr; gap: 30px; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-
       .hero-arrow { display: none; }
+      .prod-card { min-width: 160px; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="navbar">
+<!-- ══ NAV ══ -->
+<nav>
   <a href="index.html" class="nav-logo">
     <div class="nav-logo-mark">MS</div>
     <div class="nav-logo-text">
@@ -522,67 +193,121 @@
     <li><a href="#contact">Contact Us</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
-  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- HERO SLIDER -->
+<!-- ══ HERO SLIDER ══
+     Images live at: https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/
+     Upload your hero images to that folder named: hero-01.jpeg, hero-02.jpeg ... hero-10.jpeg
+-->
 <div class="hero" id="hero">
   <div class="hero-slides" id="heroSlides">
+
     <div class="hero-slide">
-      <div class="hero-bg"></div>
+      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-01.jpeg')"></div>
       <div class="hero-content">
         <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
         <p class="hero-tagline">Crafting Stories That Last</p>
         <a href="#productions" class="hero-cta">Our Productions</a>
       </div>
     </div>
+
     <div class="hero-slide">
-      <div class="hero-bg"></div>
+      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-02.jpeg')"></div>
       <div class="hero-content">
         <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
         <p class="hero-tagline">Crafting Stories That Last</p>
         <a href="#productions" class="hero-cta">Our Productions</a>
       </div>
     </div>
+
     <div class="hero-slide">
-      <div class="hero-bg"></div>
+      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-03.jpeg')"></div>
       <div class="hero-content">
         <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
         <p class="hero-tagline">Crafting Stories That Last</p>
         <a href="#productions" class="hero-cta">Our Productions</a>
       </div>
     </div>
+
     <div class="hero-slide">
-      <div class="hero-bg"></div>
+      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-04.jpeg')"></div>
       <div class="hero-content">
         <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
         <p class="hero-tagline">Crafting Stories That Last</p>
         <a href="#productions" class="hero-cta">Our Productions</a>
       </div>
     </div>
+
     <div class="hero-slide">
-      <div class="hero-bg"></div>
+      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-05.jpeg')"></div>
       <div class="hero-content">
         <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
         <p class="hero-tagline">Crafting Stories That Last</p>
         <a href="#productions" class="hero-cta">Our Productions</a>
       </div>
     </div>
+
+    <div class="hero-slide">
+      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-06.jpeg')"></div>
+      <div class="hero-content">
+        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
+        <p class="hero-tagline">Crafting Stories That Last</p>
+        <a href="#productions" class="hero-cta">Our Productions</a>
+      </div>
+    </div>
+
+    <div class="hero-slide">
+      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-07.jpeg')"></div>
+      <div class="hero-content">
+        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
+        <p class="hero-tagline">Crafting Stories That Last</p>
+        <a href="#productions" class="hero-cta">Our Productions</a>
+      </div>
+    </div>
+
+    <div class="hero-slide">
+      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-08.jpeg')"></div>
+      <div class="hero-content">
+        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
+        <p class="hero-tagline">Crafting Stories That Last</p>
+        <a href="#productions" class="hero-cta">Our Productions</a>
+      </div>
+    </div>
+
+    <div class="hero-slide">
+      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-09.jpeg')"></div>
+      <div class="hero-content">
+        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
+        <p class="hero-tagline">Crafting Stories That Last</p>
+        <a href="#productions" class="hero-cta">Our Productions</a>
+      </div>
+    </div>
+
+    <div class="hero-slide">
+      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-10.jpeg')"></div>
+      <div class="hero-content">
+        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
+        <p class="hero-tagline">Crafting Stories That Last</p>
+        <a href="#productions" class="hero-cta">Our Productions</a>
+      </div>
+    </div>
+
   </div>
   <button class="hero-arrow prev" id="heroPrev">&#8592;</button>
   <button class="hero-arrow next" id="heroNext">&#8594;</button>
   <div class="hero-dots" id="heroDots"></div>
+  <div class="hero-counter" id="heroCounter">1 / 10</div>
 </div>
 
-<!-- FEATURED NEWS -->
+
+<!-- ══ FEATURED NEWS ══ -->
 <section id="news">
   <div class="section-label">Latest Updates</div>
   <h2>Featured News</h2>
   <div class="news-grid">
 
-    <a href="post-placeholder-1.html" class="news-card">
+    <a href="#" class="news-card">
       <div class="news-card-img">PLACEHOLDER</div>
       <div class="news-card-body">
         <div class="news-card-meta">📅 March 15, 2026 &nbsp;🕐 2 min read</div>
@@ -592,17 +317,17 @@
       </div>
     </a>
 
-    <a href="post-placeholder-2.html" class="news-card">
+    <a href="#" class="news-card">
       <div class="news-card-img">PLACEHOLDER</div>
       <div class="news-card-body">
         <div class="news-card-meta">📅 March 10, 2026 &nbsp;🕐 3 min read</div>
-        <div class="news-card-title">Behind the Scenes: Our Upcoming Feature Film</div>
-        <div class="news-card-excerpt">Get an exclusive first look at the production of our debut feature film currently in pre-production.</div>
+        <div class="news-card-title">Behind the Scenes: Our Upcoming Production — FLATLINE</div>
+        <div class="news-card-excerpt">Get an exclusive first look at the production of FLATLINE, currently in production. Directed by Danny Praiz.</div>
         <span class="news-card-link">Read More</span>
       </div>
     </a>
 
-    <a href="post-placeholder-3.html" class="news-card">
+    <a href="#" class="news-card">
       <div class="news-card-img">PLACEHOLDER</div>
       <div class="news-card-body">
         <div class="news-card-meta">📅 March 5, 2026 &nbsp;🕐 3 min read</div>
@@ -612,17 +337,17 @@
       </div>
     </a>
 
-    <a href="post-placeholder-4.html" class="news-card">
+    <a href="#" class="news-card">
       <div class="news-card-img">PLACEHOLDER</div>
       <div class="news-card-body">
         <div class="news-card-meta">📅 February 28, 2026 &nbsp;🕐 2 min read</div>
         <div class="news-card-title">Mike Savage Studios Announces Strategic Partnership</div>
-        <div class="news-card-excerpt">We are proud to announce a new creative partnership that will expand our storytelling capabilities significantly.</div>
+        <div class="news-card-excerpt">A new creative partnership that will expand our storytelling capabilities significantly.</div>
         <span class="news-card-link">See More</span>
       </div>
     </a>
 
-    <a href="post-placeholder-5.html" class="news-card">
+    <a href="#" class="news-card">
       <div class="news-card-img">PLACEHOLDER</div>
       <div class="news-card-body">
         <div class="news-card-meta">📅 February 20, 2026 &nbsp;🕐 2 min read</div>
@@ -633,68 +358,83 @@
     </a>
 
   </div>
-  <div class="see-all-wrap">
-    <a href="news.html" class="see-all-link">See All News →</a>
-  </div>
+  <div class="see-all-wrap"><a href="news.html" class="see-all-link">See All News →</a></div>
 </section>
 
-<!-- PRODUCTIONS -->
+
+<!-- ══ OUR PRODUCTIONS ══
+     Upload movie poster images to GitHub as:
+     https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/poster-flatline.jpeg
+     https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/poster-[title].jpeg
+     Then replace the src="" on each <img> tag below.
+-->
 <div id="productions" style="background:var(--dark);">
   <div class="productions-inner">
     <div class="section-label">What We've Made</div>
     <h2>Our Productions</h2>
     <div class="productions-slider-wrap">
       <div class="productions-track" id="prodTrack">
-        <div class="prod-card">
-          <div class="prod-card-img">
-            PLACEHOLDER
+
+        <!-- PRODUCTION 1 — FLATLINE -->
+        <a href="#" class="prod-card">
+          <div class="prod-card-poster">
+            <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/poster-flatline.jpeg" alt="FLATLINE poster" />
             <div class="prod-card-overlay">
               <div class="prod-card-tag">Series</div>
-              <div class="prod-card-title">Placeholder Series One</div>
-              <a href="#" class="prod-card-watch">▶ Watch on YouTube</a>
+              <div class="prod-card-title">FLATLINE</div>
+              <span class="prod-card-watch">▶ Watch on YouTube</span>
             </div>
           </div>
-        </div>
-        <div class="prod-card">
-          <div class="prod-card-img">
-            PLACEHOLDER
+        </a>
+
+        <!-- PRODUCTION 2 — add your next title -->
+        <a href="#" class="prod-card">
+          <div class="prod-card-poster">
+            <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/poster-02.jpeg" alt="Production poster" />
             <div class="prod-card-overlay">
               <div class="prod-card-tag">Series</div>
-              <div class="prod-card-title">Placeholder Series Two</div>
-              <a href="#" class="prod-card-watch">▶ Watch on YouTube</a>
+              <div class="prod-card-title">TITLE HERE</div>
+              <span class="prod-card-watch">▶ Watch on YouTube</span>
             </div>
           </div>
-        </div>
-        <div class="prod-card">
-          <div class="prod-card-img">
-            PLACEHOLDER
+        </a>
+
+        <!-- PRODUCTION 3 -->
+        <a href="#" class="prod-card">
+          <div class="prod-card-poster">
+            <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/poster-03.jpeg" alt="Production poster" />
             <div class="prod-card-overlay">
               <div class="prod-card-tag">Film</div>
-              <div class="prod-card-title">Placeholder Feature Film</div>
-              <a href="#" class="prod-card-watch">▶ Watch on YouTube</a>
+              <div class="prod-card-title">TITLE HERE</div>
+              <span class="prod-card-watch">▶ Watch on YouTube</span>
             </div>
           </div>
-        </div>
-        <div class="prod-card">
-          <div class="prod-card-img">
-            PLACEHOLDER
+        </a>
+
+        <!-- PRODUCTION 4 -->
+        <a href="#" class="prod-card">
+          <div class="prod-card-poster">
+            <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/poster-04.jpeg" alt="Production poster" />
             <div class="prod-card-overlay">
               <div class="prod-card-tag">Series</div>
-              <div class="prod-card-title">Placeholder Series Three</div>
-              <a href="#" class="prod-card-watch">▶ Watch on YouTube</a>
+              <div class="prod-card-title">TITLE HERE</div>
+              <span class="prod-card-watch">▶ Watch on YouTube</span>
             </div>
           </div>
-        </div>
-        <div class="prod-card">
-          <div class="prod-card-img">
-            PLACEHOLDER
+        </a>
+
+        <!-- PRODUCTION 5 -->
+        <a href="#" class="prod-card">
+          <div class="prod-card-poster">
+            <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/poster-05.jpeg" alt="Production poster" />
             <div class="prod-card-overlay">
               <div class="prod-card-tag">Film</div>
-              <div class="prod-card-title">Placeholder Short Film</div>
-              <a href="#" class="prod-card-watch">▶ Watch on YouTube</a>
+              <div class="prod-card-title">TITLE HERE</div>
+              <span class="prod-card-watch">▶ Watch on YouTube</span>
             </div>
           </div>
-        </div>
+        </a>
+
       </div>
       <button class="prod-arrow prev" id="prodPrev">&#8592;</button>
       <button class="prod-arrow next" id="prodNext">&#8594;</button>
@@ -702,7 +442,8 @@
   </div>
 </div>
 
-<!-- CONTACT -->
+
+<!-- ══ CONTACT ══ -->
 <section id="contact">
   <div class="section-label">Reach Out</div>
   <h2>Contact Us</h2>
@@ -713,35 +454,24 @@
       <p>Email: <a href="mailto:info@mikesavagestudios.com">info@mikesavagestudios.com</a></p>
     </div>
     <div>
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" placeholder="Your full name" id="cfName" />
-      </div>
-      <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" placeholder="your@email.com" id="cfEmail" />
-      </div>
+      <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your full name" id="cfName" /></div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com" id="cfEmail" /></div>
       <div class="form-group">
         <label>Subject</label>
         <select id="cfSubject">
-          <option>General Enquiry</option>
-          <option>Collaboration</option>
-          <option>Auditions</option>
-          <option>Press &amp; Media</option>
-          <option>Other</option>
+          <option>General Enquiry</option><option>Collaboration</option>
+          <option>Auditions</option><option>Press &amp; Media</option><option>Other</option>
         </select>
       </div>
-      <div class="form-group">
-        <label>Message</label>
-        <textarea placeholder="Your message..." id="cfMessage"></textarea>
-      </div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Your message..." id="cfMessage"></textarea></div>
       <button class="btn-submit" id="cfSubmit">Send Message</button>
       <div class="form-success" id="cfSuccess">✓ Message sent! We will get back to you soon.</div>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
+
+<!-- ══ FAQ ══ -->
 <section id="faq">
   <div class="section-label">Questions</div>
   <h2>Frequently Asked Questions</h2>
@@ -769,7 +499,8 @@
   </ul>
 </section>
 
-<!-- FOOTER -->
+
+<!-- ══ FOOTER ══ -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
@@ -805,69 +536,78 @@
   </div>
 </footer>
 
+
 <script>
-  // Nav toggle
+  // ── Nav toggle ──
   document.getElementById('navToggle').addEventListener('click', function() {
     document.getElementById('navLinks').classList.toggle('open');
   });
 
-  // Hero slider
-  const slides = document.querySelectorAll('.hero-slide');
-  const dotsContainer = document.getElementById('heroDots');
-  let current = 0;
-  let autoSlide;
+  // ── Hero Slider ──
+  const totalSlides = 10;
+  let current = 0, autoSlide;
+  const dotsWrap = document.getElementById('heroDots');
+  const counter  = document.getElementById('heroCounter');
 
-  slides.forEach((_, i) => {
+  for (let i = 0; i < totalSlides; i++) {
     const d = document.createElement('div');
     d.className = 'hero-dot' + (i === 0 ? ' active' : '');
-    d.addEventListener('click', () => goTo(i));
-    dotsContainer.appendChild(d);
-  });
+    d.addEventListener('click', () => { goTo(i); resetAuto(); });
+    dotsWrap.appendChild(d);
+  }
 
   function goTo(n) {
-    current = (n + slides.length) % slides.length;
+    current = (n + totalSlides) % totalSlides;
     document.getElementById('heroSlides').style.transform = `translateX(-${current * 100}%)`;
     document.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    counter.textContent = (current + 1) + ' / ' + totalSlides;
   }
 
   document.getElementById('heroPrev').addEventListener('click', () => { goTo(current - 1); resetAuto(); });
   document.getElementById('heroNext').addEventListener('click', () => { goTo(current + 1); resetAuto(); });
 
+  // Swipe support
+  let tx = 0;
+  document.getElementById('hero').addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  document.getElementById('hero').addEventListener('touchend',   e => {
+    const diff = tx - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { goTo(diff > 0 ? current + 1 : current - 1); resetAuto(); }
+  }, {passive:true});
+
   function resetAuto() { clearInterval(autoSlide); autoSlide = setInterval(() => goTo(current + 1), 5000); }
   autoSlide = setInterval(() => goTo(current + 1), 5000);
 
-  // Productions slider
-  const prodTrack = document.getElementById('prodTrack');
-  const prodCards = prodTrack.querySelectorAll('.prod-card');
-  let prodIndex = 0;
-  const visibleCount = () => window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3;
+  // ── Productions Slider ──
+  const track = document.getElementById('prodTrack');
+  const cards = Array.from(track.querySelectorAll('.prod-card'));
+  let pIdx = 0;
 
-  function moveProd(dir) {
-    const max = prodCards.length - visibleCount();
-    prodIndex = Math.max(0, Math.min(max, prodIndex + dir));
-    const cardW = prodCards[0].offsetWidth + 20;
-    prodTrack.style.transform = `translateX(-${prodIndex * cardW}px)`;
+  function vis() { return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : window.innerWidth < 1100 ? 3 : 4; }
+  function slideProd(dir) {
+    pIdx = Math.max(0, Math.min(cards.length - vis(), pIdx + dir));
+    track.style.transform = `translateX(-${pIdx * (cards[0].offsetWidth + 20)}px)`;
   }
-  document.getElementById('prodPrev').addEventListener('click', () => moveProd(-1));
-  document.getElementById('prodNext').addEventListener('click', () => moveProd(1));
+  document.getElementById('prodPrev').addEventListener('click', () => slideProd(-1));
+  document.getElementById('prodNext').addEventListener('click', () => slideProd(1));
 
-  // FAQ accordion
+  let px = 0;
+  track.addEventListener('touchstart', e => { px = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend',   e => { const d = px - e.changedTouches[0].clientX; if (Math.abs(d) > 40) slideProd(d > 0 ? 1 : -1); }, {passive:true});
+
+  // ── FAQ ──
   document.querySelectorAll('.faq-question').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.parentElement;
-      item.classList.toggle('open');
-    });
+    btn.addEventListener('click', () => btn.parentElement.classList.toggle('open'));
   });
 
-  // Contact form
+  // ── Contact form ──
   document.getElementById('cfSubmit').addEventListener('click', function() {
-    const name = document.getElementById('cfName').value.trim();
+    const name  = document.getElementById('cfName').value.trim();
     const email = document.getElementById('cfEmail').value.trim();
-    const msg = document.getElementById('cfMessage').value.trim();
+    const msg   = document.getElementById('cfMessage').value.trim();
     if (!name || !email || !msg) { alert('Please fill in all required fields.'); return; }
     document.getElementById('cfSuccess').style.display = 'block';
-    document.getElementById('cfName').value = '';
-    document.getElementById('cfEmail').value = '';
+    document.getElementById('cfName').value    = '';
+    document.getElementById('cfEmail').value   = '';
     document.getElementById('cfMessage').value = '';
   });
 </script>
