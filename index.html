@@ -14,7 +14,13 @@
       --white: #f4f1ec; --muted: #888;
       --font-display: 'Bebas Neue', sans-serif;
       --font-body: 'Raleway', sans-serif;
-      --gh: 'https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/';
+      /* ========================================================
+         GITHUB IMAGE BASE URL
+         All images must be uploaded to GitHub at:
+         github.com/mikesavagewebsite/mikesavageweb
+         inside the "images" folder
+         ======================================================== */
+      --base: 'https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/';
     }
     html { scroll-behavior: smooth; }
     body { background: var(--black); color: var(--white); font-family: var(--font-body); line-height: 1.6; }
@@ -39,21 +45,26 @@
     .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); }
 
-    /* ── HERO SLIDER ── */
+    /* ── HERO ── */
     .hero { position: relative; height: 100vh; min-height: 600px; overflow: hidden; margin-top: 70px; }
     .hero-slides { display: flex; width: 100%; height: 100%; transition: transform 0.8s cubic-bezier(0.4,0,0.2,1); }
     .hero-slide { min-width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; }
+
+    /* Hero background — image loaded via JS so it's easy to update */
     .hero-bg {
       position: absolute; inset: 0;
       background-size: cover; background-position: center; background-repeat: no-repeat;
-      filter: brightness(0.38);
+      filter: brightness(0.4);
+      transition: opacity 0.5s;
     }
+
     .hero-content { position: relative; z-index: 1; text-align: center; padding: 0 24px; }
     .hero-studio-name { font-family: var(--font-display); font-size: clamp(48px, 9vw, 108px); letter-spacing: 6px; line-height: 1; color: var(--white); }
     .hero-studio-name span { color: var(--gold); }
     .hero-tagline { font-size: clamp(11px, 1.8vw, 15px); letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin: 16px 0 40px; font-weight: 300; }
     .hero-cta { display: inline-block; padding: 14px 42px; border: 1px solid var(--gold); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; color: var(--gold); transition: all 0.25s; }
     .hero-cta:hover { background: var(--gold); color: var(--black); }
+
     .hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; background: rgba(0,0,0,0.5); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; transition: all 0.2s; }
     .hero-arrow:hover { background: var(--gold); color: var(--black); }
     .hero-arrow.prev { left: 24px; }
@@ -63,7 +74,7 @@
     .hero-dot.active { background: var(--gold); transform: scale(1.3); }
     .hero-counter { position: absolute; bottom: 28px; right: 28px; z-index: 2; font-family: var(--font-display); font-size: 14px; letter-spacing: 2px; color: rgba(201,168,76,0.7); }
 
-    /* ── SECTION SHARED ── */
+    /* ── SHARED ── */
     .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 12px; }
     h2 { font-family: var(--font-display); font-size: clamp(30px, 5vw, 50px); letter-spacing: 3px; color: var(--white); margin-bottom: 40px; }
 
@@ -72,7 +83,7 @@
     .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px; }
     .news-card { background: var(--card); border: 1px solid rgba(255,255,255,0.05); overflow: hidden; transition: transform 0.25s, border-color 0.25s; display: block; }
     .news-card:hover { transform: translateY(-4px); border-color: rgba(201,168,76,0.3); }
-    .news-card-img { width: 100%; aspect-ratio: 16/9; background: #1a1a1a; overflow: hidden; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 20px; color: rgba(201,168,76,0.35); letter-spacing: 2px; }
+    .news-card-img { width: 100%; aspect-ratio: 16/9; background: #1e1e1e; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 18px; color: rgba(201,168,76,0.25); letter-spacing: 3px; overflow: hidden; }
     .news-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .news-card-body { padding: 20px; }
     .news-card-meta { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
@@ -82,36 +93,62 @@
     .see-all-wrap { text-align: right; margin-top: 32px; }
     .see-all-link { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
 
-    /* ── PRODUCTIONS ── */
+    /* ── OUR PRODUCTIONS ──
+       Each card = one YouTube video/series
+       Thumbnail is the YouTube video thumbnail (16:9)
+       Upload thumbnail images to GitHub as: images/thumb-[title].jpeg
+    */
     #productions { background: var(--dark); }
     .productions-inner { max-width: 1160px; margin: 0 auto; padding: 80px 40px; }
     .productions-slider-wrap { position: relative; overflow: hidden; }
     .productions-track { display: flex; gap: 20px; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
 
-    /* Poster cards — portrait 2:3 ratio like movie posters */
-    .prod-card { min-width: 200px; background: var(--card); border: 1px solid rgba(255,255,255,0.06); overflow: hidden; flex-shrink: 0; transition: border-color 0.2s, transform 0.2s; display: block; }
+    .prod-card {
+      min-width: 280px; background: var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden; flex-shrink: 0;
+      transition: border-color 0.2s, transform 0.2s;
+      display: block;
+    }
     .prod-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-4px); }
-    .prod-card-poster {
-      width: 100%; aspect-ratio: 2/3; overflow: hidden; position: relative;
-      background: #1e1e1e;
+
+    /* Thumbnail area — 16:9 like YouTube */
+    .prod-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      background: #1e1e1e; overflow: hidden; position: relative;
       display: flex; align-items: center; justify-content: center;
     }
-    .prod-card-poster img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
-    .prod-card:hover .prod-card-poster img { transform: scale(1.04); }
-    /* Placeholder state when no image yet */
-    .prod-card-poster-placeholder {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 10px; padding: 20px; text-align: center;
-      width: 100%; height: 100%;
+    .prod-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+    .prod-card:hover .prod-thumb img { transform: scale(1.04); }
+
+    /* Play button overlay */
+    .prod-play {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.35);
+      opacity: 0; transition: opacity 0.25s;
     }
-    .prod-card-poster-placeholder span:first-child { font-size: 36px; opacity: 0.2; }
-    .prod-card-poster-placeholder span:last-child { font-family: var(--font-display); font-size: 13px; letter-spacing: 2px; color: rgba(201,168,76,0.3); }
-    .prod-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.93) 0%, rgba(0,0,0,0.1) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; opacity: 0; transition: opacity 0.25s; }
-    .prod-card:hover .prod-card-overlay { opacity: 1; }
-    .prod-card-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 4px; }
-    .prod-card-title { font-family: var(--font-display); font-size: 20px; letter-spacing: 2px; color: var(--white); line-height: 1.1; }
-    .prod-card-watch { display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 1px; }
-    .prod-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.75); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; z-index: 2; transition: all 0.2s; }
+    .prod-card:hover .prod-play { opacity: 1; }
+    .prod-play-btn {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--gold); display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: var(--black);
+    }
+
+    /* Placeholder when no thumbnail yet */
+    .prod-thumb-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    }
+    .prod-thumb-placeholder .ph-icon { font-size: 32px; opacity: 0.15; }
+    .prod-thumb-placeholder .ph-label { font-family: var(--font-display); font-size: 11px; letter-spacing: 3px; color: rgba(201,168,76,0.25); }
+
+    .prod-info { padding: 14px 16px; }
+    .prod-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 4px; }
+    .prod-title { font-family: var(--font-display); font-size: 20px; letter-spacing: 2px; color: var(--white); line-height: 1.1; margin-bottom: 6px; }
+    .prod-watch { font-size: 11px; color: var(--muted); font-weight: 600; }
+
+    .prod-arrow { position: absolute; top: 40%; transform: translateY(-50%); background: rgba(0,0,0,0.75); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; z-index: 2; transition: all 0.2s; }
     .prod-arrow:hover { background: var(--gold); color: var(--black); }
     .prod-arrow.prev { left: 0; }
     .prod-arrow.next { right: 0; }
@@ -170,13 +207,13 @@
       .footer-inner { grid-template-columns: 1fr; gap: 30px; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
       .hero-arrow { display: none; }
-      .prod-card { min-width: 160px; }
+      .prod-card { min-width: 85vw; }
     }
   </style>
 </head>
 <body>
 
-<!-- ══ NAV ══ -->
+<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">
     <div class="nav-logo-mark">MS</div>
@@ -196,103 +233,16 @@
   <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- ══ HERO SLIDER ══
-     Images live at: https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/
-     Upload your hero images to that folder named: hero-01.jpeg, hero-02.jpeg ... hero-10.jpeg
--->
+<!-- ══════════════════════════════════════════
+     HERO SLIDER
+     Images are loaded from GitHub via JavaScript below.
+     To update hero images:
+       1. Upload images to GitHub → images/ folder
+       2. Name them: hero-01.jpeg, hero-02.jpeg ... hero-10.jpeg
+══════════════════════════════════════════ -->
 <div class="hero" id="hero">
   <div class="hero-slides" id="heroSlides">
-
-    <div class="hero-slide">
-      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-01.jpeg')"></div>
-      <div class="hero-content">
-        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
-        <p class="hero-tagline">Crafting Stories That Last</p>
-        <a href="#productions" class="hero-cta">Our Productions</a>
-      </div>
-    </div>
-
-    <div class="hero-slide">
-      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-02.jpeg')"></div>
-      <div class="hero-content">
-        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
-        <p class="hero-tagline">Crafting Stories That Last</p>
-        <a href="#productions" class="hero-cta">Our Productions</a>
-      </div>
-    </div>
-
-    <div class="hero-slide">
-      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-03.jpeg')"></div>
-      <div class="hero-content">
-        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
-        <p class="hero-tagline">Crafting Stories That Last</p>
-        <a href="#productions" class="hero-cta">Our Productions</a>
-      </div>
-    </div>
-
-    <div class="hero-slide">
-      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-04.jpeg')"></div>
-      <div class="hero-content">
-        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
-        <p class="hero-tagline">Crafting Stories That Last</p>
-        <a href="#productions" class="hero-cta">Our Productions</a>
-      </div>
-    </div>
-
-    <div class="hero-slide">
-      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-05.jpeg')"></div>
-      <div class="hero-content">
-        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
-        <p class="hero-tagline">Crafting Stories That Last</p>
-        <a href="#productions" class="hero-cta">Our Productions</a>
-      </div>
-    </div>
-
-    <div class="hero-slide">
-      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-06.jpeg')"></div>
-      <div class="hero-content">
-        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
-        <p class="hero-tagline">Crafting Stories That Last</p>
-        <a href="#productions" class="hero-cta">Our Productions</a>
-      </div>
-    </div>
-
-    <div class="hero-slide">
-      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-07.jpeg')"></div>
-      <div class="hero-content">
-        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
-        <p class="hero-tagline">Crafting Stories That Last</p>
-        <a href="#productions" class="hero-cta">Our Productions</a>
-      </div>
-    </div>
-
-    <div class="hero-slide">
-      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-08.jpeg')"></div>
-      <div class="hero-content">
-        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
-        <p class="hero-tagline">Crafting Stories That Last</p>
-        <a href="#productions" class="hero-cta">Our Productions</a>
-      </div>
-    </div>
-
-    <div class="hero-slide">
-      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-09.jpeg')"></div>
-      <div class="hero-content">
-        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
-        <p class="hero-tagline">Crafting Stories That Last</p>
-        <a href="#productions" class="hero-cta">Our Productions</a>
-      </div>
-    </div>
-
-    <div class="hero-slide">
-      <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/hero-10.jpeg')"></div>
-      <div class="hero-content">
-        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
-        <p class="hero-tagline">Crafting Stories That Last</p>
-        <a href="#productions" class="hero-cta">Our Productions</a>
-      </div>
-    </div>
-
+    <!-- Slides are built by JavaScript below -->
   </div>
   <button class="hero-arrow prev" id="heroPrev">&#8592;</button>
   <button class="hero-arrow next" id="heroNext">&#8594;</button>
@@ -301,24 +251,24 @@
 </div>
 
 
-<!-- ══ FEATURED NEWS ══ -->
+<!-- FEATURED NEWS -->
 <section id="news">
   <div class="section-label">Latest Updates</div>
   <h2>Featured News</h2>
   <div class="news-grid">
 
     <a href="#" class="news-card">
-      <div class="news-card-img">PLACEHOLDER</div>
+      <div class="news-card-img">NEWS IMAGE</div>
       <div class="news-card-body">
         <div class="news-card-meta">📅 March 15, 2026 &nbsp;🕐 2 min read</div>
         <div class="news-card-title">Welcome to Mike Savage Studios – Our Story Begins</div>
-        <div class="news-card-excerpt">We are thrilled to officially launch Mike Savage Studios and share our vision for powerful storytelling with the world.</div>
+        <div class="news-card-excerpt">We are thrilled to officially launch Mike Savage Studios and share our vision for powerful storytelling.</div>
         <span class="news-card-link">Read More</span>
       </div>
     </a>
 
     <a href="#" class="news-card">
-      <div class="news-card-img">PLACEHOLDER</div>
+      <div class="news-card-img">NEWS IMAGE</div>
       <div class="news-card-body">
         <div class="news-card-meta">📅 March 10, 2026 &nbsp;🕐 3 min read</div>
         <div class="news-card-title">Behind the Scenes: Our Upcoming Production — FLATLINE</div>
@@ -328,7 +278,7 @@
     </a>
 
     <a href="#" class="news-card">
-      <div class="news-card-img">PLACEHOLDER</div>
+      <div class="news-card-img">NEWS IMAGE</div>
       <div class="news-card-body">
         <div class="news-card-meta">📅 March 5, 2026 &nbsp;🕐 3 min read</div>
         <div class="news-card-title">Open Auditions Announced for New Series</div>
@@ -338,7 +288,7 @@
     </a>
 
     <a href="#" class="news-card">
-      <div class="news-card-img">PLACEHOLDER</div>
+      <div class="news-card-img">NEWS IMAGE</div>
       <div class="news-card-body">
         <div class="news-card-meta">📅 February 28, 2026 &nbsp;🕐 2 min read</div>
         <div class="news-card-title">Mike Savage Studios Announces Strategic Partnership</div>
@@ -348,11 +298,11 @@
     </a>
 
     <a href="#" class="news-card">
-      <div class="news-card-img">PLACEHOLDER</div>
+      <div class="news-card-img">NEWS IMAGE</div>
       <div class="news-card-body">
         <div class="news-card-meta">📅 February 20, 2026 &nbsp;🕐 2 min read</div>
         <div class="news-card-title">Our Vision: Authentic Stories for Real Audiences</div>
-        <div class="news-card-excerpt">Mike Savage Studios is committed to producing stories that reflect real lives with honesty and emotional depth.</div>
+        <div class="news-card-excerpt">Mike Savage Studios is committed to producing stories that reflect real lives with honesty and depth.</div>
         <span class="news-card-link">Read More</span>
       </div>
     </a>
@@ -362,12 +312,15 @@
 </section>
 
 
-<!-- ══ OUR PRODUCTIONS ══
-     Upload movie poster images to GitHub as:
-     https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/poster-flatline.jpeg
-     https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/poster-[title].jpeg
-     Then replace the src="" on each <img> tag below.
--->
+<!-- ══════════════════════════════════════════
+     OUR PRODUCTIONS
+     Each card = one YouTube series or film
+     HOW TO ADD A PRODUCTION:
+       1. Upload the YouTube video thumbnail to GitHub → images/ folder
+          Name it: thumb-[title].jpeg  e.g. thumb-flatline.jpeg
+       2. Copy one <a class="prod-card"> block below
+       3. Replace the YouTube link, thumbnail src, tag, and title
+══════════════════════════════════════════ -->
 <div id="productions" style="background:var(--dark);">
   <div class="productions-inner">
     <div class="section-label">What We've Made</div>
@@ -375,63 +328,85 @@
     <div class="productions-slider-wrap">
       <div class="productions-track" id="prodTrack">
 
-        <!-- PRODUCTION 1 — FLATLINE -->
-        <a href="#" class="prod-card">
-          <div class="prod-card-poster">
-            <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/poster-flatline.jpeg" alt="FLATLINE poster" />
-            <div class="prod-card-overlay">
-              <div class="prod-card-tag">Series</div>
-              <div class="prod-card-title">FLATLINE</div>
-              <span class="prod-card-watch">▶ Watch on YouTube</span>
+        <!-- PRODUCTION 1 — FLATLINE
+             Replace href with actual YouTube playlist/video URL
+             Replace thumb src with: images/thumb-flatline.jpeg on GitHub -->
+        <a href="https://www.youtube.com/@mikesavagestudios" target="_blank" class="prod-card">
+          <div class="prod-thumb">
+            <div class="prod-thumb-placeholder">
+              <div class="ph-icon">🎬</div>
+              <div class="ph-label">UPLOAD THUMBNAIL</div>
             </div>
+            <div class="prod-play"><div class="prod-play-btn">▶</div></div>
+          </div>
+          <div class="prod-info">
+            <div class="prod-tag">Series</div>
+            <div class="prod-title">FLATLINE</div>
+            <div class="prod-watch">▶ Watch on YouTube</div>
           </div>
         </a>
 
-        <!-- PRODUCTION 2 — add your next title -->
+        <!-- PRODUCTION 2 — Add your next title here -->
         <a href="#" class="prod-card">
-          <div class="prod-card-poster">
-            <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/poster-02.jpeg" alt="Production poster" />
-            <div class="prod-card-overlay">
-              <div class="prod-card-tag">Series</div>
-              <div class="prod-card-title">TITLE HERE</div>
-              <span class="prod-card-watch">▶ Watch on YouTube</span>
+          <div class="prod-thumb">
+            <div class="prod-thumb-placeholder">
+              <div class="ph-icon">🎬</div>
+              <div class="ph-label">UPLOAD THUMBNAIL</div>
             </div>
+            <div class="prod-play"><div class="prod-play-btn">▶</div></div>
+          </div>
+          <div class="prod-info">
+            <div class="prod-tag">Series</div>
+            <div class="prod-title">TITLE HERE</div>
+            <div class="prod-watch">▶ Watch on YouTube</div>
           </div>
         </a>
 
         <!-- PRODUCTION 3 -->
         <a href="#" class="prod-card">
-          <div class="prod-card-poster">
-            <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/poster-03.jpeg" alt="Production poster" />
-            <div class="prod-card-overlay">
-              <div class="prod-card-tag">Film</div>
-              <div class="prod-card-title">TITLE HERE</div>
-              <span class="prod-card-watch">▶ Watch on YouTube</span>
+          <div class="prod-thumb">
+            <div class="prod-thumb-placeholder">
+              <div class="ph-icon">🎬</div>
+              <div class="ph-label">UPLOAD THUMBNAIL</div>
             </div>
+            <div class="prod-play"><div class="prod-play-btn">▶</div></div>
+          </div>
+          <div class="prod-info">
+            <div class="prod-tag">Film</div>
+            <div class="prod-title">TITLE HERE</div>
+            <div class="prod-watch">▶ Watch on YouTube</div>
           </div>
         </a>
 
         <!-- PRODUCTION 4 -->
         <a href="#" class="prod-card">
-          <div class="prod-card-poster">
-            <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/poster-04.jpeg" alt="Production poster" />
-            <div class="prod-card-overlay">
-              <div class="prod-card-tag">Series</div>
-              <div class="prod-card-title">TITLE HERE</div>
-              <span class="prod-card-watch">▶ Watch on YouTube</span>
+          <div class="prod-thumb">
+            <div class="prod-thumb-placeholder">
+              <div class="ph-icon">🎬</div>
+              <div class="ph-label">UPLOAD THUMBNAIL</div>
             </div>
+            <div class="prod-play"><div class="prod-play-btn">▶</div></div>
+          </div>
+          <div class="prod-info">
+            <div class="prod-tag">Series</div>
+            <div class="prod-title">TITLE HERE</div>
+            <div class="prod-watch">▶ Watch on YouTube</div>
           </div>
         </a>
 
         <!-- PRODUCTION 5 -->
         <a href="#" class="prod-card">
-          <div class="prod-card-poster">
-            <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/images/poster-05.jpeg" alt="Production poster" />
-            <div class="prod-card-overlay">
-              <div class="prod-card-tag">Film</div>
-              <div class="prod-card-title">TITLE HERE</div>
-              <span class="prod-card-watch">▶ Watch on YouTube</span>
+          <div class="prod-thumb">
+            <div class="prod-thumb-placeholder">
+              <div class="ph-icon">🎬</div>
+              <div class="ph-label">UPLOAD THUMBNAIL</div>
             </div>
+            <div class="prod-play"><div class="prod-play-btn">▶</div></div>
+          </div>
+          <div class="prod-info">
+            <div class="prod-tag">Film</div>
+            <div class="prod-title">TITLE HERE</div>
+            <div class="prod-watch">▶ Watch on YouTube</div>
           </div>
         </a>
 
@@ -443,7 +418,7 @@
 </div>
 
 
-<!-- ══ CONTACT ══ -->
+<!-- CONTACT -->
 <section id="contact">
   <div class="section-label">Reach Out</div>
   <h2>Contact Us</h2>
@@ -471,102 +446,100 @@
 </section>
 
 
-<!-- ══ FAQ ══ -->
+<!-- FAQ -->
 <section id="faq">
   <div class="section-label">Questions</div>
   <h2>Frequently Asked Questions</h2>
   <ul class="faq-list">
-    <li class="faq-item">
-      <button class="faq-question">Where can I watch Mike Savage Studios productions?</button>
-      <div class="faq-answer">All our productions are available for free on our YouTube channel. Follow us for the latest uploads and behind-the-scenes content.</div>
-    </li>
-    <li class="faq-item">
-      <button class="faq-question">How can I audition for Mike Savage Studios?</button>
-      <div class="faq-answer">Visit the Auditions page to see current opportunities. We welcome talent of all backgrounds and experience levels to apply.</div>
-    </li>
-    <li class="faq-item">
-      <button class="faq-question">How can I collaborate or partner with Mike Savage Studios?</button>
-      <div class="faq-answer">Send us an email at info@mikesavagestudios.com or use the Contact Us form above. We're always open to creative partnerships.</div>
-    </li>
-    <li class="faq-item">
-      <button class="faq-question">What kind of stories does Mike Savage Studios tell?</button>
-      <div class="faq-answer">We focus on authentic, emotionally grounded stories that reflect real human experiences — from drama and romance to action and social commentary.</div>
-    </li>
-    <li class="faq-item">
-      <button class="faq-question">How do I stay updated on new productions?</button>
-      <div class="faq-answer">Follow us on Instagram, TikTok, Facebook, and YouTube for the latest news, casting calls, and production updates.</div>
-    </li>
+    <li class="faq-item"><button class="faq-question">Where can I watch Mike Savage Studios productions?</button><div class="faq-answer">All our productions are available for free on our YouTube channel. Follow us for the latest uploads and behind-the-scenes content.</div></li>
+    <li class="faq-item"><button class="faq-question">How can I audition for Mike Savage Studios?</button><div class="faq-answer">Visit the Auditions page to see current opportunities. We welcome talent of all backgrounds and experience levels.</div></li>
+    <li class="faq-item"><button class="faq-question">How can I collaborate or partner with Mike Savage Studios?</button><div class="faq-answer">Send us an email at info@mikesavagestudios.com or use the Contact Us form above.</div></li>
+    <li class="faq-item"><button class="faq-question">What kind of stories does Mike Savage Studios tell?</button><div class="faq-answer">We focus on authentic, emotionally grounded stories that reflect real human experiences — from drama and romance to action and social commentary.</div></li>
+    <li class="faq-item"><button class="faq-question">How do I stay updated on new productions?</button><div class="faq-answer">Follow us on Instagram, TikTok, Facebook, and YouTube for the latest news, casting calls, and production updates.</div></li>
   </ul>
 </section>
 
 
-<!-- ══ FOOTER ══ -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo">
-        <div class="footer-logo-mark">MS</div>
-        <div class="footer-logo-name">MIKE SAVAGE STUDIOS</div>
-      </div>
+      <div class="footer-logo"><div class="footer-logo-mark">MS</div><div class="footer-logo-name">MIKE SAVAGE STUDIOS</div></div>
       <p>Crafting stories through films &amp; series.</p>
     </div>
-    <div class="footer-col">
-      <h4>Navigate</h4>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="auditions.html">Auditions</a></li>
-        <li><a href="#contact">Contact Us</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Follow Us</h4>
-      <ul>
-        <li><a href="#">YouTube</a></li>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">TikTok</a></li>
-      </ul>
-    </div>
+    <div class="footer-col"><h4>Navigate</h4><ul>
+      <li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li>
+      <li><a href="about.html">About</a></li><li><a href="auditions.html">Auditions</a></li>
+      <li><a href="#contact">Contact Us</a></li><li><a href="#faq">FAQ</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Follow Us</h4><ul>
+      <li><a href="#">YouTube</a></li><li><a href="#">Instagram</a></li>
+      <li><a href="#">Facebook</a></li><li><a href="#">TikTok</a></li>
+    </ul></div>
   </div>
-  <div class="footer-bottom">
-    <span>© 2026 Mike Savage Studios. All Rights Reserved.</span>
-  </div>
+  <div class="footer-bottom"><span>© 2026 Mike Savage Studios. All Rights Reserved.</span></div>
 </footer>
 
 
 <script>
-  // ── Nav toggle ──
-  document.getElementById('navToggle').addEventListener('click', function() {
-    document.getElementById('navLinks').classList.toggle('open');
+  // ══════════════════════════════════════════
+  // CONFIGURATION — edit this section only
+  // ══════════════════════════════════════════
+  const GITHUB_BASE = 'https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/';
+
+  // Hero images — must be uploaded to GitHub as images/hero-01.jpeg ... hero-10.jpeg
+  const HERO_IMAGES = [
+    'hero-01.jpeg',
+    'hero-02.jpeg',
+    'hero-03.jpeg',
+    'hero-04.jpeg',
+    'hero-05.jpeg',
+    'hero-06.jpeg',
+    'hero-07.jpeg',
+    'hero-08.jpeg',
+    'hero-09.jpeg',
+    'hero-10.jpeg'
+  ];
+  // ══════════════════════════════════════════
+
+  // Build hero slides from the array above
+  const slidesWrap = document.getElementById('heroSlides');
+  const dotsWrap   = document.getElementById('heroDots');
+  const counter    = document.getElementById('heroCounter');
+
+  HERO_IMAGES.forEach((img, i) => {
+    // Slide
+    const slide = document.createElement('div');
+    slide.className = 'hero-slide';
+    slide.innerHTML = `
+      <div class="hero-bg" style="background-image:url('${GITHUB_BASE}${img}')"></div>
+      <div class="hero-content">
+        <h1 class="hero-studio-name">MIKE SAVAGE <span>STUDIOS</span></h1>
+        <p class="hero-tagline">Crafting Stories That Last</p>
+        <a href="#productions" class="hero-cta">Our Productions</a>
+      </div>`;
+    slidesWrap.appendChild(slide);
+
+    // Dot
+    const dot = document.createElement('div');
+    dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => { goTo(i); resetAuto(); });
+    dotsWrap.appendChild(dot);
   });
 
-  // ── Hero Slider ──
-  const totalSlides = 10;
   let current = 0, autoSlide;
-  const dotsWrap = document.getElementById('heroDots');
-  const counter  = document.getElementById('heroCounter');
-
-  for (let i = 0; i < totalSlides; i++) {
-    const d = document.createElement('div');
-    d.className = 'hero-dot' + (i === 0 ? ' active' : '');
-    d.addEventListener('click', () => { goTo(i); resetAuto(); });
-    dotsWrap.appendChild(d);
-  }
 
   function goTo(n) {
-    current = (n + totalSlides) % totalSlides;
-    document.getElementById('heroSlides').style.transform = `translateX(-${current * 100}%)`;
+    current = (n + HERO_IMAGES.length) % HERO_IMAGES.length;
+    slidesWrap.style.transform = `translateX(-${current * 100}%)`;
     document.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('active', i === current));
-    counter.textContent = (current + 1) + ' / ' + totalSlides;
+    counter.textContent = (current + 1) + ' / ' + HERO_IMAGES.length;
   }
 
   document.getElementById('heroPrev').addEventListener('click', () => { goTo(current - 1); resetAuto(); });
   document.getElementById('heroNext').addEventListener('click', () => { goTo(current + 1); resetAuto(); });
 
-  // Swipe support
+  // Touch swipe
   let tx = 0;
   document.getElementById('hero').addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
   document.getElementById('hero').addEventListener('touchend',   e => {
@@ -577,11 +550,10 @@
   function resetAuto() { clearInterval(autoSlide); autoSlide = setInterval(() => goTo(current + 1), 5000); }
   autoSlide = setInterval(() => goTo(current + 1), 5000);
 
-  // ── Productions Slider ──
+  // Productions slider
   const track = document.getElementById('prodTrack');
   const cards = Array.from(track.querySelectorAll('.prod-card'));
   let pIdx = 0;
-
   function vis() { return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : window.innerWidth < 1100 ? 3 : 4; }
   function slideProd(dir) {
     pIdx = Math.max(0, Math.min(cards.length - vis(), pIdx + dir));
@@ -594,20 +566,25 @@
   track.addEventListener('touchstart', e => { px = e.touches[0].clientX; }, {passive:true});
   track.addEventListener('touchend',   e => { const d = px - e.changedTouches[0].clientX; if (Math.abs(d) > 40) slideProd(d > 0 ? 1 : -1); }, {passive:true});
 
-  // ── FAQ ──
+  // Nav
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // FAQ
   document.querySelectorAll('.faq-question').forEach(btn => {
     btn.addEventListener('click', () => btn.parentElement.classList.toggle('open'));
   });
 
-  // ── Contact form ──
+  // Contact form
   document.getElementById('cfSubmit').addEventListener('click', function() {
     const name  = document.getElementById('cfName').value.trim();
     const email = document.getElementById('cfEmail').value.trim();
     const msg   = document.getElementById('cfMessage').value.trim();
     if (!name || !email || !msg) { alert('Please fill in all required fields.'); return; }
     document.getElementById('cfSuccess').style.display = 'block';
-    document.getElementById('cfName').value    = '';
-    document.getElementById('cfEmail').value   = '';
+    document.getElementById('cfName').value = '';
+    document.getElementById('cfEmail').value = '';
     document.getElementById('cfMessage').value = '';
   });
 </script>
