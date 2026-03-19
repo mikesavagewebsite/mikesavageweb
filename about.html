@@ -8,10 +8,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --black: #000; --white: #fff; --light: #f8f8f8; --light2: #f0f0f0; --border: #e5e5e5; --text: #222; --muted: #777; --font-display: 'Bebas Neue', sans-serif; --font-body: 'Raleway', sans-serif; }
+    :root {
+      --black: #000; --white: #fff; --light: #f8f8f8;
+      --border: #e5e5e5; --text: #333; --muted: #888;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Raleway', sans-serif;
+    }
     html { scroll-behavior: smooth; }
-    body { background: var(--white); color: var(--text); font-family: var(--font-body); line-height: 1.6; padding-bottom: 52px; }
+    body { background: var(--white); color: var(--text); font-family: var(--font-body); line-height: 1.7; padding-bottom: 52px; }
     a { color: inherit; text-decoration: none; }
+
+    /* NAV — BLACK */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: #000; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 70px; }
     .nav-logo { display: flex; align-items: center; gap: 12px; }
     .nav-logo-img { width: 46px; height: 46px; object-fit: contain; mix-blend-mode: screen; }
@@ -24,66 +31,128 @@
     .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .nav-toggle span { display: block; width: 24px; height: 2px; background: #fff; }
 
-    /* PAGE HEADER — WHITE, black text, black bottom border */
-    .page-header { margin-top: 70px; background: var(--white); border-bottom: 2px solid var(--black); padding: 60px 40px 40px; }
-    .page-header .lbl { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 10px; }
-    .page-header h1 { font-family: var(--font-display); font-size: clamp(36px,6vw,72px); letter-spacing: 4px; color: var(--black); margin-bottom: 10px; }
-    .page-header p { font-size: 15px; color: var(--muted); }
+    /* ═══ HERO — full width image with dark overlay ═══ */
+    .hero-about {
+      margin-top: 70px;
+      position: relative;
+      height: 420px;
+      background: url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/hero-03.jpeg') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+    }
+    .hero-about::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.62);
+    }
+    .hero-about-content { position: relative; z-index: 1; padding: 0 24px; }
+    .hero-about-content h1 { font-family: var(--font-display); font-size: clamp(36px,6vw,64px); letter-spacing: 4px; color: #fff; margin-bottom: 14px; }
+    .hero-about-content p { font-size: 15px; color: rgba(255,255,255,0.75); letter-spacing: 1px; }
 
-    .sec-white { background: var(--white); }
-    .sec-light { background: var(--light); }
-    .sec-black { background: var(--black); }
+    /* ═══ WAVE PATTERN BACKGROUND ═══ */
+    .wave-bg {
+      background-color: #fafafa;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cdefs%3E%3Cpattern id='wave' x='0' y='0' width='200' height='200' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='100' cy='100' r='80' fill='none' stroke='%23e8e8e8' stroke-width='1'/%3E%3Ccircle cx='100' cy='100' r='60' fill='none' stroke='%23e8e8e8' stroke-width='0.8'/%3E%3Ccircle cx='100' cy='100' r='40' fill='none' stroke='%23e8e8e8' stroke-width='0.6'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23wave)'/%3E%3C/svg%3E");
+    }
+
+    /* ═══ SECTIONS ═══ */
     .inner { max-width: 1100px; margin: 0 auto; padding: 70px 40px; }
-    .lbl-dark { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 10px; }
-    .lbl-light { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.45); font-weight: 700; margin-bottom: 10px; }
-    h2 { font-family: var(--font-display); font-size: clamp(28px,4vw,44px); letter-spacing: 3px; margin-bottom: 20px; }
-    h2.dk { color: var(--black); } h2.lt { color: #fff; }
-    .divider { width: 50px; height: 2px; background: var(--black); margin-bottom: 28px; }
-    .divider-lt { width: 50px; height: 2px; background: #fff; margin-bottom: 28px; }
-    p.lead { font-size: 17px; color: var(--text); line-height: 1.9; margin-bottom: 20px; font-weight: 500; }
+    .section-title { font-family: var(--font-display); font-size: clamp(26px,3.5vw,40px); letter-spacing: 2px; color: var(--black); margin-bottom: 8px; }
+    .section-underline { width: 44px; height: 3px; background: var(--black); margin-bottom: 32px; border-radius: 2px; }
     p.body { font-size: 15px; color: #555; line-height: 1.9; margin-bottom: 16px; }
+    p.lead { font-size: 16px; color: #333; line-height: 1.9; margin-bottom: 16px; }
 
-    /* WHO WE ARE — WHITE */
+    /* ═══ WHO WE ARE ═══ */
     .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .who-logo { background: var(--light); padding: 50px; display: flex; align-items: center; justify-content: center; }
-    .who-logo img { width: 180px; }
+    .who-logo-box {
+      background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+      border-radius: 4px;
+      padding: 50px;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 280px;
+    }
+    .who-logo-box img { width: 160px; object-fit: contain; }
 
-    /* MISSION & VISION — LIGHT GREY */
+    /* ═══ MISSION & VISION — dark cards on light bg ═══ */
     .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .mv-card { background: var(--white); border: 1px solid var(--border); padding: 36px; }
-    .mv-card h3 { font-family: var(--font-display); font-size: 22px; letter-spacing: 2px; color: var(--black); margin-bottom: 12px; }
-    .mv-card p { font-size: 14px; color: #666; line-height: 1.8; }
+    .mv-card {
+      background: #1a1a2e;
+      border-radius: 4px;
+      padding: 36px;
+      color: #fff;
+    }
+    .mv-card-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #aaa; font-weight: 700; margin-bottom: 12px; }
+    .mv-card h3 { font-family: var(--font-display); font-size: 22px; letter-spacing: 2px; color: #fff; margin-bottom: 14px; }
+    .mv-card p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.8; }
 
-    /* VALUES — BLACK */
-    .values-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 20px; }
-    .val-card { border: 1px solid rgba(255,255,255,0.1); background: #111; padding: 28px 22px; }
-    .val-icon { font-size: 30px; margin-bottom: 14px; display: block; }
-    .val-card h4 { font-family: var(--font-display); font-size: 18px; letter-spacing: 1px; color: #fff; margin-bottom: 10px; }
-    .val-card p { font-size: 13px; color: #888; line-height: 1.7; }
+    /* ═══ OUR VALUES — white cards with icon circles ═══ */
+    .values-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+    .val-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .val-icon-circle {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: #000;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin: 0 auto 16px;
+    }
+    .val-card h4 { font-family: var(--font-display); font-size: 16px; letter-spacing: 1px; color: var(--black); margin-bottom: 10px; }
+    .val-card p { font-size: 13px; color: #777; line-height: 1.7; }
 
-    /* FOUNDER — WHITE */
-    .founder-grid { display: grid; grid-template-columns: 320px 1fr; gap: 60px; align-items: start; }
-    .founder-img img { width: 100%; display: block; }
-    .founder-name { font-family: var(--font-display); font-size: clamp(24px,3vw,36px); letter-spacing: 2px; color: var(--black); margin-bottom: 6px; }
-    .founder-role { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    /* ═══ MEET THE FOUNDER ═══ */
+    .founder-grid { display: grid; grid-template-columns: 300px 1fr; gap: 50px; align-items: start; }
+    .founder-photo { border-radius: 2px; overflow: hidden; }
+    .founder-photo img { width: 100%; display: block; }
+    .founder-name { font-family: var(--font-display); font-size: clamp(24px,3vw,36px); letter-spacing: 2px; color: var(--black); margin-bottom: 4px; }
+    .founder-role { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 20px; }
+    .founder-divider { width: 44px; height: 3px; background: var(--black); margin-bottom: 24px; border-radius: 2px; }
     .founder-bio p { font-size: 15px; color: #555; line-height: 1.9; margin-bottom: 16px; }
 
-    /* PRODUCTIONS — BLACK */
-    .prod-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 20px; }
-    .prod-card { background: #111; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; display: block; transition: border-color 0.2s, transform 0.2s; }
-    .prod-card:hover { border-color: rgba(255,255,255,0.3); transform: translateY(-3px); }
-    .prod-thumb { width: 100%; aspect-ratio: 16/9; overflow: hidden; position: relative; background: #1a1a1a; }
-    .prod-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
-    .prod-card:hover .prod-thumb img { transform: scale(1.04); }
-    .prod-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); opacity: 0; transition: opacity 0.25s; }
-    .prod-card:hover .prod-play { opacity: 1; }
-    .prod-play-btn { width: 44px; height: 44px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #000; }
-    .prod-info { padding: 14px 16px; }
-    .prod-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); font-weight: 700; margin-bottom: 4px; }
-    .prod-title { font-family: var(--font-display); font-size: 20px; letter-spacing: 2px; color: #fff; margin-bottom: 4px; }
-    .prod-watch { font-size: 11px; color: #555; }
+    /* ═══ OUR PRODUCTIONS — portrait cards like movie posters ═══ */
+    .prod-grid { display: flex; gap: 20px; flex-wrap: wrap; }
+    .prod-card {
+      width: 180px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      display: block;
+      transition: transform 0.25s, box-shadow 0.25s;
+      flex-shrink: 0;
+    }
+    .prod-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+    .prod-poster {
+      width: 100%; aspect-ratio: 2/3;
+      overflow: hidden; position: relative;
+      background: #1a1a1a;
+    }
+    .prod-poster img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+    .prod-card:hover .prod-poster img { transform: scale(1.05); }
+    .prod-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 12px;
+    }
+    .prod-badge {
+      display: inline-block;
+      background: var(--black);
+      color: #fff;
+      font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 2px; margin-bottom: 6px;
+      width: fit-content;
+    }
+    .prod-name { font-family: var(--font-display); font-size: 14px; letter-spacing: 1px; color: #fff; line-height: 1.2; }
+    .prod-foot { padding: 10px 12px; }
+    .prod-watch { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .prod-watch:hover { color: var(--black); }
 
-    /* FOOTER — BLACK */
+    /* FOOTER */
     footer { background: var(--black); padding: 60px 40px 30px; }
     .footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
     .footer-brand p { color: #555; font-size: 13px; margin-top: 12px; line-height: 1.7; }
@@ -101,8 +170,11 @@
     .social-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; display: flex; height: 52px; }
     .social-bar a { flex: 1; display: flex; align-items: center; justify-content: center; color: #fff; transition: opacity 0.2s; }
     .social-bar a:hover { opacity: 0.85; }
-    .sb-youtube { background: #FF0000; } .sb-facebook { background: #1877F2; } .sb-instagram { background: #C13584; } .sb-tiktok { background: #000; } .sb-whatsapp { background: #25D366; } .sb-linkedin { background: #0A66C2; }
+    .sb-youtube { background: #FF0000; } .sb-facebook { background: #1877F2; }
+    .sb-instagram { background: #C13584; } .sb-tiktok { background: #000; }
+    .sb-whatsapp { background: #25D366; } .sb-linkedin { background: #0A66C2; }
 
+    /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; flex-direction: column; gap: 0; position: fixed; top: 70px; left: 0; right: 0; background: #000; z-index: 9999; border-bottom: 1px solid rgba(255,255,255,0.08); }
@@ -110,9 +182,12 @@
       .nav-links li { border-bottom: 1px solid rgba(255,255,255,0.06); }
       .nav-links a { display: block; padding: 16px 20px; }
       .nav-toggle { display: flex; }
-      .page-header { padding: 50px 20px 30px; }
+      .hero-about { height: 300px; }
       .inner { padding: 50px 20px; }
-      .who-grid, .mv-grid, .founder-grid { grid-template-columns: 1fr; gap: 28px; }
+      .who-grid { grid-template-columns: 1fr; gap: 28px; }
+      .mv-grid { grid-template-columns: 1fr; }
+      .founder-grid { grid-template-columns: 1fr; gap: 28px; }
+      .prod-grid { justify-content: center; }
       .footer-inner { grid-template-columns: 1fr; gap: 28px; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
       footer { padding: 50px 20px 24px; }
@@ -121,6 +196,7 @@
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">
     <img class="nav-logo-img" src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="Mike Savage Studios" />
@@ -137,82 +213,104 @@
   <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- PAGE HEADER — WHITE, black text -->
-<div class="page-header">
-  <div class="lbl">Who We Are</div>
-  <h1>About Mike Savage Studios</h1>
-  <p>Who we are, what we believe, and why we create</p>
+<!-- HERO — full width image with dark overlay, white text -->
+<div class="hero-about">
+  <div class="hero-about-content">
+    <h1>About Mike Savage Studios</h1>
+    <p>Who we are, what we believe, and why we create</p>
+  </div>
 </div>
 
-<!-- WHO WE ARE — WHITE -->
-<div class="sec-white">
+<!-- WHO WE ARE — white with wave pattern bg -->
+<div class="wave-bg">
   <div class="inner">
     <div class="who-grid">
       <div>
-        <div class="lbl-dark">About Us</div>
-        <h2 class="dk">Who We Are</h2>
-        <div class="divider"></div>
+        <h2 class="section-title">Who We Are</h2>
+        <div class="section-underline"></div>
         <p class="lead">Mikesavage Studios is a powerhouse in film, comedy, and original entertainment, dedicated to creating bold, engaging content that resonates with audiences.</p>
         <p class="body">From laugh-out-loud comedies to boundary-pushing films, the studio brings fresh, fearless storytelling to life with a distinct creative edge. Every project is crafted to entertain, provoke thought, and leave a lasting impression.</p>
         <p class="body">Whether producing short films, viral skits, or full-length features, Mikesavage Studios stays true to its identity — real, raw, and relentlessly entertaining.</p>
         <p class="body">Welcome to a world where creativity meets savage energy.</p>
       </div>
-      <div class="who-logo">
+      <div class="who-logo-box">
         <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="Mike Savage Studios" />
       </div>
     </div>
   </div>
 </div>
 
-<!-- MISSION & VISION — LIGHT GREY -->
-<div class="sec-light">
+<!-- MISSION & VISION — light grey with dark cards -->
+<div style="background:#f2f2f2;">
   <div class="inner">
-    <div class="lbl-dark">Purpose</div>
-    <h2 class="dk">Mission &amp; Vision</h2>
-    <div class="divider"></div>
+    <h2 class="section-title">Mission &amp; Vision</h2>
+    <div class="section-underline"></div>
     <div class="mv-grid">
       <div class="mv-card">
-        <h3>Our Mission</h3>
+        <div class="mv-card-label">Our Mission</div>
         <p>To create bold, original content — from films to comedy — that entertains, provokes thought, and connects deeply with audiences through fearless storytelling and savage creative energy.</p>
       </div>
       <div class="mv-card">
-        <h3>Our Vision</h3>
-        <p>To build Mikesavage Studios into a leading entertainment powerhouse that shapes culture, amplifies authentic African voices, and delivers world-class content to global audiences.</p>
+        <div class="mv-card-label">Our Vision</div>
+        <p>To build Mikesavage Studios into a leading entertainment powerhouse that shapes culture, amplifies authentic voices, and delivers world-class content to global audiences.</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- OUR VALUES — BLACK, white text -->
-<div class="sec-black">
+<!-- OUR VALUES — white with wave bg, white cards -->
+<div class="wave-bg">
   <div class="inner">
-    <div class="lbl-light">What Drives Us</div>
-    <h2 class="lt">Our Values</h2>
-    <div class="divider-lt"></div>
+    <h2 class="section-title">Our Values</h2>
+    <div class="section-underline"></div>
     <div class="values-grid">
-      <div class="val-card"><span class="val-icon">🎬</span><h4>Bold Storytelling</h4><p>We believe powerful stories begin with fearless ideas. Every project is driven by the courage to tell stories that others won't.</p></div>
-      <div class="val-card"><span class="val-icon">✨</span><h4>Creative Excellence</h4><p>From concept to screen, we are committed to quality, professionalism, and artistic integrity in every project we produce.</p></div>
-      <div class="val-card"><span class="val-icon">❤️</span><h4>Raw Authenticity</h4><p>We tell stories that are real, honest, and rooted in genuine human experience — content audiences can truly connect with.</p></div>
-      <div class="val-card"><span class="val-icon">😂</span><h4>Entertainment First</h4><p>Whether drama or comedy, entertainment is at the heart of everything we do. We make content that moves, thrills, and delights.</p></div>
-      <div class="val-card"><span class="val-icon">🌍</span><h4>Cultural Impact</h4><p>Our work is created not only to entertain but to reflect culture, spark conversations, and leave a lasting mark on audiences.</p></div>
-      <div class="val-card"><span class="val-icon">🤝</span><h4>Collaborative Spirit</h4><p>Great content is built through teamwork. We value every creative mind that brings passion and talent to our productions.</p></div>
+      <div class="val-card">
+        <div class="val-icon-circle">🎬</div>
+        <h4>Bold Storytelling</h4>
+        <p>Every project is driven by the courage to tell stories that others won't.</p>
+      </div>
+      <div class="val-card">
+        <div class="val-icon-circle">✨</div>
+        <h4>Creative Excellence</h4>
+        <p>Quality, professionalism, and artistic integrity in every project we produce.</p>
+      </div>
+      <div class="val-card">
+        <div class="val-icon-circle">❤️</div>
+        <h4>Raw Authenticity</h4>
+        <p>Real, honest stories rooted in genuine human experience.</p>
+      </div>
+      <div class="val-card">
+        <div class="val-icon-circle">😂</div>
+        <h4>Entertainment First</h4>
+        <p>Whether drama or comedy, entertainment drives everything we do.</p>
+      </div>
+      <div class="val-card">
+        <div class="val-icon-circle">🌍</div>
+        <h4>Cultural Impact</h4>
+        <p>Content that reflects culture, sparks conversations, and leaves a lasting mark.</p>
+      </div>
+      <div class="val-card">
+        <div class="val-icon-circle">🤝</div>
+        <h4>Collaboration</h4>
+        <p>Great content is built through teamwork and shared creative passion.</p>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- MEET THE FOUNDER — WHITE -->
-<div class="sec-white">
+<!-- MEET THE FOUNDER — white with wave bg -->
+<div class="wave-bg">
   <div class="inner">
-    <div class="lbl-dark">The Person Behind the Studio</div>
-    <h2 class="dk">Meet the Founder</h2>
-    <div class="divider"></div>
+    <h2 class="section-title">Meet the Founder</h2>
+    <div class="section-underline"></div>
     <div class="founder-grid">
-      <div class="founder-img">
-        <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/founder.jpeg" alt="Onaolapo Olaniyi Micheal — Founder, Mike Savage Studios" />
+      <div class="founder-photo">
+        <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/founder.jpeg" alt="Onaolapo Olaniyi Micheal" />
       </div>
       <div class="founder-bio">
         <div class="founder-name">ONAOLAPO OLANIYI MICHEAL</div>
-        <div class="founder-role">Founder &amp; Filmmaker — Mikesavage</div>
+        <div class="founder-role">Founder &amp; Filmmaker</div>
+        <div class="founder-divider"></div>
         <p>Onaolapo Olaniyi Micheal, popularly known as Mikesavage, is a filmmaker, actor, and content creator driven by a passion for storytelling and performance.</p>
         <p>With a strong presence in both film and digital entertainment, he has built a reputation for delivering content that connects with audiences through authenticity, humor, and originality. His work reflects a commitment to pushing creative boundaries while staying true to his unique voice.</p>
         <p>Through Mikesavage Studios, he continues to shape stories that entertain, inspire, and stand out in today's evolving media landscape.</p>
@@ -221,35 +319,70 @@
   </div>
 </div>
 
-<!-- OUR PRODUCTIONS — BLACK, white text -->
-<div class="sec-black">
+<!-- OUR PRODUCTIONS — white, portrait poster cards -->
+<div style="background:#fff;">
   <div class="inner">
-    <div class="lbl-light">What We've Made</div>
-    <h2 class="lt">Our Productions</h2>
-    <div class="divider-lt"></div>
+    <h2 class="section-title">Our Productions</h2>
+    <div class="section-underline"></div>
     <div class="prod-grid">
+
       <a href="https://youtu.be/RGkTHHqcBk8?si=H3NijlPKEfJDtuah" target="_blank" class="prod-card">
-        <div class="prod-thumb"><img src="https://img.youtube.com/vi/RGkTHHqcBk8/hqdefault.jpg" alt="Love &amp; Betrayal" /><div class="prod-play"><div class="prod-play-btn">&#9654;</div></div></div>
-        <div class="prod-info"><div class="prod-tag">Film</div><div class="prod-title">LOVE &amp; BETRAYAL</div><div class="prod-watch">&#9654; Watch on YouTube</div></div>
+        <div class="prod-poster">
+          <img src="https://img.youtube.com/vi/RGkTHHqcBk8/hqdefault.jpg" alt="Love &amp; Betrayal" />
+          <div class="prod-overlay">
+            <div class="prod-badge">Film</div>
+            <div class="prod-name">LOVE &amp; BETRAYAL</div>
+          </div>
+        </div>
+        <div class="prod-foot"><div class="prod-watch">&#9654; Watch on YouTube</div></div>
       </a>
+
       <a href="https://youtu.be/NUc4qeGEV5A?si=1GMmDjX0SGj30zcm" target="_blank" class="prod-card">
-        <div class="prod-thumb"><img src="https://img.youtube.com/vi/NUc4qeGEV5A/hqdefault.jpg" alt="Mr Caretaker" /><div class="prod-play"><div class="prod-play-btn">&#9654;</div></div></div>
-        <div class="prod-info"><div class="prod-tag">Film</div><div class="prod-title">MR CARETAKER</div><div class="prod-watch">&#9654; Watch on YouTube</div></div>
+        <div class="prod-poster">
+          <img src="https://img.youtube.com/vi/NUc4qeGEV5A/hqdefault.jpg" alt="Mr Caretaker" />
+          <div class="prod-overlay">
+            <div class="prod-badge">Film</div>
+            <div class="prod-name">MR CARETAKER</div>
+          </div>
+        </div>
+        <div class="prod-foot"><div class="prod-watch">&#9654; Watch on YouTube</div></div>
       </a>
+
       <a href="https://youtu.be/Sl76stqg1wA?si=gGVyyOSynREQ4O4i" target="_blank" class="prod-card">
-        <div class="prod-thumb"><img src="https://img.youtube.com/vi/Sl76stqg1wA/hqdefault.jpg" alt="Flatline" /><div class="prod-play"><div class="prod-play-btn">&#9654;</div></div></div>
-        <div class="prod-info"><div class="prod-tag">Film</div><div class="prod-title">FLATLINE</div><div class="prod-watch">&#9654; Watch on YouTube</div></div>
+        <div class="prod-poster">
+          <img src="https://img.youtube.com/vi/Sl76stqg1wA/hqdefault.jpg" alt="Flatline" />
+          <div class="prod-overlay">
+            <div class="prod-badge">Film</div>
+            <div class="prod-name">FLATLINE</div>
+          </div>
+        </div>
+        <div class="prod-foot"><div class="prod-watch">&#9654; Watch on YouTube</div></div>
       </a>
+
     </div>
   </div>
 </div>
 
-<!-- FOOTER — BLACK -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-brand"><div class="footer-logo"><img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="MS" /><span>MIKE SAVAGE STUDIOS</span></div><p>Crafting stories through films &amp; series.</p></div>
-    <div class="footer-col"><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="about.html">About</a></li><li><a href="auditions.html">Auditions</a></li><li><a href="index.html#contact">Contact Us</a></li><li><a href="index.html#faq">FAQ</a></li></ul></div>
-    <div class="footer-col"><h4>Follow Us</h4><ul><li><a href="https://www.youtube.com/@Mike_savagess" target="_blank">YouTube</a></li><li><a href="https://www.facebook.com/share/1CFWiWGXnq/" target="_blank">Facebook</a></li><li><a href="https://www.instagram.com/mikesavage_studios" target="_blank">Instagram</a></li><li><a href="https://www.tiktok.com/@mikesavagess" target="_blank">TikTok</a></li><li><a href="https://chat.whatsapp.com/ECAVXKOu3LA3C3oQZrsFTf" target="_blank">WhatsApp</a></li><li><a href="https://www.linkedin.com/in/mikesavage-studios-8025943b8" target="_blank">LinkedIn</a></li></ul></div>
+    <div class="footer-brand">
+      <div class="footer-logo"><img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="MS" /><span>MIKE SAVAGE STUDIOS</span></div>
+      <p>Crafting stories through films &amp; series.</p>
+    </div>
+    <div class="footer-col"><h4>Navigate</h4><ul>
+      <li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li>
+      <li><a href="about.html">About</a></li><li><a href="auditions.html">Auditions</a></li>
+      <li><a href="index.html#contact">Contact Us</a></li><li><a href="index.html#faq">FAQ</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Follow Us</h4><ul>
+      <li><a href="https://www.youtube.com/@Mike_savagess" target="_blank">YouTube</a></li>
+      <li><a href="https://www.facebook.com/share/1CFWiWGXnq/" target="_blank">Facebook</a></li>
+      <li><a href="https://www.instagram.com/mikesavage_studios" target="_blank">Instagram</a></li>
+      <li><a href="https://www.tiktok.com/@mikesavagess" target="_blank">TikTok</a></li>
+      <li><a href="https://chat.whatsapp.com/ECAVXKOu3LA3C3oQZrsFTf" target="_blank">WhatsApp</a></li>
+      <li><a href="https://www.linkedin.com/in/mikesavage-studios-8025943b8" target="_blank">LinkedIn</a></li>
+    </ul></div>
   </div>
   <div class="footer-bottom"><span>&#169; 2026 Mike Savage Studios. All Rights Reserved.</span></div>
 </footer>
@@ -265,8 +398,12 @@
 </div>
 
 <script>
-  document.getElementById('navToggle').addEventListener('click', function() { document.getElementById('navLinks').classList.toggle('open'); });
-  document.querySelectorAll('#navLinks a').forEach(function(a) { a.addEventListener('click', function() { document.getElementById('navLinks').classList.remove('open'); }); });
+  document.getElementById('navToggle').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('#navLinks a').forEach(function(a) {
+    a.addEventListener('click', function() { document.getElementById('navLinks').classList.remove('open'); });
+  });
 </script>
 </body>
 </html>
