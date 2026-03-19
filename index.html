@@ -80,7 +80,7 @@
     /* PRODUCTIONS — BLACK, white text */
     .prod-wrap { position: relative; overflow: hidden; }
     .prod-track { display: flex; gap: 20px; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
-    .prod-card { min-width: 280px; background: #111; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; flex-shrink: 0; transition: border-color 0.2s, transform 0.2s; display: block; }
+    .prod-card { width: 300px; min-width: 300px; max-width: 300px; background: #111; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; flex-shrink: 0; transition: border-color 0.2s, transform 0.2s; display: block; }
     .prod-card:hover { border-color: rgba(255,255,255,0.3); transform: translateY(-3px); }
     .prod-thumb { width: 100%; aspect-ratio: 16/9; overflow: hidden; position: relative; background: #1a1a1a; display: flex; align-items: center; justify-content: center; }
     .prod-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
@@ -157,7 +157,7 @@
       .footer-inner { grid-template-columns: 1fr; gap: 28px; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
       footer { padding: 50px 20px 24px; }
-      .prod-card { min-width: 85vw; }
+      .prod-card { width: 85vw !important; min-width: 85vw !important; max-width: 85vw !important; }
     }
   </style>
 </head>
@@ -241,7 +241,7 @@
       <div class="contact-info">
         <h3>Get In Touch</h3>
         <p>We would love to hear from you. Whether you have a question, want to collaborate, or just want to say hello — reach out and let's start the conversation.</p>
-        <p>Email: info@mikesavagestudios.com</p>
+        <p>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2e474048416e4347454b5d4f584f494b5d5a5b4a47415d004d4143">[email&#160;protected]</a></p>
       </div>
       <div>
         <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your full name" id="cfName" /></div>
@@ -341,8 +341,13 @@
   var track = document.getElementById('prodTrack');
   var pcards = track.querySelectorAll('.prod-card');
   var pIdx = 0;
+  var CARD_W = 320; /* 300px card + 20px gap */
   function vis() { return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3; }
-  function moveProd(dir) { var max = Math.max(0, pcards.length - vis()); pIdx = Math.max(0, Math.min(max, pIdx + dir)); track.style.transform = 'translateX(-' + (pIdx * (pcards[0].offsetWidth + 20)) + 'px)'; }
+  function moveProd(dir) {
+    var max = Math.max(0, pcards.length - vis());
+    pIdx = Math.max(0, Math.min(max, pIdx + dir));
+    track.style.transform = 'translateX(-' + (pIdx * CARD_W) + 'px)';
+  }
   document.getElementById('prodPrev').addEventListener('click', function() { moveProd(-1); });
   document.getElementById('prodNext').addEventListener('click', function() { moveProd(1); });
 
@@ -351,13 +356,13 @@
 
   /* CONTACT FORM */
   document.getElementById('cfSubmit').addEventListener('click', function() {
-    var name = document.getElementById('cfName').value.trim();
+    var name  = document.getElementById('cfName').value.trim();
     var email = document.getElementById('cfEmail').value.trim();
-    var msg = document.getElementById('cfMessage').value.trim();
+    var msg   = document.getElementById('cfMessage').value.trim();
     if (!name || !email || !msg) { alert('Please fill in all required fields.'); return; }
     document.getElementById('cfOk').style.display = 'block';
-    document.getElementById('cfName').value = '';
-    document.getElementById('cfEmail').value = '';
+    document.getElementById('cfName').value    = '';
+    document.getElementById('cfEmail').value   = '';
     document.getElementById('cfMessage').value = '';
   });
 </script>
