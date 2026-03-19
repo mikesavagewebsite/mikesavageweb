@@ -8,97 +8,83 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --black: #000; --dark: #0d0d0d;
-      --white: #fff; --light: #f5f5f5; --light2: #eee;
-      --font-display: 'Bebas Neue', sans-serif;
-      --font-body: 'Raleway', sans-serif;
-    }
+    :root { --black: #000; --white: #fff; --light: #f8f8f8; --light2: #f0f0f0; --border: #e5e5e5; --text: #222; --muted: #777; --font-display: 'Bebas Neue', sans-serif; --font-body: 'Raleway', sans-serif; }
     html { scroll-behavior: smooth; }
-    body { background: var(--white); color: var(--black); font-family: var(--font-body); line-height: 1.6; padding-bottom: 52px; }
+    body { background: var(--white); color: var(--text); font-family: var(--font-body); line-height: 1.6; padding-bottom: 52px; }
     a { color: inherit; text-decoration: none; }
-
-    /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(0,0,0,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 70px; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: #000; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 70px; }
     .nav-logo { display: flex; align-items: center; gap: 12px; }
     .nav-logo-img { width: 46px; height: 46px; object-fit: contain; mix-blend-mode: screen; }
     .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
     .nav-logo-text span:first-child { font-family: var(--font-display); font-size: 18px; letter-spacing: 2px; color: #fff; }
     .nav-logo-text span:last-child { font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.4); text-transform: uppercase; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+    .nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); transition: color 0.2s; }
     .nav-links a:hover, .nav-links a.active { color: #fff; }
     .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .nav-toggle span { display: block; width: 24px; height: 2px; background: #fff; }
 
-    /* PAGE HEADER — BLACK */
-    .page-header {
-      margin-top: 70px;
-      background: var(--black);
-      padding: 80px 40px 60px;
-      text-align: center;
-    }
-    .page-header .lbl { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.4); font-weight: 700; margin-bottom: 14px; }
-    .page-header h1 { font-family: var(--font-display); font-size: clamp(36px, 6vw, 72px); letter-spacing: 4px; color: #fff; margin-bottom: 16px; }
-    .page-header p { font-size: 15px; color: rgba(255,255,255,0.5); max-width: 520px; margin: 0 auto; font-weight: 300; letter-spacing: 1px; }
+    /* PAGE HEADER — WHITE, black text, black bottom border */
+    .page-header { margin-top: 70px; background: var(--white); border-bottom: 2px solid var(--black); padding: 60px 40px 40px; }
+    .page-header .lbl { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 10px; }
+    .page-header h1 { font-family: var(--font-display); font-size: clamp(36px,6vw,72px); letter-spacing: 4px; color: var(--black); margin-bottom: 10px; }
+    .page-header p { font-size: 15px; color: var(--muted); }
 
-    /* SECTION HELPERS */
-    .sec-white { background: #fff; }
+    .sec-white { background: var(--white); }
     .sec-light { background: var(--light); }
-    .sec-black { background: #000; }
-    .inner { max-width: 860px; margin: 0 auto; padding: 80px 40px; }
-    .inner-wide { max-width: 1160px; margin: 0 auto; padding: 80px 40px; }
-    .lbl-dark  { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(0,0,0,0.35); font-weight: 700; margin-bottom: 12px; }
-    .lbl-light { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.4); font-weight: 700; margin-bottom: 12px; }
-    h2 { font-family: var(--font-display); font-size: clamp(28px, 4vw, 44px); letter-spacing: 3px; margin-bottom: 28px; }
-    h2.dk { color: #000; } h2.lt { color: #fff; }
-    h3 { font-family: var(--font-display); font-size: clamp(20px, 3vw, 28px); letter-spacing: 2px; margin-bottom: 14px; }
-    h3.dk { color: #000; } h3.lt { color: #fff; }
-    p.body { font-size: 15px; color: #555; line-height: 1.9; margin-bottom: 20px; }
-    p.body-lg { font-size: 17px; color: #333; line-height: 1.9; margin-bottom: 20px; font-weight: 500; }
+    .sec-black { background: var(--black); }
+    .inner { max-width: 1100px; margin: 0 auto; padding: 70px 40px; }
+    .lbl-dark { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 10px; }
+    .lbl-light { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.45); font-weight: 700; margin-bottom: 10px; }
+    h2 { font-family: var(--font-display); font-size: clamp(28px,4vw,44px); letter-spacing: 3px; margin-bottom: 20px; }
+    h2.dk { color: var(--black); } h2.lt { color: #fff; }
+    .divider { width: 50px; height: 2px; background: var(--black); margin-bottom: 28px; }
+    .divider-lt { width: 50px; height: 2px; background: #fff; margin-bottom: 28px; }
+    p.lead { font-size: 17px; color: var(--text); line-height: 1.9; margin-bottom: 20px; font-weight: 500; }
+    p.body { font-size: 15px; color: #555; line-height: 1.9; margin-bottom: 16px; }
 
     /* WHO WE ARE — WHITE */
     .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .who-img img { width: 100%; border-radius: 2px; display: block; }
-    .who-img-placeholder { width: 100%; aspect-ratio: 1/1; background: var(--light2); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 16px; letter-spacing: 2px; color: #ccc; }
+    .who-logo { background: var(--light); padding: 50px; display: flex; align-items: center; justify-content: center; }
+    .who-logo img { width: 180px; }
 
-    /* MISSION & VISION — LIGHT */
-    .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 10px; }
-    .mv-card { padding: 36px; border: 1px solid #e0e0e0; background: #fff; }
-    .mv-card h3 { font-family: var(--font-display); font-size: 22px; letter-spacing: 2px; color: #000; margin-bottom: 14px; }
+    /* MISSION & VISION — LIGHT GREY */
+    .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .mv-card { background: var(--white); border: 1px solid var(--border); padding: 36px; }
+    .mv-card h3 { font-family: var(--font-display); font-size: 22px; letter-spacing: 2px; color: var(--black); margin-bottom: 12px; }
     .mv-card p { font-size: 14px; color: #666; line-height: 1.8; }
 
     /* VALUES — BLACK */
-    .values-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; margin-top: 10px; }
-    .val-card { padding: 30px 24px; border: 1px solid rgba(255,255,255,0.1); background: #111; }
-    .val-icon { font-size: 32px; margin-bottom: 16px; display: block; }
-    .val-card h4 { font-family: var(--font-display); font-size: 18px; letter-spacing: 2px; color: #fff; margin-bottom: 10px; }
+    .values-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 20px; }
+    .val-card { border: 1px solid rgba(255,255,255,0.1); background: #111; padding: 28px 22px; }
+    .val-icon { font-size: 30px; margin-bottom: 14px; display: block; }
+    .val-card h4 { font-family: var(--font-display); font-size: 18px; letter-spacing: 1px; color: #fff; margin-bottom: 10px; }
     .val-card p { font-size: 13px; color: #888; line-height: 1.7; }
 
     /* FOUNDER — WHITE */
-    .founder-grid { display: grid; grid-template-columns: 340px 1fr; gap: 60px; align-items: start; }
-    .founder-img { position: sticky; top: 90px; }
-    .founder-img img { width: 100%; display: block; border-radius: 2px; }
-    .founder-name { font-family: var(--font-display); font-size: clamp(28px, 4vw, 44px); letter-spacing: 3px; color: #000; margin-bottom: 6px; }
-    .founder-role { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #999; margin-bottom: 28px; }
-    .founder-bio p { font-size: 15px; color: #555; line-height: 1.9; margin-bottom: 18px; }
+    .founder-grid { display: grid; grid-template-columns: 320px 1fr; gap: 60px; align-items: start; }
+    .founder-img img { width: 100%; display: block; }
+    .founder-name { font-family: var(--font-display); font-size: clamp(24px,3vw,36px); letter-spacing: 2px; color: var(--black); margin-bottom: 6px; }
+    .founder-role { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .founder-bio p { font-size: 15px; color: #555; line-height: 1.9; margin-bottom: 16px; }
 
     /* PRODUCTIONS — BLACK */
-    .prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+    .prod-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 20px; }
     .prod-card { background: #111; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; display: block; transition: border-color 0.2s, transform 0.2s; }
     .prod-card:hover { border-color: rgba(255,255,255,0.3); transform: translateY(-3px); }
     .prod-thumb { width: 100%; aspect-ratio: 16/9; overflow: hidden; position: relative; background: #1a1a1a; }
-    .prod-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .prod-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+    .prod-card:hover .prod-thumb img { transform: scale(1.04); }
     .prod-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); opacity: 0; transition: opacity 0.25s; }
     .prod-card:hover .prod-play { opacity: 1; }
-    .prod-play-btn { width: 48px; height: 48px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #000; }
+    .prod-play-btn { width: 44px; height: 44px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #000; }
     .prod-info { padding: 14px 16px; }
     .prod-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); font-weight: 700; margin-bottom: 4px; }
     .prod-title { font-family: var(--font-display); font-size: 20px; letter-spacing: 2px; color: #fff; margin-bottom: 4px; }
     .prod-watch { font-size: 11px; color: #555; }
 
-    /* FOOTER */
-    footer { background: #000; border-top: 1px solid rgba(255,255,255,0.08); padding: 60px 40px 30px; }
+    /* FOOTER — BLACK */
+    footer { background: var(--black); padding: 60px 40px 30px; }
     .footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
     .footer-brand p { color: #555; font-size: 13px; margin-top: 12px; line-height: 1.7; }
     .footer-logo { display: flex; align-items: center; gap: 12px; }
@@ -109,49 +95,36 @@
     .footer-col ul li { margin-bottom: 10px; }
     .footer-col ul a { font-size: 13px; color: #555; transition: color 0.2s; }
     .footer-col ul a:hover { color: #fff; }
-    .footer-bottom { max-width: 1160px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #444; }
+    .footer-bottom { max-width: 1160px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; font-size: 12px; color: #444; }
 
     /* SOCIAL BAR */
     .social-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; display: flex; height: 52px; }
     .social-bar a { flex: 1; display: flex; align-items: center; justify-content: center; color: #fff; transition: opacity 0.2s; }
     .social-bar a:hover { opacity: 0.85; }
-    .social-bar a.sb-youtube   { background: #FF0000; }
-    .social-bar a.sb-facebook  { background: #1877F2; }
-    .social-bar a.sb-instagram { background: #C13584; }
-    .social-bar a.sb-tiktok    { background: #000000; }
-    .social-bar a.sb-whatsapp  { background: #25D366; }
-    .social-bar a.sb-linkedin  { background: #0A66C2; }
+    .sb-youtube { background: #FF0000; } .sb-facebook { background: #1877F2; } .sb-instagram { background: #C13584; } .sb-tiktok { background: #000; } .sb-whatsapp { background: #25D366; } .sb-linkedin { background: #0A66C2; }
 
-    /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .nav-links { display: none; flex-direction: column; gap: 0; position: fixed; top: 70px; left: 0; right: 0; background: rgba(0,0,0,0.98); border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-links { display: none; flex-direction: column; gap: 0; position: fixed; top: 70px; left: 0; right: 0; background: #000; z-index: 9999; border-bottom: 1px solid rgba(255,255,255,0.08); }
       .nav-links.open { display: flex; }
-      .nav-links li { border-bottom: 1px solid rgba(255,255,255,0.05); }
+      .nav-links li { border-bottom: 1px solid rgba(255,255,255,0.06); }
       .nav-links a { display: block; padding: 16px 20px; }
       .nav-toggle { display: flex; }
-      .page-header { padding: 60px 20px 40px; }
-      .inner, .inner-wide { padding: 60px 20px; }
-      .who-grid { grid-template-columns: 1fr; gap: 30px; }
-      .mv-grid { grid-template-columns: 1fr; gap: 24px; }
-      .founder-grid { grid-template-columns: 1fr; gap: 30px; }
-      .founder-img { position: static; }
-      .footer-inner { grid-template-columns: 1fr; gap: 30px; }
+      .page-header { padding: 50px 20px 30px; }
+      .inner { padding: 50px 20px; }
+      .who-grid, .mv-grid, .founder-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 28px; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-      footer { padding: 60px 20px 30px; }
+      footer { padding: 50px 20px 24px; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">
     <img class="nav-logo-img" src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="Mike Savage Studios" />
-    <div class="nav-logo-text">
-      <span>MIKE SAVAGE STUDIOS</span>
-      <span>Crafting Stories That Last</span>
-    </div>
+    <div class="nav-logo-text"><span>MIKE SAVAGE STUDIOS</span><span>Crafting Stories That Last</span></div>
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html">Home</a></li>
@@ -164,7 +137,7 @@
   <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- PAGE HEADER — BLACK -->
+<!-- PAGE HEADER — WHITE, black text -->
 <div class="page-header">
   <div class="lbl">Who We Are</div>
   <h1>About Mike Savage Studios</h1>
@@ -173,18 +146,19 @@
 
 <!-- WHO WE ARE — WHITE -->
 <div class="sec-white">
-  <div class="inner" style="max-width:1100px;">
+  <div class="inner">
     <div class="who-grid">
       <div>
         <div class="lbl-dark">About Us</div>
         <h2 class="dk">Who We Are</h2>
-        <p class="body-lg">Mikesavage Studios is a powerhouse in film, comedy, and original entertainment, dedicated to creating bold, engaging content that resonates with audiences.</p>
+        <div class="divider"></div>
+        <p class="lead">Mikesavage Studios is a powerhouse in film, comedy, and original entertainment, dedicated to creating bold, engaging content that resonates with audiences.</p>
         <p class="body">From laugh-out-loud comedies to boundary-pushing films, the studio brings fresh, fearless storytelling to life with a distinct creative edge. Every project is crafted to entertain, provoke thought, and leave a lasting impression.</p>
         <p class="body">Whether producing short films, viral skits, or full-length features, Mikesavage Studios stays true to its identity — real, raw, and relentlessly entertaining.</p>
         <p class="body">Welcome to a world where creativity meets savage energy.</p>
       </div>
-      <div class="who-img">
-        <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="Mike Savage Studios" style="mix-blend-mode:multiply; background:#f5f5f5; padding:40px;" />
+      <div class="who-logo">
+        <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="Mike Savage Studios" />
       </div>
     </div>
   </div>
@@ -195,6 +169,7 @@
   <div class="inner">
     <div class="lbl-dark">Purpose</div>
     <h2 class="dk">Mission &amp; Vision</h2>
+    <div class="divider"></div>
     <div class="mv-grid">
       <div class="mv-card">
         <h3>Our Mission</h3>
@@ -208,54 +183,31 @@
   </div>
 </div>
 
-<!-- OUR VALUES — BLACK -->
+<!-- OUR VALUES — BLACK, white text -->
 <div class="sec-black">
   <div class="inner">
     <div class="lbl-light">What Drives Us</div>
     <h2 class="lt">Our Values</h2>
+    <div class="divider-lt"></div>
     <div class="values-grid">
-      <div class="val-card">
-        <span class="val-icon">🎬</span>
-        <h4>Bold Storytelling</h4>
-        <p>We believe powerful stories begin with fearless ideas. Every project is driven by the courage to tell stories that others won't.</p>
-      </div>
-      <div class="val-card">
-        <span class="val-icon">✨</span>
-        <h4>Creative Excellence</h4>
-        <p>From concept to screen, we are committed to quality, professionalism, and artistic integrity in every project we produce.</p>
-      </div>
-      <div class="val-card">
-        <span class="val-icon">❤️</span>
-        <h4>Raw Authenticity</h4>
-        <p>We tell stories that are real, honest, and rooted in genuine human experience — content audiences can truly connect with.</p>
-      </div>
-      <div class="val-card">
-        <span class="val-icon">😂</span>
-        <h4>Entertainment First</h4>
-        <p>Whether drama or comedy, entertainment is at the heart of everything we do. We make content that moves, thrills, and delights.</p>
-      </div>
-      <div class="val-card">
-        <span class="val-icon">🌍</span>
-        <h4>Cultural Impact</h4>
-        <p>Our work is created not only to entertain but to reflect culture, spark conversations, and leave a lasting mark on audiences.</p>
-      </div>
-      <div class="val-card">
-        <span class="val-icon">🤝</span>
-        <h4>Collaborative Spirit</h4>
-        <p>Great content is built through teamwork. We value every creative mind that brings passion and talent to our productions.</p>
-      </div>
+      <div class="val-card"><span class="val-icon">🎬</span><h4>Bold Storytelling</h4><p>We believe powerful stories begin with fearless ideas. Every project is driven by the courage to tell stories that others won't.</p></div>
+      <div class="val-card"><span class="val-icon">✨</span><h4>Creative Excellence</h4><p>From concept to screen, we are committed to quality, professionalism, and artistic integrity in every project we produce.</p></div>
+      <div class="val-card"><span class="val-icon">❤️</span><h4>Raw Authenticity</h4><p>We tell stories that are real, honest, and rooted in genuine human experience — content audiences can truly connect with.</p></div>
+      <div class="val-card"><span class="val-icon">😂</span><h4>Entertainment First</h4><p>Whether drama or comedy, entertainment is at the heart of everything we do. We make content that moves, thrills, and delights.</p></div>
+      <div class="val-card"><span class="val-icon">🌍</span><h4>Cultural Impact</h4><p>Our work is created not only to entertain but to reflect culture, spark conversations, and leave a lasting mark on audiences.</p></div>
+      <div class="val-card"><span class="val-icon">🤝</span><h4>Collaborative Spirit</h4><p>Great content is built through teamwork. We value every creative mind that brings passion and talent to our productions.</p></div>
     </div>
   </div>
 </div>
 
 <!-- MEET THE FOUNDER — WHITE -->
 <div class="sec-white">
-  <div class="inner" style="max-width:1100px;">
+  <div class="inner">
     <div class="lbl-dark">The Person Behind the Studio</div>
     <h2 class="dk">Meet the Founder</h2>
+    <div class="divider"></div>
     <div class="founder-grid">
       <div class="founder-img">
-        <!-- Upload founder.jpeg to GitHub root and it will appear here -->
         <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/founder.jpeg" alt="Onaolapo Olaniyi Micheal — Founder, Mike Savage Studios" />
       </div>
       <div class="founder-bio">
@@ -269,113 +221,52 @@
   </div>
 </div>
 
-<!-- OUR PRODUCTIONS — BLACK -->
+<!-- OUR PRODUCTIONS — BLACK, white text -->
 <div class="sec-black">
-  <div class="inner-wide">
+  <div class="inner">
     <div class="lbl-light">What We've Made</div>
     <h2 class="lt">Our Productions</h2>
+    <div class="divider-lt"></div>
     <div class="prod-grid">
       <a href="https://youtu.be/RGkTHHqcBk8?si=H3NijlPKEfJDtuah" target="_blank" class="prod-card">
-        <div class="prod-thumb">
-          <img src="https://img.youtube.com/vi/RGkTHHqcBk8/hqdefault.jpg" alt="Love &amp; Betrayal" />
-          <div class="prod-play"><div class="prod-play-btn">&#9654;</div></div>
-        </div>
-        <div class="prod-info">
-          <div class="prod-tag">Film</div>
-          <div class="prod-title">LOVE &amp; BETRAYAL</div>
-          <div class="prod-watch">&#9654; Watch on YouTube</div>
-        </div>
+        <div class="prod-thumb"><img src="https://img.youtube.com/vi/RGkTHHqcBk8/hqdefault.jpg" alt="Love &amp; Betrayal" /><div class="prod-play"><div class="prod-play-btn">&#9654;</div></div></div>
+        <div class="prod-info"><div class="prod-tag">Film</div><div class="prod-title">LOVE &amp; BETRAYAL</div><div class="prod-watch">&#9654; Watch on YouTube</div></div>
       </a>
       <a href="https://youtu.be/NUc4qeGEV5A?si=1GMmDjX0SGj30zcm" target="_blank" class="prod-card">
-        <div class="prod-thumb">
-          <img src="https://img.youtube.com/vi/NUc4qeGEV5A/hqdefault.jpg" alt="Mr Caretaker" />
-          <div class="prod-play"><div class="prod-play-btn">&#9654;</div></div>
-        </div>
-        <div class="prod-info">
-          <div class="prod-tag">Film</div>
-          <div class="prod-title">MR CARETAKER</div>
-          <div class="prod-watch">&#9654; Watch on YouTube</div>
-        </div>
+        <div class="prod-thumb"><img src="https://img.youtube.com/vi/NUc4qeGEV5A/hqdefault.jpg" alt="Mr Caretaker" /><div class="prod-play"><div class="prod-play-btn">&#9654;</div></div></div>
+        <div class="prod-info"><div class="prod-tag">Film</div><div class="prod-title">MR CARETAKER</div><div class="prod-watch">&#9654; Watch on YouTube</div></div>
       </a>
       <a href="https://youtu.be/Sl76stqg1wA?si=gGVyyOSynREQ4O4i" target="_blank" class="prod-card">
-        <div class="prod-thumb">
-          <img src="https://img.youtube.com/vi/Sl76stqg1wA/hqdefault.jpg" alt="Flatline" />
-          <div class="prod-play"><div class="prod-play-btn">&#9654;</div></div>
-        </div>
-        <div class="prod-info">
-          <div class="prod-tag">Film</div>
-          <div class="prod-title">FLATLINE</div>
-          <div class="prod-watch">&#9654; Watch on YouTube</div>
-        </div>
+        <div class="prod-thumb"><img src="https://img.youtube.com/vi/Sl76stqg1wA/hqdefault.jpg" alt="Flatline" /><div class="prod-play"><div class="prod-play-btn">&#9654;</div></div></div>
+        <div class="prod-info"><div class="prod-tag">Film</div><div class="prod-title">FLATLINE</div><div class="prod-watch">&#9654; Watch on YouTube</div></div>
       </a>
     </div>
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- FOOTER — BLACK -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="footer-logo">
-        <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="Mike Savage Studios" />
-        <span>MIKE SAVAGE STUDIOS</span>
-      </div>
-      <p>Crafting stories through films &amp; series.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Navigate</h4>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="auditions.html">Auditions</a></li>
-        <li><a href="index.html#contact">Contact Us</a></li>
-        <li><a href="index.html#faq">FAQ</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Follow Us</h4>
-      <ul>
-        <li><a href="https://www.youtube.com/@Mike_savagess" target="_blank">YouTube</a></li>
-        <li><a href="https://www.facebook.com/share/1CFWiWGXnq/?mibextid=wwXIfr" target="_blank">Facebook</a></li>
-        <li><a href="https://www.instagram.com/mikesavage_studios" target="_blank">Instagram</a></li>
-        <li><a href="https://www.tiktok.com/@mikesavagess" target="_blank">TikTok</a></li>
-        <li><a href="https://chat.whatsapp.com/ECAVXKOu3LA3C3oQZrsFTf?mode=gi_t" target="_blank">WhatsApp</a></li>
-        <li><a href="https://www.linkedin.com/in/mikesavage-studios-8025943b8" target="_blank">LinkedIn</a></li>
-      </ul>
-    </div>
+    <div class="footer-brand"><div class="footer-logo"><img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="MS" /><span>MIKE SAVAGE STUDIOS</span></div><p>Crafting stories through films &amp; series.</p></div>
+    <div class="footer-col"><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="about.html">About</a></li><li><a href="auditions.html">Auditions</a></li><li><a href="index.html#contact">Contact Us</a></li><li><a href="index.html#faq">FAQ</a></li></ul></div>
+    <div class="footer-col"><h4>Follow Us</h4><ul><li><a href="https://www.youtube.com/@Mike_savagess" target="_blank">YouTube</a></li><li><a href="https://www.facebook.com/share/1CFWiWGXnq/" target="_blank">Facebook</a></li><li><a href="https://www.instagram.com/mikesavage_studios" target="_blank">Instagram</a></li><li><a href="https://www.tiktok.com/@mikesavagess" target="_blank">TikTok</a></li><li><a href="https://chat.whatsapp.com/ECAVXKOu3LA3C3oQZrsFTf" target="_blank">WhatsApp</a></li><li><a href="https://www.linkedin.com/in/mikesavage-studios-8025943b8" target="_blank">LinkedIn</a></li></ul></div>
   </div>
-  <div class="footer-bottom">
-    <span>&#169; 2026 Mike Savage Studios. All Rights Reserved.</span>
-  </div>
+  <div class="footer-bottom"><span>&#169; 2026 Mike Savage Studios. All Rights Reserved.</span></div>
 </footer>
 
 <!-- FLOATING SOCIAL BAR -->
 <div class="social-bar">
-  <a href="https://www.youtube.com/@Mike_savagess" target="_blank" class="sb-youtube" title="YouTube">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
-  </a>
-  <a href="https://www.facebook.com/share/1CFWiWGXnq/?mibextid=wwXIfr" target="_blank" class="sb-facebook" title="Facebook">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.1C24 5.4 18.6 0 12 0S0 5.4 0 12.1C0 18.1 4.4 23.1 10.1 24v-8.4H7.1v-3.5h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-1.9.9-1.9 1.9v2.2h3.3l-.5 3.5h-2.8V24C19.6 23.1 24 18.1 24 12.1z"/></svg>
-  </a>
-  <a href="https://www.instagram.com/mikesavage_studios?igsh=MW1xZjh5a28xam44Ng%3D%3D&utm_source=qr" target="_blank" class="sb-instagram" title="Instagram">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.2 4.8 1.7 5 5 .1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.2 3.3-1.7 4.8-5 5-1.3.1-1.6.1-4.9.1s-3.6 0-4.8-.1c-3.3-.2-4.8-1.7-5-5C2 16.6 2 16.3 2 12s0-3.6.1-4.8c.2-3.3 1.7-4.8 5-5 1.2-.1 1.6-.1 4.9-.1zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12s0 3.7.1 4.9C.3 21.3 2.7 23.7 7.1 23.9 8.3 24 8.7 24 12 24s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7C24 15.7 24 15.3 24 12s0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg>
-  </a>
-  <a href="https://www.tiktok.com/@mikesavagess" target="_blank" class="sb-tiktok" title="TikTok">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 0h-3.9v16.3a3.8 3.8 0 0 1-3.8 3.8 3.8 3.8 0 0 1-3.8-3.8 3.8 3.8 0 0 1 3.8-3.8c.4 0 .7 0 1 .1V8.6a8 8 0 0 0-1-.1 7.8 7.8 0 0 0-7.8 7.8 7.8 7.8 0 0 0 7.8 7.7 7.8 7.8 0 0 0 7.8-7.7V8.1a11.9 11.9 0 0 0 6.9 2.2V6.4a6 6 0 0 1-6.9-6.4z"/></svg>
-  </a>
-  <a href="https://chat.whatsapp.com/ECAVXKOu3LA3C3oQZrsFTf?mode=gi_t" target="_blank" class="sb-whatsapp" title="WhatsApp">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9s-.5-.1-.7.1-.7.9-.9 1.1-.3.2-.6 0a7.8 7.8 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.4.1-.6l.4-.5.3-.4v-.5l-.9-2.1c-.2-.5-.5-.4-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1.1 2.6 5.9 5.9 0 0 0 1.2 3.1 13.6 13.6 0 0 0 5.2 4.6c.7.3 1.3.5 1.7.6a4.2 4.2 0 0 0 1.9.1 3.1 3.1 0 0 0 2.1-1.5 2.6 2.6 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.3zM12 0A12 12 0 0 0 1 17.9L0 24l6.3-1.7A12 12 0 1 0 12 0zm0 22a10 10 0 0 1-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A10 10 0 1 1 12 22z"/></svg>
-  </a>
-  <a href="https://www.linkedin.com/in/mikesavage-studios-8025943b8" target="_blank" class="sb-linkedin" title="LinkedIn">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 20.4h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.4V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.3-1.8 3.5 0 4.2 2.3 4.2 5.4v6.2zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM3.5 20.4h3.6V9H3.5v11.4zM22.2 0H1.8A1.8 1.8 0 0 0 0 1.8v20.4A1.8 1.8 0 0 0 1.8 24h20.4A1.8 1.8 0 0 0 24 22.2V1.8A1.8 1.8 0 0 0 22.2 0z"/></svg>
-  </a>
+  <a href="https://www.youtube.com/@Mike_savagess" target="_blank" class="sb-youtube" title="YouTube"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg></a>
+  <a href="https://www.facebook.com/share/1CFWiWGXnq/?mibextid=wwXIfr" target="_blank" class="sb-facebook" title="Facebook"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.1C24 5.4 18.6 0 12 0S0 5.4 0 12.1C0 18.1 4.4 23.1 10.1 24v-8.4H7.1v-3.5h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-1.9.9-1.9 1.9v2.2h3.3l-.5 3.5h-2.8V24C19.6 23.1 24 18.1 24 12.1z"/></svg></a>
+  <a href="https://www.instagram.com/mikesavage_studios?igsh=MW1xZjh5a28xam44Ng%3D%3D&utm_source=qr" target="_blank" class="sb-instagram" title="Instagram"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.2 4.8 1.7 5 5 .1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.2 3.3-1.7 4.8-5 5-1.3.1-1.6.1-4.9.1s-3.6 0-4.8-.1c-3.3-.2-4.8-1.7-5-5C2 16.6 2 16.3 2 12s0-3.6.1-4.8c.2-3.3 1.7-4.8 5-5 1.2-.1 1.6-.1 4.9-.1zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12s0 3.7.1 4.9C.3 21.3 2.7 23.7 7.1 23.9 8.3 24 8.7 24 12 24s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7C24 15.7 24 15.3 24 12s0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg></a>
+  <a href="https://www.tiktok.com/@mikesavagess" target="_blank" class="sb-tiktok" title="TikTok"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 0h-3.9v16.3a3.8 3.8 0 0 1-3.8 3.8 3.8 3.8 0 0 1-3.8-3.8 3.8 3.8 0 0 1 3.8-3.8c.4 0 .7 0 1 .1V8.6a8 8 0 0 0-1-.1 7.8 7.8 0 0 0-7.8 7.8 7.8 7.8 0 0 0 7.8 7.7 7.8 7.8 0 0 0 7.8-7.7V8.1a11.9 11.9 0 0 0 6.9 2.2V6.4a6 6 0 0 1-6.9-6.4z"/></svg></a>
+  <a href="https://chat.whatsapp.com/ECAVXKOu3LA3C3oQZrsFTf?mode=gi_t" target="_blank" class="sb-whatsapp" title="WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9s-.5-.1-.7.1-.7.9-.9 1.1-.3.2-.6 0a7.8 7.8 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.4.1-.6l.4-.5.3-.4v-.5l-.9-2.1c-.2-.5-.5-.4-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1.1 2.6 5.9 5.9 0 0 0 1.2 3.1 13.6 13.6 0 0 0 5.2 4.6c.7.3 1.3.5 1.7.6a4.2 4.2 0 0 0 1.9.1 3.1 3.1 0 0 0 2.1-1.5 2.6 2.6 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.3zM12 0A12 12 0 0 0 1 17.9L0 24l6.3-1.7A12 12 0 1 0 12 0zm0 22a10 10 0 0 1-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A10 10 0 1 1 12 22z"/></svg></a>
+  <a href="https://www.linkedin.com/in/mikesavage-studios-8025943b8" target="_blank" class="sb-linkedin" title="LinkedIn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 20.4h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.4V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.3-1.8 3.5 0 4.2 2.3 4.2 5.4v6.2zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM3.5 20.4h3.6V9H3.5v11.4zM22.2 0H1.8A1.8 1.8 0 0 0 0 1.8v20.4A1.8 1.8 0 0 0 1.8 24h20.4A1.8 1.8 0 0 0 24 22.2V1.8A1.8 1.8 0 0 0 22.2 0z"/></svg></a>
 </div>
 
 <script>
-  document.getElementById('navToggle').addEventListener('click', function() {
-    document.getElementById('navLinks').classList.toggle('open');
-  });
+  document.getElementById('navToggle').addEventListener('click', function() { document.getElementById('navLinks').classList.toggle('open'); });
+  document.querySelectorAll('#navLinks a').forEach(function(a) { a.addEventListener('click', function() { document.getElementById('navLinks').classList.remove('open'); }); });
 </script>
 </body>
 </html>
