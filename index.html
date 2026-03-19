@@ -3,97 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mike Savage Studios | Films, Series & Stories</title>
+  <title>Mike Savage Studios | Films, Series &amp; Stories</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --black: #000000;
-      --dark:  #0d0d0d;
-      --white: #ffffff;
-      --light: #f5f5f5;
-      --light2: #eeeeee;
-      --card-dark: #161616;
-      --card-light: #ffffff;
-      --muted-dark: #666;
-      --muted-light: #888;
+      --black: #000000; --dark: #0d0d0d;
+      --white: #ffffff; --light: #f5f5f5; --light2: #eeeeee;
       --font-display: 'Bebas Neue', sans-serif;
       --font-body: 'Raleway', sans-serif;
-      --GITHUB: 'https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/';
     }
     html { scroll-behavior: smooth; }
     body { background: var(--white); color: var(--black); font-family: var(--font-body); line-height: 1.6; }
     a { color: inherit; text-decoration: none; }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(0,0,0,0.96); backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px; height: 70px;
-    }
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(0,0,0,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 70px; }
     .nav-logo { display: flex; align-items: center; gap: 12px; }
-    .nav-logo-img { width: 46px; height: 46px; object-fit: contain; }
+    .nav-logo-img { width: 46px; height: 46px; object-fit: contain; mix-blend-mode: screen; }
     .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
-    .nav-logo-text span:first-child { font-family: var(--font-display); font-size: 18px; letter-spacing: 2px; color: var(--white); }
+    .nav-logo-text span:first-child { font-family: var(--font-display); font-size: 18px; letter-spacing: 2px; color: #fff; }
     .nav-logo-text span:last-child { font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.4); text-transform: uppercase; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
     .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: #fff; }
 
-    /* ── HERO — dark ── */
+    /* HERO */
     .hero { position: relative; height: 100vh; min-height: 600px; overflow: hidden; margin-top: 70px; }
     .hero-slides { display: flex; width: 100%; height: 100%; transition: transform 0.8s cubic-bezier(0.4,0,0.2,1); }
     .hero-slide { min-width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; }
     .hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; filter: brightness(0.38); }
     .hero-content { position: relative; z-index: 1; text-align: center; padding: 0 24px; }
-    .hero-logo-big { width: 90px; height: 90px; object-fit: contain; margin: 0 auto 20px; display: block; }
-    .hero-studio-name { font-family: var(--font-display); font-size: clamp(48px, 9vw, 108px); letter-spacing: 6px; line-height: 1; color: var(--white); }
+    .hero-logo-big { width: 90px; height: 90px; object-fit: contain; margin: 0 auto 20px; display: block; mix-blend-mode: screen; }
+    .hero-studio-name { font-family: var(--font-display); font-size: clamp(48px, 9vw, 108px); letter-spacing: 6px; line-height: 1; color: #fff; }
     .hero-tagline { font-size: clamp(11px, 1.8vw, 15px); letter-spacing: 6px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin: 16px 0 40px; font-weight: 300; }
-    .hero-cta { display: inline-block; padding: 14px 42px; border: 1px solid var(--white); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; color: var(--white); transition: all 0.25s; }
-    .hero-cta:hover { background: var(--white); color: var(--black); }
-    .hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: var(--white); width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; transition: all 0.2s; }
-    .hero-arrow:hover { background: var(--white); color: var(--black); }
+    .hero-cta { display: inline-block; padding: 14px 42px; border: 1px solid #fff; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; color: #fff; transition: all 0.25s; }
+    .hero-cta:hover { background: #fff; color: #000; }
+    .hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: #fff; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; transition: all 0.2s; }
+    .hero-arrow:hover { background: #fff; color: #000; }
     .hero-arrow.prev { left: 24px; }
     .hero-arrow.next { right: 24px; }
     .hero-dots { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: 280px; }
     .hero-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25); cursor: pointer; transition: all 0.2s; }
-    .hero-dot.active { background: var(--white); transform: scale(1.3); }
+    .hero-dot.active { background: #fff; transform: scale(1.3); }
     .hero-counter { position: absolute; bottom: 28px; right: 28px; z-index: 2; font-family: var(--font-display); font-size: 14px; letter-spacing: 2px; color: rgba(255,255,255,0.5); }
 
-    /* ── SECTION LABELS ── */
-    .section-label-dark  { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(0,0,0,0.35); font-weight: 700; margin-bottom: 12px; }
-    .section-label-light { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.4); font-weight: 700; margin-bottom: 12px; }
+    /* LABELS & HEADINGS */
+    .lbl-dark  { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(0,0,0,0.35); font-weight: 700; margin-bottom: 12px; }
+    .lbl-light { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.4); font-weight: 700; margin-bottom: 12px; }
     h2 { font-family: var(--font-display); font-size: clamp(30px, 5vw, 50px); letter-spacing: 3px; margin-bottom: 40px; }
-    h2.dark  { color: var(--black); }
-    h2.light { color: var(--white); }
+    h2.dk { color: #000; }
+    h2.lt { color: #fff; }
 
-    /* ── NEWS — WHITE section ── */
-    #news { background: var(--white); }
-    #news-inner { max-width: 1160px; margin: 0 auto; padding: 80px 40px; }
+    /* NEWS — WHITE */
+    .sec-white { background: #fff; }
+    .sec-light { background: var(--light); }
+    .sec-black { background: #000; }
+    .inner { max-width: 1160px; margin: 0 auto; padding: 80px 40px; }
+
     .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
-
-    .news-card { background: var(--white); border: 1px solid #e0e0e0; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; display: block; }
+    .news-card { background: #fff; border: 1px solid #e0e0e0; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; display: block; }
     .news-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
-    .news-card-img { width: 100%; aspect-ratio: 16/9; background: var(--light2); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 14px; letter-spacing: 3px; color: #ccc; overflow: hidden; }
-    .news-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .news-card-body { padding: 20px; }
-    .news-card-meta { font-size: 11px; color: #aaa; margin-bottom: 8px; }
-    .news-card-title { font-weight: 700; font-size: 15px; margin-bottom: 8px; line-height: 1.4; color: var(--black); }
-    .news-card-excerpt { font-size: 13px; color: #666; line-height: 1.6; }
-    .news-card-link { display: inline-block; margin-top: 14px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--black); border-bottom: 1px solid #000; padding-bottom: 2px; }
-    .see-all-wrap { text-align: right; margin-top: 32px; }
-    .see-all-link { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--black); border-bottom: 1px solid #000; padding-bottom: 2px; }
+    .nc-img { width: 100%; aspect-ratio: 16/9; background: var(--light2); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 14px; letter-spacing: 3px; color: #ccc; overflow: hidden; }
+    .nc-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .nc-body { padding: 20px; }
+    .nc-meta { font-size: 11px; color: #aaa; margin-bottom: 8px; }
+    .nc-title { font-weight: 700; font-size: 15px; margin-bottom: 8px; line-height: 1.4; color: #000; }
+    .nc-excerpt { font-size: 13px; color: #666; line-height: 1.6; }
+    .nc-link { display: inline-block; margin-top: 14px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #000; border-bottom: 1px solid #000; padding-bottom: 2px; }
+    .see-all { text-align: right; margin-top: 32px; }
+    .see-all a { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #000; border-bottom: 1px solid #000; padding-bottom: 2px; }
 
-    /* ── PRODUCTIONS — BLACK section ── */
-    #productions { background: var(--black); }
-    .productions-inner { max-width: 1160px; margin: 0 auto; padding: 80px 40px; }
-    .productions-slider-wrap { position: relative; overflow: hidden; }
-    .productions-track { display: flex; gap: 20px; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
+    /* PRODUCTIONS — BLACK */
+    .prod-wrap { position: relative; overflow: hidden; }
+    .prod-track { display: flex; gap: 20px; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
     .prod-card { min-width: 280px; background: #111; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; flex-shrink: 0; transition: border-color 0.2s, transform 0.2s; display: block; }
     .prod-card:hover { border-color: rgba(255,255,255,0.3); transform: translateY(-4px); }
     .prod-thumb { width: 100%; aspect-ratio: 16/9; background: #1a1a1a; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; }
@@ -101,61 +87,57 @@
     .prod-card:hover .prod-thumb img { transform: scale(1.04); }
     .prod-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); opacity: 0; transition: opacity 0.25s; }
     .prod-card:hover .prod-play { opacity: 1; }
-    .prod-play-btn { width: 52px; height: 52px; border-radius: 50%; background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--black); }
-    .prod-thumb-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
-    .prod-thumb-placeholder .ph-icon { font-size: 32px; opacity: 0.12; }
-    .prod-thumb-placeholder .ph-label { font-family: var(--font-display); font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.15); }
+    .prod-play-btn { width: 52px; height: 52px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #000; }
+    .prod-ph { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+    .prod-ph .ph-i { font-size: 32px; opacity: 0.12; }
+    .prod-ph .ph-l { font-family: var(--font-display); font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.15); }
     .prod-info { padding: 14px 16px; }
     .prod-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); font-weight: 700; margin-bottom: 4px; }
-    .prod-title { font-family: var(--font-display); font-size: 20px; letter-spacing: 2px; color: var(--white); margin-bottom: 6px; }
+    .prod-title { font-family: var(--font-display); font-size: 20px; letter-spacing: 2px; color: #fff; margin-bottom: 6px; }
     .prod-watch { font-size: 11px; color: #666; font-weight: 600; }
-    .prod-arrow { position: absolute; top: 40%; transform: translateY(-50%); background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.15); color: var(--white); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; z-index: 2; transition: all 0.2s; }
-    .prod-arrow:hover { background: var(--white); color: var(--black); }
-    .prod-arrow.prev { left: 0; }
-    .prod-arrow.next { right: 0; }
+    .prod-btn { position: absolute; top: 40%; transform: translateY(-50%); background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.15); color: #fff; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; z-index: 2; transition: all 0.2s; }
+    .prod-btn:hover { background: #fff; color: #000; }
+    .prod-btn.prev { left: 0; }
+    .prod-btn.next { right: 0; }
 
-    /* ── CONTACT — WHITE section ── */
-    #contact { background: var(--light); }
-    #contact-inner { max-width: 1160px; margin: 0 auto; padding: 80px 40px; }
+    /* CONTACT — LIGHT */
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-    .contact-info h3 { font-family: var(--font-display); font-size: 28px; letter-spacing: 2px; margin-bottom: 16px; color: var(--black); }
+    .contact-info h3 { font-family: var(--font-display); font-size: 28px; letter-spacing: 2px; margin-bottom: 16px; color: #000; }
     .contact-info p { color: #555; font-size: 14px; line-height: 1.8; margin-bottom: 24px; }
-    .contact-info a { color: var(--black); font-weight: 700; }
     .form-group { margin-bottom: 18px; }
     .form-group label { display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; color: #999; }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--white); border: 1px solid #ddd; color: var(--black); font-family: var(--font-body); font-size: 14px; padding: 12px 16px; outline: none; transition: border-color 0.2s; appearance: none; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--black); }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; background: #fff; border: 1px solid #ddd; color: #000; font-family: var(--font-body); font-size: 14px; padding: 12px 16px; outline: none; transition: border-color 0.2s; appearance: none; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #000; }
     .form-group textarea { height: 120px; resize: vertical; }
-    .btn-submit { display: block; width: 100%; padding: 14px; background: var(--black); color: var(--white); font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.2s; }
-    .btn-submit:hover { background: #222; }
-    .form-success { display: none; margin-top: 14px; padding: 12px 16px; background: #f0f0f0; border: 1px solid #ccc; font-size: 13px; color: var(--black); }
+    .form-group select option { background: #fff; }
+    .btn-sub { display: block; width: 100%; padding: 14px; background: #000; color: #fff; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; border: none; cursor: pointer; }
+    .btn-sub:hover { background: #222; }
+    .form-ok { display: none; margin-top: 14px; padding: 12px 16px; background: #f0f0f0; border: 1px solid #ccc; font-size: 13px; color: #000; }
 
-    /* ── FAQ — WHITE section ── */
-    #faq { background: var(--white); }
-    #faq-inner { max-width: 1160px; margin: 0 auto; padding: 80px 40px; }
+    /* FAQ — WHITE */
     .faq-list { list-style: none; }
     .faq-item { border-bottom: 1px solid #e8e8e8; }
-    .faq-question { width: 100%; text-align: left; background: none; border: none; color: var(--black); font-family: var(--font-body); font-size: 15px; font-weight: 600; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; gap: 16px; }
-    .faq-question::after { content: '+'; font-size: 22px; color: #aaa; flex-shrink: 0; transition: transform 0.25s; }
-    .faq-item.open .faq-question::after { transform: rotate(45deg); color: var(--black); }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; font-size: 14px; color: #666; line-height: 1.8; }
-    .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 20px; }
+    .faq-q { width: 100%; text-align: left; background: none; border: none; color: #000; font-family: var(--font-body); font-size: 15px; font-weight: 600; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; gap: 16px; }
+    .faq-q::after { content: '+'; font-size: 22px; color: #aaa; flex-shrink: 0; transition: transform 0.25s; }
+    .faq-item.open .faq-q::after { transform: rotate(45deg); color: #000; }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; font-size: 14px; color: #666; line-height: 1.8; }
+    .faq-item.open .faq-a { max-height: 200px; padding-bottom: 20px; }
 
-    /* ── FOOTER — BLACK section ── */
-    footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.08); padding: 60px 40px 30px; }
+    /* FOOTER */
+    footer { background: #000; border-top: 1px solid rgba(255,255,255,0.08); padding: 60px 40px 30px; }
     .footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
     .footer-brand p { color: #555; font-size: 13px; margin-top: 12px; line-height: 1.7; }
     .footer-logo { display: flex; align-items: center; gap: 12px; }
-    .footer-logo-img { width: 40px; height: 40px; object-fit: contain; }
-    .footer-logo-name { font-family: var(--font-display); font-size: 16px; letter-spacing: 2px; color: var(--white); }
+    .footer-logo img { width: 40px; height: 40px; object-fit: contain; mix-blend-mode: screen; }
+    .footer-logo span { font-family: var(--font-display); font-size: 16px; letter-spacing: 2px; color: #fff; }
     .footer-col h4 { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); font-weight: 700; margin-bottom: 16px; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 10px; }
     .footer-col ul a { font-size: 13px; color: #555; transition: color 0.2s; }
-    .footer-col ul a:hover { color: var(--white); }
+    .footer-col ul a:hover { color: #fff; }
     .footer-bottom { max-width: 1160px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #444; }
 
-    /* ── RESPONSIVE ── */
+    /* MOBILE */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; flex-direction: column; gap: 0; position: fixed; top: 70px; left: 0; right: 0; background: rgba(0,0,0,0.98); border-bottom: 1px solid rgba(255,255,255,0.08); }
@@ -163,13 +145,43 @@
       .nav-links li { border-bottom: 1px solid rgba(255,255,255,0.05); }
       .nav-links a { display: block; padding: 16px 20px; }
       .nav-toggle { display: flex; }
-      #news-inner, #contact-inner, #faq-inner, .productions-inner { padding: 60px 20px; }
+      .inner { padding: 60px 20px; }
       .contact-grid { grid-template-columns: 1fr; gap: 40px; }
       .footer-inner { grid-template-columns: 1fr; gap: 30px; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
       .hero-arrow { display: none; }
       .prod-card { min-width: 85vw; }
+      footer { padding: 60px 20px 30px; }
     }
+
+
+    /* ── FLOATING BOTTOM SOCIAL BAR ── */
+    .social-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 9999;
+      display: flex;
+      height: 52px;
+    }
+    .social-bar a {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 22px;
+      transition: opacity 0.2s;
+    }
+    .social-bar a:hover { opacity: 0.85; }
+    .social-bar a.sb-facebook   { background: #1877F2; }
+    .social-bar a.sb-instagram  { background: #C13584; }
+    .social-bar a.sb-youtube    { background: #FF0000; }
+    .social-bar a.sb-tiktok     { background: #000000; }
+    .social-bar a.sb-whatsapp   { background: #25D366; }
+    .social-bar a.sb-facebook2  { background: #1877F2; }
+
+    /* push page content above the bar */
+    body { padding-bottom: 52px; }
   </style>
 </head>
 <body>
@@ -194,7 +206,7 @@
   <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- HERO — dark with images -->
+<!-- HERO SLIDER -->
 <div class="hero" id="hero">
   <div class="hero-slides" id="heroSlides"></div>
   <button class="hero-arrow prev" id="heroPrev">&#8592;</button>
@@ -204,232 +216,325 @@
 </div>
 
 <!-- NEWS — WHITE -->
-<div id="news">
-  <div id="news-inner">
-    <div class="section-label-dark">Latest Updates</div>
-    <h2 class="dark">Featured News</h2>
+<div class="sec-white">
+  <div class="inner">
+    <div class="lbl-dark">Latest Updates</div>
+    <h2 class="dk">Featured News</h2>
     <div class="news-grid">
       <a href="#" class="news-card">
-        <div class="news-card-img">NEWS IMAGE</div>
-        <div class="news-card-body">
-          <div class="news-card-meta">📅 March 15, 2026 &nbsp;🕐 2 min read</div>
-          <div class="news-card-title">Welcome to Mike Savage Studios – Our Story Begins</div>
-          <div class="news-card-excerpt">We are thrilled to officially launch Mike Savage Studios and share our vision for powerful storytelling.</div>
-          <span class="news-card-link">Read More</span>
+        <div class="nc-img">NEWS IMAGE</div>
+        <div class="nc-body">
+          <div class="nc-meta">📅 March 15, 2026 &nbsp;🕐 2 min read</div>
+          <div class="nc-title">Welcome to Mike Savage Studios – Our Story Begins</div>
+          <div class="nc-excerpt">We are thrilled to officially launch Mike Savage Studios and share our vision for powerful storytelling.</div>
+          <span class="nc-link">Read More</span>
         </div>
       </a>
       <a href="#" class="news-card">
-        <div class="news-card-img">NEWS IMAGE</div>
-        <div class="news-card-body">
-          <div class="news-card-meta">📅 March 10, 2026 &nbsp;🕐 3 min read</div>
-          <div class="news-card-title">Behind the Scenes: Our Upcoming Production — FLATLINE</div>
-          <div class="news-card-excerpt">Get an exclusive first look at the production of FLATLINE. Directed by Danny Praiz.</div>
-          <span class="news-card-link">Read More</span>
+        <div class="nc-img">NEWS IMAGE</div>
+        <div class="nc-body">
+          <div class="nc-meta">📅 March 10, 2026 &nbsp;🕐 3 min read</div>
+          <div class="nc-title">Behind the Scenes: Our Upcoming Production — FLATLINE</div>
+          <div class="nc-excerpt">Get an exclusive first look at the production of FLATLINE. Directed by Danny Praiz.</div>
+          <span class="nc-link">Read More</span>
         </div>
       </a>
       <a href="#" class="news-card">
-        <div class="news-card-img">NEWS IMAGE</div>
-        <div class="news-card-body">
-          <div class="news-card-meta">📅 March 5, 2026 &nbsp;🕐 3 min read</div>
-          <div class="news-card-title">Open Auditions Announced for New Series</div>
-          <div class="news-card-excerpt">Mike Savage Studios is casting for its first original series. We welcome talent of all experience levels.</div>
-          <span class="news-card-link">Read More</span>
+        <div class="nc-img">NEWS IMAGE</div>
+        <div class="nc-body">
+          <div class="nc-meta">📅 March 5, 2026 &nbsp;🕐 3 min read</div>
+          <div class="nc-title">Open Auditions Announced for New Series</div>
+          <div class="nc-excerpt">Mike Savage Studios is casting for its first original series. All levels welcome.</div>
+          <span class="nc-link">Read More</span>
         </div>
       </a>
       <a href="#" class="news-card">
-        <div class="news-card-img">NEWS IMAGE</div>
-        <div class="news-card-body">
-          <div class="news-card-meta">📅 February 28, 2026 &nbsp;🕐 2 min read</div>
-          <div class="news-card-title">Mike Savage Studios Announces Strategic Partnership</div>
-          <div class="news-card-excerpt">A new creative partnership that will expand our storytelling capabilities significantly.</div>
-          <span class="news-card-link">See More</span>
+        <div class="nc-img">NEWS IMAGE</div>
+        <div class="nc-body">
+          <div class="nc-meta">📅 February 28, 2026 &nbsp;🕐 2 min read</div>
+          <div class="nc-title">Mike Savage Studios Announces Strategic Partnership</div>
+          <div class="nc-excerpt">A new creative partnership that will expand our storytelling capabilities.</div>
+          <span class="nc-link">See More</span>
         </div>
       </a>
       <a href="#" class="news-card">
-        <div class="news-card-img">NEWS IMAGE</div>
-        <div class="news-card-body">
-          <div class="news-card-meta">📅 February 20, 2026 &nbsp;🕐 2 min read</div>
-          <div class="news-card-title">Our Vision: Authentic Stories for Real Audiences</div>
-          <div class="news-card-excerpt">Mike Savage Studios is committed to producing stories that reflect real lives with honesty and depth.</div>
-          <span class="news-card-link">Read More</span>
+        <div class="nc-img">NEWS IMAGE</div>
+        <div class="nc-body">
+          <div class="nc-meta">📅 February 20, 2026 &nbsp;🕐 2 min read</div>
+          <div class="nc-title">Our Vision: Authentic Stories for Real Audiences</div>
+          <div class="nc-excerpt">Committed to stories that reflect real lives with honesty and depth.</div>
+          <span class="nc-link">Read More</span>
         </div>
       </a>
     </div>
-    <div class="see-all-wrap"><a href="news.html" class="see-all-link">See All News →</a></div>
+    <div class="see-all"><a href="news.html">See All News &rarr;</a></div>
   </div>
 </div>
 
 <!-- PRODUCTIONS — BLACK -->
-<div id="productions">
-  <div class="productions-inner">
-    <div class="section-label-light">What We've Made</div>
-    <h2 class="light">Our Productions</h2>
-    <div class="productions-slider-wrap">
-      <div class="productions-track" id="prodTrack">
-        <a href="https://www.youtube.com/@mikesavagestudios" target="_blank" class="prod-card">
+<div id="productions" class="sec-black">
+  <div class="inner">
+    <div class="lbl-light">What We've Made</div>
+    <h2 class="lt">Our Productions</h2>
+    <div class="prod-wrap">
+      <div class="prod-track" id="prodTrack">
+
+        <a href="https://youtu.be/RGkTHHqcBk8?si=H3NijlPKEfJDtuah" target="_blank" class="prod-card">
           <div class="prod-thumb">
-            <div class="prod-thumb-placeholder"><div class="ph-icon">🎬</div><div class="ph-label">UPLOAD THUMBNAIL</div></div>
-            <div class="prod-play"><div class="prod-play-btn">▶</div></div>
+            <div class="prod-ph"><div class="ph-i">🎬</div><div class="ph-l">UPLOAD THUMBNAIL</div></div>
+            <div class="prod-play"><div class="prod-play-btn">&#9654;</div></div>
           </div>
-          <div class="prod-info"><div class="prod-tag">Series</div><div class="prod-title">FLATLINE</div><div class="prod-watch">▶ Watch on YouTube</div></div>
+          <div class="prod-info">
+            <div class="prod-tag">Film</div>
+            <div class="prod-title">LOVE &amp; BETRAYAL</div>
+            <div class="prod-watch">&#9654; Watch on YouTube</div>
+          </div>
         </a>
-        <a href="#" class="prod-card">
-          <div class="prod-thumb"><div class="prod-thumb-placeholder"><div class="ph-icon">🎬</div><div class="ph-label">UPLOAD THUMBNAIL</div></div><div class="prod-play"><div class="prod-play-btn">▶</div></div></div>
-          <div class="prod-info"><div class="prod-tag">Series</div><div class="prod-title">TITLE HERE</div><div class="prod-watch">▶ Watch on YouTube</div></div>
+
+        <a href="https://youtu.be/NUc4qeGEV5A?si=1GMmDjX0SGj30zcm" target="_blank" class="prod-card">
+          <div class="prod-thumb">
+            <div class="prod-ph"><div class="ph-i">🎬</div><div class="ph-l">UPLOAD THUMBNAIL</div></div>
+            <div class="prod-play"><div class="prod-play-btn">&#9654;</div></div>
+          </div>
+          <div class="prod-info">
+            <div class="prod-tag">Film</div>
+            <div class="prod-title">MR CARETAKER</div>
+            <div class="prod-watch">&#9654; Watch on YouTube</div>
+          </div>
         </a>
-        <a href="#" class="prod-card">
-          <div class="prod-thumb"><div class="prod-thumb-placeholder"><div class="ph-icon">🎬</div><div class="ph-label">UPLOAD THUMBNAIL</div></div><div class="prod-play"><div class="prod-play-btn">▶</div></div></div>
-          <div class="prod-info"><div class="prod-tag">Film</div><div class="prod-title">TITLE HERE</div><div class="prod-watch">▶ Watch on YouTube</div></div>
+
+        <a href="https://youtu.be/Sl76stqg1wA?si=gGVyyOSynREQ4O4i" target="_blank" class="prod-card">
+          <div class="prod-thumb">
+            <div class="prod-ph"><div class="ph-i">🎬</div><div class="ph-l">UPLOAD THUMBNAIL</div></div>
+            <div class="prod-play"><div class="prod-play-btn">&#9654;</div></div>
+          </div>
+          <div class="prod-info">
+            <div class="prod-tag">Film</div>
+            <div class="prod-title">FLATLINE</div>
+            <div class="prod-watch">&#9654; Watch on YouTube</div>
+          </div>
         </a>
-        <a href="#" class="prod-card">
-          <div class="prod-thumb"><div class="prod-thumb-placeholder"><div class="ph-icon">🎬</div><div class="ph-label">UPLOAD THUMBNAIL</div></div><div class="prod-play"><div class="prod-play-btn">▶</div></div></div>
-          <div class="prod-info"><div class="prod-tag">Series</div><div class="prod-title">TITLE HERE</div><div class="prod-watch">▶ Watch on YouTube</div></div>
-        </a>
-        <a href="#" class="prod-card">
-          <div class="prod-thumb"><div class="prod-thumb-placeholder"><div class="ph-icon">🎬</div><div class="ph-label">UPLOAD THUMBNAIL</div></div><div class="prod-play"><div class="prod-play-btn">▶</div></div></div>
-          <div class="prod-info"><div class="prod-tag">Film</div><div class="prod-title">TITLE HERE</div><div class="prod-watch">▶ Watch on YouTube</div></div>
-        </a>
+
       </div>
-      <button class="prod-arrow prev" id="prodPrev">&#8592;</button>
-      <button class="prod-arrow next" id="prodNext">&#8594;</button>
+      <button class="prod-btn prev" id="prodPrev">&#8592;</button>
+      <button class="prod-btn next" id="prodNext">&#8594;</button>
     </div>
   </div>
 </div>
 
-<!-- CONTACT — LIGHT GREY -->
-<div id="contact">
-  <div id="contact-inner">
-    <div class="section-label-dark">Reach Out</div>
-    <h2 class="dark">Contact Us</h2>
+<!-- CONTACT — LIGHT -->
+<div class="sec-light">
+  <div class="inner">
+    <div class="lbl-dark">Reach Out</div>
+    <h2 class="dk">Contact Us</h2>
     <div class="contact-grid">
       <div class="contact-info">
         <h3>Get In Touch</h3>
         <p>We would love to hear from you. Whether you have a question, want to collaborate, or just want to say hello — reach out and let's start the conversation.</p>
-        <p>Email: <a href="mailto:info@mikesavagestudios.com">info@mikesavagestudios.com</a></p>
+        <p>Email: info@mikesavagestudios.com</p>
       </div>
       <div>
         <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your full name" id="cfName" /></div>
         <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com" id="cfEmail" /></div>
-        <div class="form-group"><label>Subject</label>
-          <select id="cfSubject"><option>General Enquiry</option><option>Collaboration</option><option>Auditions</option><option>Press &amp; Media</option><option>Other</option></select>
+        <div class="form-group">
+          <label>Subject</label>
+          <select id="cfSubject">
+            <option>General Enquiry</option>
+            <option>Collaboration</option>
+            <option>Auditions</option>
+            <option>Press &amp; Media</option>
+            <option>Other</option>
+          </select>
         </div>
         <div class="form-group"><label>Message</label><textarea placeholder="Your message..." id="cfMessage"></textarea></div>
-        <button class="btn-submit" id="cfSubmit">Send Message</button>
-        <div class="form-success" id="cfSuccess">✓ Message sent! We will get back to you soon.</div>
+        <button class="btn-sub" id="cfSubmit">Send Message</button>
+        <div class="form-ok" id="cfOk">&#10003; Message sent! We will get back to you soon.</div>
       </div>
     </div>
   </div>
 </div>
 
 <!-- FAQ — WHITE -->
-<div id="faq">
-  <div id="faq-inner">
-    <div class="section-label-dark">Questions</div>
-    <h2 class="dark">Frequently Asked Questions</h2>
+<div id="faq" class="sec-white">
+  <div class="inner">
+    <div class="lbl-dark">Questions</div>
+    <h2 class="dk">Frequently Asked Questions</h2>
     <ul class="faq-list">
-      <li class="faq-item"><button class="faq-question">Where can I watch Mike Savage Studios productions?</button><div class="faq-answer">All our productions are available for free on our YouTube channel. Follow us for the latest uploads and behind-the-scenes content.</div></li>
-      <li class="faq-item"><button class="faq-question">How can I audition for Mike Savage Studios?</button><div class="faq-answer">Visit the Auditions page to see current opportunities. We welcome talent of all backgrounds and experience levels.</div></li>
-      <li class="faq-item"><button class="faq-question">How can I collaborate or partner with Mike Savage Studios?</button><div class="faq-answer">Send us an email at info@mikesavagestudios.com or use the Contact Us form above.</div></li>
-      <li class="faq-item"><button class="faq-question">What kind of stories does Mike Savage Studios tell?</button><div class="faq-answer">We focus on authentic, emotionally grounded stories that reflect real human experiences — from drama and romance to action and social commentary.</div></li>
-      <li class="faq-item"><button class="faq-question">How do I stay updated on new productions?</button><div class="faq-answer">Follow us on Instagram, TikTok, Facebook, and YouTube for the latest news, casting calls, and production updates.</div></li>
+      <li class="faq-item">
+        <button class="faq-q">Where can I watch Mike Savage Studios productions?</button>
+        <div class="faq-a">All our productions are available for free on our YouTube channel. Follow us for the latest uploads and behind-the-scenes content.</div>
+      </li>
+      <li class="faq-item">
+        <button class="faq-q">How can I audition for Mike Savage Studios?</button>
+        <div class="faq-a">Visit the Auditions page to see current opportunities. We welcome talent of all backgrounds and experience levels.</div>
+      </li>
+      <li class="faq-item">
+        <button class="faq-q">How can I collaborate or partner with Mike Savage Studios?</button>
+        <div class="faq-a">Use the Contact Us form above or email us directly. We are always open to creative partnerships.</div>
+      </li>
+      <li class="faq-item">
+        <button class="faq-q">What kind of stories does Mike Savage Studios tell?</button>
+        <div class="faq-a">We focus on authentic, emotionally grounded stories — from drama and romance to action and social commentary.</div>
+      </li>
+      <li class="faq-item">
+        <button class="faq-q">How do I stay updated on new productions?</button>
+        <div class="faq-a">Follow us on Instagram, TikTok, Facebook, and YouTube for the latest news, casting calls, and updates.</div>
+      </li>
     </ul>
   </div>
 </div>
 
-<!-- FOOTER — BLACK -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-logo">
-        <img class="footer-logo-img" src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="Mike Savage Studios" />
-        <div class="footer-logo-name">MIKE SAVAGE STUDIOS</div>
+        <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="Mike Savage Studios" />
+        <span>MIKE SAVAGE STUDIOS</span>
       </div>
       <p>Crafting stories through films &amp; series.</p>
     </div>
-    <div class="footer-col"><h4>Navigate</h4><ul>
-      <li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li>
-      <li><a href="about.html">About</a></li><li><a href="auditions.html">Auditions</a></li>
-      <li><a href="#contact">Contact Us</a></li><li><a href="#faq">FAQ</a></li>
-    </ul></div>
-    <div class="footer-col"><h4>Follow Us</h4><ul>
-      <li><a href="#">YouTube</a></li><li><a href="#">Instagram</a></li>
-      <li><a href="#">Facebook</a></li><li><a href="#">TikTok</a></li>
-    </ul></div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="auditions.html">Auditions</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Follow Us</h4>
+      <ul>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">TikTok</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="footer-bottom"><span>© 2026 Mike Savage Studios. All Rights Reserved.</span></div>
+  <div class="footer-bottom">
+    <span>&#169; 2026 Mike Savage Studios. All Rights Reserved.</span>
+  </div>
 </footer>
 
 <script>
-  const GITHUB_BASE = 'https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/';
-  const HERO_IMAGES = [
+  /* ---- HERO SLIDER ---- */
+  var GITHUB = 'https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/';
+  var IMGS = [
     'hero-01.jpeg','hero-02.jpeg','hero-03.jpeg','hero-04.jpeg','hero-05.jpeg',
     'hero-06.jpeg','hero-07.jpeg','hero-08.jpeg','hero-09.jpeg','hero-10.jpeg'
   ];
 
-  const slidesWrap = document.getElementById('heroSlides');
-  const dotsWrap   = document.getElementById('heroDots');
-  const counter    = document.getElementById('heroCounter');
+  var slidesWrap = document.getElementById('heroSlides');
+  var dotsWrap   = document.getElementById('heroDots');
+  var counter    = document.getElementById('heroCounter');
+  var cur = 0, timer;
 
-  HERO_IMAGES.forEach((img, i) => {
-    const slide = document.createElement('div');
+  IMGS.forEach(function(img, i) {
+    var slide = document.createElement('div');
     slide.className = 'hero-slide';
-    slide.innerHTML = `
-      <div class="hero-bg" style="background-image:url('${GITHUB_BASE}${img}')"></div>
-      <div class="hero-content">
-        <img class="hero-logo-big" src="${GITHUB_BASE}logo.jpeg" alt="Mike Savage Studios" />
-        <h1 class="hero-studio-name">MIKE SAVAGE STUDIOS</h1>
-        <p class="hero-tagline">Crafting Stories That Last</p>
-        <a href="#productions" class="hero-cta">Our Productions</a>
-      </div>`;
+    slide.innerHTML =
+      '<div class="hero-bg" style="background-image:url(\'' + GITHUB + img + '\')"></div>' +
+      '<div class="hero-content">' +
+        '<img class="hero-logo-big" src="' + GITHUB + 'logo.jpeg" alt="Mike Savage Studios" />' +
+        '<h1 class="hero-studio-name">MIKE SAVAGE STUDIOS</h1>' +
+        '<p class="hero-tagline">Crafting Stories That Last</p>' +
+        '<a href="#productions" class="hero-cta">Our Productions</a>' +
+      '</div>';
     slidesWrap.appendChild(slide);
-    const dot = document.createElement('div');
+
+    var dot = document.createElement('div');
     dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => { goTo(i); resetAuto(); });
+    dot.setAttribute('data-i', i);
+    dot.addEventListener('click', function() { goTo(parseInt(this.getAttribute('data-i'))); resetTimer(); });
     dotsWrap.appendChild(dot);
   });
 
-  let current = 0, autoSlide;
   function goTo(n) {
-    current = (n + HERO_IMAGES.length) % HERO_IMAGES.length;
-    slidesWrap.style.transform = `translateX(-${current * 100}%)`;
-    document.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('active', i === current));
-    counter.textContent = (current + 1) + ' / ' + HERO_IMAGES.length;
+    cur = (n + IMGS.length) % IMGS.length;
+    slidesWrap.style.transform = 'translateX(-' + (cur * 100) + '%)';
+    var dots = dotsWrap.querySelectorAll('.hero-dot');
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === cur); });
+    counter.textContent = (cur + 1) + ' / ' + IMGS.length;
   }
-  document.getElementById('heroPrev').addEventListener('click', () => { goTo(current - 1); resetAuto(); });
-  document.getElementById('heroNext').addEventListener('click', () => { goTo(current + 1); resetAuto(); });
-  let tx = 0;
-  document.getElementById('hero').addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
-  document.getElementById('hero').addEventListener('touchend', e => {
-    const diff = tx - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) { goTo(diff > 0 ? current + 1 : current - 1); resetAuto(); }
-  }, {passive:true});
-  function resetAuto() { clearInterval(autoSlide); autoSlide = setInterval(() => goTo(current + 1), 5000); }
-  autoSlide = setInterval(() => goTo(current + 1), 5000);
 
-  // Productions slider
-  const track = document.getElementById('prodTrack');
-  const cards = Array.from(track.querySelectorAll('.prod-card'));
-  let pIdx = 0;
-  function vis() { return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : window.innerWidth < 1100 ? 3 : 4; }
-  function slideProd(dir) {
-    pIdx = Math.max(0, Math.min(cards.length - vis(), pIdx + dir));
-    track.style.transform = `translateX(-${pIdx * (cards[0].offsetWidth + 20)}px)`;
+  document.getElementById('heroPrev').addEventListener('click', function() { goTo(cur - 1); resetTimer(); });
+  document.getElementById('heroNext').addEventListener('click', function() { goTo(cur + 1); resetTimer(); });
+
+  var tx = 0;
+  document.getElementById('hero').addEventListener('touchstart', function(e) { tx = e.touches[0].clientX; }, {passive: true});
+  document.getElementById('hero').addEventListener('touchend', function(e) {
+    var diff = tx - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { goTo(diff > 0 ? cur + 1 : cur - 1); resetTimer(); }
+  }, {passive: true});
+
+  function resetTimer() { clearInterval(timer); timer = setInterval(function() { goTo(cur + 1); }, 5000); }
+  timer = setInterval(function() { goTo(cur + 1); }, 5000);
+
+  /* ---- PRODUCTIONS SLIDER ---- */
+  var track = document.getElementById('prodTrack');
+  var pcards = track.querySelectorAll('.prod-card');
+  var pIdx = 0;
+
+  function visCount() {
+    return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3;
   }
-  document.getElementById('prodPrev').addEventListener('click', () => slideProd(-1));
-  document.getElementById('prodNext').addEventListener('click', () => slideProd(1));
+  function moveProd(dir) {
+    var max = Math.max(0, pcards.length - visCount());
+    pIdx = Math.max(0, Math.min(max, pIdx + dir));
+    track.style.transform = 'translateX(-' + (pIdx * (pcards[0].offsetWidth + 20)) + 'px)';
+  }
+  document.getElementById('prodPrev').addEventListener('click', function() { moveProd(-1); });
+  document.getElementById('prodNext').addEventListener('click', function() { moveProd(1); });
 
-  document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
-  document.querySelectorAll('.faq-question').forEach(btn => btn.addEventListener('click', () => btn.parentElement.classList.toggle('open')));
+  /* ---- NAV DROPDOWN ---- */
+  document.getElementById('navToggle').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  /* ---- FAQ ---- */
+  document.querySelectorAll('.faq-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      btn.parentElement.classList.toggle('open');
+    });
+  });
+
+  /* ---- CONTACT FORM ---- */
   document.getElementById('cfSubmit').addEventListener('click', function() {
-    const name = document.getElementById('cfName').value.trim();
-    const email = document.getElementById('cfEmail').value.trim();
-    const msg = document.getElementById('cfMessage').value.trim();
+    var name  = document.getElementById('cfName').value.trim();
+    var email = document.getElementById('cfEmail').value.trim();
+    var msg   = document.getElementById('cfMessage').value.trim();
     if (!name || !email || !msg) { alert('Please fill in all required fields.'); return; }
-    document.getElementById('cfSuccess').style.display = 'block';
-    document.getElementById('cfName').value = '';
-    document.getElementById('cfEmail').value = '';
+    document.getElementById('cfOk').style.display = 'block';
+    document.getElementById('cfName').value    = '';
+    document.getElementById('cfEmail').value   = '';
     document.getElementById('cfMessage').value = '';
   });
 </script>
+
+<!-- FLOATING SOCIAL BAR -->
+<div class="social-bar">
+  <a href="#" class="sb-facebook" title="Facebook">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.1C24 5.4 18.6 0 12 0S0 5.4 0 12.1C0 18.1 4.4 23.1 10.1 24v-8.4H7.1v-3.5h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-1.9.9-1.9 1.9v2.2h3.3l-.5 3.5h-2.8V24C19.6 23.1 24 18.1 24 12.1z"/></svg>
+  </a>
+  <a href="#" class="sb-instagram" title="Instagram">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.2 4.8 1.7 5 5 .1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.2 3.3-1.7 4.8-5 5-1.3.1-1.6.1-4.9.1s-3.6 0-4.8-.1c-3.3-.2-4.8-1.7-5-5C2 16.6 2 16.3 2 12s0-3.6.1-4.8c.2-3.3 1.7-4.8 5-5 1.2-.1 1.6-.1 4.9-.1zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12s0 3.7.1 4.9C.3 21.3 2.7 23.7 7.1 23.9 8.3 24 8.7 24 12 24s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7C24 15.7 24 15.3 24 12s0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg>
+  </a>
+  <a href="#" class="sb-youtube" title="YouTube">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+  </a>
+  <a href="#" class="sb-tiktok" title="TikTok">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 0h-3.9v16.3a3.8 3.8 0 0 1-3.8 3.8 3.8 3.8 0 0 1-3.8-3.8 3.8 3.8 0 0 1 3.8-3.8c.4 0 .7 0 1 .1V8.6a8 8 0 0 0-1-.1 7.8 7.8 0 0 0-7.8 7.8 7.8 7.8 0 0 0 7.8 7.7 7.8 7.8 0 0 0 7.8-7.7V8.1a11.9 11.9 0 0 0 6.9 2.2V6.4a6 6 0 0 1-6.9-6.4z"/></svg>
+  </a>
+  <a href="#" class="sb-whatsapp" title="WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9s-.5-.1-.7.1-.7.9-.9 1.1-.3.2-.6 0a7.8 7.8 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.4.1-.6l.4-.5.3-.4v-.5l-.9-2.1c-.2-.5-.5-.4-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1.1 2.6 5.9 5.9 0 0 0 1.2 3.1 13.6 13.6 0 0 0 5.2 4.6c.7.3 1.3.5 1.7.6a4.2 4.2 0 0 0 1.9.1 3.1 3.1 0 0 0 2.1-1.5 2.6 2.6 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.3zM12 0A12 12 0 0 0 1 17.9L0 24l6.3-1.7A12 12 0 1 0 12 0zm0 22a10 10 0 0 1-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A10 10 0 1 1 12 22z"/></svg>
+  </a>
+  <a href="#" class="sb-facebook2" title="Facebook">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.1C24 5.4 18.6 0 12 0S0 5.4 0 12.1C0 18.1 4.4 23.1 10.1 24v-8.4H7.1v-3.5h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-1.9.9-1.9 1.9v2.2h3.3l-.5 3.5h-2.8V24C19.6 23.1 24 18.1 24 12.1z"/></svg>
+  </a>
+</div>
 </body>
 </html>
