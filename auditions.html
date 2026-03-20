@@ -8,62 +8,174 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --black: #000; --white: #fff; --light: #f8f8f8; --light2: #f0f0f0; --border: #e5e5e5; --text: #222; --muted: #777; --font-display: 'Bebas Neue', sans-serif; --font-body: 'Raleway', sans-serif; }
+    :root {
+      --black: #000; --white: #fff;
+      --light: #f8f8f8; --border: #e5e5e5;
+      --text: #333; --muted: #888;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Raleway', sans-serif;
+    }
     html { scroll-behavior: smooth; }
-    body { background: var(--white); color: var(--text); font-family: var(--font-body); line-height: 1.6; padding-bottom: 52px; }
+    body { background: var(--white); color: var(--text); font-family: var(--font-body); line-height: 1.7; padding-bottom: 52px; }
     a { color: inherit; text-decoration: none; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: #000; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 70px; }
+
+    /* NAV — BLACK */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: #000; border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 70px;
+    }
     .nav-logo { display: flex; align-items: center; gap: 12px; }
     .nav-logo-img { width: 46px; height: 46px; object-fit: contain; mix-blend-mode: screen; }
     .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
-    .nav-logo-text span:first-child { font-family: var(--font-display); font-size: 18px; letter-spacing: 2px; color: #fff; }
-    .nav-logo-text span:last-child { font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+    .nav-logo-text .n1 { font-family: var(--font-display); font-size: 18px; letter-spacing: 2px; color: #fff; }
+    .nav-logo-text .n2 { font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.4); text-transform: uppercase; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); transition: color 0.2s; }
     .nav-links a:hover, .nav-links a.active { color: #fff; }
     .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .nav-toggle span { display: block; width: 24px; height: 2px; background: #fff; }
 
-    .page-header { margin-top: 70px; background: var(--white); border-bottom: 2px solid var(--black); padding: 60px 40px 40px; }
-    .page-header .lbl { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 10px; }
-    .page-header h1 { font-family: var(--font-display); font-size: clamp(36px,6vw,72px); letter-spacing: 4px; color: var(--black); }
+    /* ══════════════════════════════
+       MAIN CONTENT AREA
+       — white background, left-aligned, clean
+    ══════════════════════════════ */
+    .page-wrap {
+      margin-top: 70px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 60px 40px 80px;
+    }
 
-    .sec-white { background: var(--white); }
-    .sec-light { background: var(--light); }
-    .sec-black { background: var(--black); }
-    .inner { max-width: 860px; margin: 0 auto; padding: 70px 40px; }
-    .lbl-dark { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 10px; }
-    .lbl-light { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.45); font-weight: 700; margin-bottom: 10px; }
-    h2 { font-family: var(--font-display); font-size: clamp(28px,4vw,44px); letter-spacing: 3px; margin-bottom: 20px; }
-    h2.dk { color: var(--black); } h2.lt { color: #fff; }
-    .divider { width: 50px; height: 2px; background: var(--black); margin-bottom: 28px; }
-    .divider-lt { width: 50px; height: 2px; background: #fff; margin-bottom: 28px; }
-    p.body { font-size: 15px; color: #555; line-height: 1.9; margin-bottom: 16px; }
-    p.body-lt { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.9; margin-bottom: 16px; }
+    /* Page title — H2 style, left aligned */
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 52px);
+      letter-spacing: 3px;
+      color: var(--black);
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
 
-    /* STATUS — BLACK */
-    .status-box { border: 1px solid rgba(255,255,255,0.12); padding: 50px 40px; text-align: center; max-width: 600px; margin: 0 auto; }
-    .status-badge { display: inline-block; padding: 6px 20px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; color: #fff; margin-bottom: 20px; }
-    .status-box h3 { font-family: var(--font-display); font-size: 30px; letter-spacing: 3px; color: #fff; margin-bottom: 14px; }
-    .status-box p { color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.8; }
+    /* Intro text */
+    .intro-text {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.9;
+      margin-bottom: 10px;
+      max-width: 720px;
+    }
 
-    /* POSTER — WHITE */
-    .audition-poster { width: 100%; aspect-ratio: 16/9; background: var(--light2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 18px; letter-spacing: 4px; color: #bbb; margin: 28px 0; }
+    /* Divider line — thin, subtle */
+    .page-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 40px 0;
+    }
 
-    /* STEPS — LIGHT */
-    .steps { margin-top: 10px; }
-    .step { display: flex; gap: 24px; align-items: flex-start; padding: 26px 0; border-bottom: 1px solid var(--border); }
-    .step:last-child { border-bottom: none; }
-    .step-num { min-width: 46px; height: 46px; background: var(--black); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 20px; color: #fff; flex-shrink: 0; }
-    .step-text h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--black); }
-    .step-text p { font-size: 13px; color: #777; line-height: 1.7; }
+    /* Section heading — H3 style */
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 32px);
+      letter-spacing: 2px;
+      color: var(--black);
+      margin-bottom: 24px;
+    }
 
-    /* CTA — BLACK */
-    .cta-box { text-align: center; }
-    .cta-btn { display: inline-block; margin-top: 10px; padding: 14px 44px; border: 1px solid #fff; font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #fff; transition: all 0.25s; }
+    /* ══════════════════════════════
+       AUDITION POSTER — full width image
+    ══════════════════════════════ */
+    .audition-poster {
+      width: 100%;
+      display: block;
+      margin-bottom: 40px;
+      border-radius: 2px;
+    }
+    .audition-poster img {
+      width: 100%;
+      display: block;
+      border-radius: 2px;
+    }
+    /* Placeholder if no poster yet */
+    .poster-placeholder {
+      width: 100%;
+      aspect-ratio: 16/7;
+      background: var(--light);
+      border: 1px dashed var(--border);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      margin-bottom: 40px; border-radius: 2px;
+    }
+    .poster-placeholder span:first-child { font-size: 40px; opacity: 0.3; }
+    .poster-placeholder span:last-child { font-family: var(--font-display); font-size: 14px; letter-spacing: 3px; color: #ccc; }
+
+    /* ══════════════════════════════
+       STATUS BOX
+    ══════════════════════════════ */
+    .status-wrap { margin-bottom: 48px; }
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--black);
+      padding: 16px 22px;
+      margin-bottom: 16px;
+    }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; background: #f59e0b; flex-shrink: 0; }
+    .status-dot.open { background: #22c55e; }
+    .status-text { font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--black); }
+    .status-desc { font-size: 14px; color: #666; line-height: 1.8; max-width: 620px; }
+
+    /* ══════════════════════════════
+       HOW TO APPLY STEPS
+    ══════════════════════════════ */
+    .steps-wrap { margin-bottom: 48px; }
+    .steps-list { list-style: none; }
+    .step-item {
+      display: flex; gap: 20px; align-items: flex-start;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step-item:first-child { border-top: 1px solid var(--border); }
+    .step-num {
+      min-width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--black);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .step-body h4 { font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 5px; }
+    .step-body p { font-size: 14px; color: #666; line-height: 1.7; }
+
+    /* ══════════════════════════════
+       CONTACT / CTA STRIP
+    ══════════════════════════════ */
+    .cta-strip {
+      background: var(--black);
+      padding: 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+    }
+    .cta-strip-text h3 { font-family: var(--font-display); font-size: 26px; letter-spacing: 2px; color: #fff; margin-bottom: 6px; }
+    .cta-strip-text p { font-size: 14px; color: rgba(255,255,255,0.6); }
+    .cta-btn {
+      display: inline-block;
+      padding: 13px 36px;
+      border: 1px solid #fff;
+      font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: #fff; white-space: nowrap;
+      transition: all 0.25s;
+    }
     .cta-btn:hover { background: #fff; color: #000; }
 
-    footer { background: var(--black); padding: 60px 40px 30px; }
+    /* FOOTER */
+    footer { background: #000; padding: 60px 40px 30px; }
     .footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
     .footer-brand p { color: #555; font-size: 13px; margin-top: 12px; line-height: 1.7; }
     .footer-logo { display: flex; align-items: center; gap: 12px; }
@@ -76,11 +188,15 @@
     .footer-col ul a:hover { color: #fff; }
     .footer-bottom { max-width: 1160px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; font-size: 12px; color: #444; }
 
+    /* SOCIAL BAR */
     .social-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; display: flex; height: 52px; }
     .social-bar a { flex: 1; display: flex; align-items: center; justify-content: center; color: #fff; transition: opacity 0.2s; }
     .social-bar a:hover { opacity: 0.85; }
-    .sb-youtube { background: #FF0000; } .sb-facebook { background: #1877F2; } .sb-instagram { background: #C13584; } .sb-tiktok { background: #000; } .sb-whatsapp { background: #25D366; } .sb-linkedin { background: #0A66C2; }
+    .sb-youtube { background: #FF0000; } .sb-facebook { background: #1877F2; }
+    .sb-instagram { background: #C13584; } .sb-tiktok { background: #000; }
+    .sb-whatsapp { background: #25D366; } .sb-linkedin { background: #0A66C2; }
 
+    /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; flex-direction: column; gap: 0; position: fixed; top: 70px; left: 0; right: 0; background: #000; z-index: 9999; border-bottom: 1px solid rgba(255,255,255,0.08); }
@@ -88,9 +204,8 @@
       .nav-links li { border-bottom: 1px solid rgba(255,255,255,0.06); }
       .nav-links a { display: block; padding: 16px 20px; }
       .nav-toggle { display: flex; }
-      .page-header { padding: 50px 20px 30px; }
-      .inner { padding: 50px 20px; }
-      .step { gap: 16px; }
+      .page-wrap { padding: 40px 20px 60px; }
+      .cta-strip { flex-direction: column; align-items: flex-start; }
       .footer-inner { grid-template-columns: 1fr; gap: 28px; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
       footer { padding: 50px 20px 24px; }
@@ -98,10 +213,15 @@
   </style>
 </head>
 <body>
+
+<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">
     <img class="nav-logo-img" src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="Mike Savage Studios" />
-    <div class="nav-logo-text"><span>MIKE SAVAGE STUDIOS</span><span>Crafting Stories That Last</span></div>
+    <div class="nav-logo-text">
+      <span class="n1">MIKE SAVAGE STUDIOS</span>
+      <span class="n2">Crafting Stories That Last</span>
+    </div>
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html">Home</a></li>
@@ -114,70 +234,123 @@
   <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- PAGE HEADER — WHITE, black text -->
-<div class="page-header">
-  <div class="lbl">Get Involved</div>
-  <h1>Audition Opportunities</h1>
-</div>
+<!-- MAIN CONTENT — white, clean, left-aligned like BN Media Films -->
+<div class="page-wrap">
 
-<!-- INTRO — WHITE -->
-<div class="sec-white">
-  <div class="inner">
-    <div class="lbl-dark">About Auditions</div>
-    <h2 class="dk">Join Our Productions</h2>
-    <div class="divider"></div>
-    <p class="body">We announce auditions for upcoming projects here. When auditions are open, you will find full details including project title, eligible participants, dates, and any materials required.</p>
-    <p class="body">This page will also include a link to audition information and a downloadable audition pack when available. We welcome talent of all backgrounds and experience levels.</p>
-    <div class="audition-poster">AUDITION POSTER — UPLOAD TO GITHUB AS poster-audition.jpeg</div>
+  <!-- PAGE TITLE -->
+  <h2 class="page-title">Audition Opportunities</h2>
+
+  <!-- INTRO TEXT -->
+  <p class="intro-text">We announce auditions for upcoming projects here. When auditions are open, you will find full details including project title, eligible participants, dates, and any materials required.</p>
+  <p class="intro-text">This page will also include a link to audition information and a downloadable audition pack when available.</p>
+
+  <div class="page-divider"></div>
+
+  <!-- AUDITION STATUS -->
+  <h3 class="section-heading">Audition Status</h3>
+
+  <!-- AUDITION POSTER — full width -->
+  <div class="audition-poster">
+    <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/poster-audition.jpeg"
+         alt="Mike Savage Studios Auditions"
+         onerror="this.parentElement.innerHTML='<div class=\'poster-placeholder\'><span>🎬</span><span>UPLOAD AUDITION POSTER TO GITHUB AS poster-audition.jpeg</span></div>'" />
   </div>
-</div>
 
-<!-- STATUS — BLACK, white text -->
-<div class="sec-black">
-  <div class="inner">
-    <div class="status-box">
-      <div class="status-badge">Current Audition Status</div>
-      <h3>Auditions Opening Soon</h3>
-      <p>We are preparing for our next round of casting. Check back here or follow us on social media to be notified the moment auditions open.</p>
+  <!-- STATUS BADGE -->
+  <div class="status-wrap">
+    <div class="status-badge">
+      <div class="status-dot"></div>
+      <div class="status-text">Auditions Opening Soon</div>
     </div>
+    <p class="status-desc">We are preparing for our next round of casting. Check back here regularly or follow us on social media to be the first to know when auditions open. We welcome talent of all backgrounds and experience levels.</p>
   </div>
-</div>
 
-<!-- HOW TO APPLY — LIGHT GREY -->
-<div class="sec-light">
-  <div class="inner">
-    <div class="lbl-dark">The Process</div>
-    <h2 class="dk">How to Apply</h2>
-    <div class="divider"></div>
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-text"><h4>Read the Audition Brief</h4><p>Download the audition pack when available. It includes project details, character descriptions, and all required materials.</p></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-text"><h4>Prepare Your Materials</h4><p>This typically includes a self-tape or in-person audition, a headshot, and a short bio.</p></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-text"><h4>Submit Your Application</h4><p>Send your materials to the contact provided in the audition brief before the stated deadline.</p></div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-text"><h4>Wait for a Response</h4><p>Our casting team reviews all submissions. Shortlisted candidates will be contacted directly for callbacks.</p></div></div>
+  <div class="page-divider"></div>
+
+  <!-- HOW TO APPLY -->
+  <h3 class="section-heading">How to Apply</h3>
+  <div class="steps-wrap">
+    <ul class="steps-list">
+      <li class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Read the Audition Brief</h4>
+          <p>Download the audition pack when available. It contains the project title, character descriptions, eligibility criteria, audition dates, and all required materials.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Prepare Your Materials</h4>
+          <p>Prepare a self-tape or attend in person as directed. You will typically need a headshot, a short bio, and the required audition piece as described in the brief.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Submit Your Application</h4>
+          <p>Send your materials to the contact address provided in the audition brief. Make sure all submissions are complete and sent before the stated deadline.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Wait for a Response</h4>
+          <p>Our casting team reviews every submission carefully. Shortlisted candidates will be contacted directly with details for the next stage.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="page-divider"></div>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <div class="cta-strip-text">
+      <h3>Want to Be Notified?</h3>
+      <p>Follow us on social media or reach out via our contact page to stay updated on upcoming auditions.</p>
     </div>
+    <a href="index.html#contact" class="cta-btn">Contact Us</a>
   </div>
+
 </div>
 
-<!-- CTA — BLACK, white text -->
-<div class="sec-black">
-  <div class="inner">
-    <div class="cta-box">
-      <div class="lbl-light">Don't Miss Out</div>
-      <h2 class="lt">Be the First to Know</h2>
-      <p class="body-lt">Want to be notified when auditions open? Reach out through our contact page or follow us on social media.</p>
-      <a href="index.html#contact" class="cta-btn">Contact Us</a>
-    </div>
-  </div>
-</div>
-
-<!-- FOOTER — BLACK -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-brand"><div class="footer-logo"><img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="MS" /><span>MIKE SAVAGE STUDIOS</span></div><p>Crafting stories through films &amp; series.</p></div>
-    <div class="footer-col"><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li><li><a href="about.html">About</a></li><li><a href="auditions.html">Auditions</a></li></ul></div>
-    <div class="footer-col"><h4>Follow Us</h4><ul><li><a href="https://www.youtube.com/@Mike_savagess" target="_blank">YouTube</a></li><li><a href="https://www.facebook.com/share/1CFWiWGXnq/" target="_blank">Facebook</a></li><li><a href="https://www.instagram.com/mikesavage_studios" target="_blank">Instagram</a></li><li><a href="https://www.tiktok.com/@mikesavagess" target="_blank">TikTok</a></li></ul></div>
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="MS" />
+        <span>MIKE SAVAGE STUDIOS</span>
+      </div>
+      <p>Crafting stories through films &amp; series.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="auditions.html">Auditions</a></li>
+        <li><a href="index.html#contact">Contact Us</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Follow Us</h4>
+      <ul>
+        <li><a href="https://www.youtube.com/@Mike_savagess" target="_blank">YouTube</a></li>
+        <li><a href="https://www.facebook.com/share/1CFWiWGXnq/" target="_blank">Facebook</a></li>
+        <li><a href="https://www.instagram.com/mikesavage_studios" target="_blank">Instagram</a></li>
+        <li><a href="https://www.tiktok.com/@mikesavagess" target="_blank">TikTok</a></li>
+        <li><a href="https://chat.whatsapp.com/ECAVXKOu3LA3C3oQZrsFTf" target="_blank">WhatsApp</a></li>
+        <li><a href="https://www.linkedin.com/in/mikesavage-studios-8025943b8" target="_blank">LinkedIn</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="footer-bottom"><span>&#169; 2026 Mike Savage Studios. All Rights Reserved.</span></div>
+  <div class="footer-bottom">
+    <span>&#169; 2026 Mike Savage Studios. All Rights Reserved.</span>
+  </div>
 </footer>
 
 <!-- FLOATING SOCIAL BAR -->
@@ -191,8 +364,14 @@
 </div>
 
 <script>
-  document.getElementById('navToggle').addEventListener('click', function() { document.getElementById('navLinks').classList.toggle('open'); });
-  document.querySelectorAll('#navLinks a').forEach(function(a) { a.addEventListener('click', function() { document.getElementById('navLinks').classList.remove('open'); }); });
+  document.getElementById('navToggle').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('#navLinks a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
 </script>
 </body>
 </html>
