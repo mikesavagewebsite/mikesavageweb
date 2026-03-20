@@ -9,8 +9,9 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --black: #000; --white: #fff; --light: #f8f8f8;
-      --border: #e5e5e5; --text: #333; --muted: #888;
+      --black: #000; --white: #fff;
+      --light: #f5f5f5; --border: #e0e0e0;
+      --text: #333; --muted: #888;
       --font-display: 'Bebas Neue', sans-serif;
       --font-body: 'Raleway', sans-serif;
     }
@@ -18,142 +19,212 @@
     body { background: var(--white); color: var(--text); font-family: var(--font-body); line-height: 1.7; padding-bottom: 52px; }
     a { color: inherit; text-decoration: none; }
 
-    /* NAV — BLACK */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: #000; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 70px; }
+    /* ══════════════════════════════
+       NAV — BLACK
+    ══════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: #000;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 70px;
+    }
     .nav-logo { display: flex; align-items: center; gap: 12px; }
     .nav-logo-img { width: 46px; height: 46px; object-fit: contain; mix-blend-mode: screen; }
     .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
-    .nav-logo-text span:first-child { font-family: var(--font-display); font-size: 18px; letter-spacing: 2px; color: #fff; }
-    .nav-logo-text span:last-child { font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+    .nav-logo-text .n1 { font-family: var(--font-display); font-size: 18px; letter-spacing: 2px; color: #fff; }
+    .nav-logo-text .n2 { font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.4); text-transform: uppercase; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); transition: color 0.2s; }
     .nav-links a:hover, .nav-links a.active { color: #fff; }
     .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .nav-toggle span { display: block; width: 24px; height: 2px; background: #fff; }
 
-    /* ═══ HERO — full width image with dark overlay ═══ */
-    .hero-about {
+    /* ══════════════════════════════
+       HERO — full width, dark image overlay, white text centered
+    ══════════════════════════════ */
+    .about-hero {
       margin-top: 70px;
       position: relative;
-      height: 420px;
-      background: url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/hero-03.jpeg') center/cover no-repeat;
-      display: flex; align-items: center; justify-content: center;
-      text-align: center;
+      height: 440px;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center; text-align: center;
     }
-    .hero-about::before {
-      content: '';
+    .about-hero-bg {
       position: absolute; inset: 0;
-      background: rgba(0,0,0,0.62);
+      background: url('https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/hero-05.jpeg') center/cover no-repeat;
+      filter: brightness(0.45);
     }
-    .hero-about-content { position: relative; z-index: 1; padding: 0 24px; }
-    .hero-about-content h1 { font-family: var(--font-display); font-size: clamp(36px,6vw,64px); letter-spacing: 4px; color: #fff; margin-bottom: 14px; }
-    .hero-about-content p { font-size: 15px; color: rgba(255,255,255,0.75); letter-spacing: 1px; }
+    .about-hero-content { position: relative; z-index: 1; padding: 0 24px; }
+    .about-hero-content h1 {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 6vw, 68px);
+      letter-spacing: 4px; color: #fff; margin-bottom: 14px;
+    }
+    .about-hero-content p { font-size: 15px; color: rgba(255,255,255,0.7); letter-spacing: 1px; }
 
-    /* ═══ WAVE PATTERN BACKGROUND ═══ */
-    .wave-bg {
-      background-color: #fafafa;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cdefs%3E%3Cpattern id='wave' x='0' y='0' width='200' height='200' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='100' cy='100' r='80' fill='none' stroke='%23e8e8e8' stroke-width='1'/%3E%3Ccircle cx='100' cy='100' r='60' fill='none' stroke='%23e8e8e8' stroke-width='0.8'/%3E%3Ccircle cx='100' cy='100' r='40' fill='none' stroke='%23e8e8e8' stroke-width='0.6'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23wave)'/%3E%3C/svg%3E");
+    /* ══════════════════════════════
+       WAVE / RIPPLE PATTERN BACKGROUND
+       — used on all white sections exactly like Dashing Films
+    ══════════════════════════════ */
+    .wave-section {
+      background-color: #fff;
+      background-image:
+        radial-gradient(circle at 50% 50%, transparent 30%, rgba(0,0,0,0.018) 31%, transparent 32%),
+        radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.015) 41%, transparent 42%),
+        radial-gradient(circle at 50% 50%, transparent 50%, rgba(0,0,0,0.012) 51%, transparent 52%),
+        radial-gradient(circle at 50% 50%, transparent 60%, rgba(0,0,0,0.01) 61%, transparent 62%),
+        radial-gradient(circle at 50% 50%, transparent 70%, rgba(0,0,0,0.008) 71%, transparent 72%),
+        radial-gradient(circle at 50% 50%, transparent 80%, rgba(0,0,0,0.006) 81%, transparent 82%),
+        radial-gradient(circle at 50% 50%, transparent 90%, rgba(0,0,0,0.004) 91%, transparent 92%);
+      background-size: 800px 800px;
+      background-position: center;
     }
 
-    /* ═══ SECTIONS ═══ */
-    .inner { max-width: 1100px; margin: 0 auto; padding: 70px 40px; }
-    .section-title { font-family: var(--font-display); font-size: clamp(26px,3.5vw,40px); letter-spacing: 2px; color: var(--black); margin-bottom: 8px; }
-    .section-underline { width: 44px; height: 3px; background: var(--black); margin-bottom: 32px; border-radius: 2px; }
-    p.body { font-size: 15px; color: #555; line-height: 1.9; margin-bottom: 16px; }
-    p.lead { font-size: 16px; color: #333; line-height: 1.9; margin-bottom: 16px; }
+    /* ══════════════════════════════
+       SHARED SECTION STYLES
+    ══════════════════════════════ */
+    .section-inner { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: 2px; color: var(--black); margin-bottom: 6px;
+    }
+    .section-line { width: 44px; height: 3px; background: var(--black); margin-bottom: 36px; border-radius: 2px; }
+    p.body-text { font-size: 15px; color: #555; line-height: 1.9; margin-bottom: 18px; }
+    p.lead-text { font-size: 16px; color: #333; line-height: 1.9; margin-bottom: 18px; font-weight: 500; }
 
-    /* ═══ WHO WE ARE ═══ */
-    .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .who-logo-box {
-      background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+    /* ══════════════════════════════
+       WHO WE ARE
+       — text left, logo right, wave bg
+    ══════════════════════════════ */
+    .who-grid {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 60px; align-items: center;
+    }
+    .who-logo-side {
+      background: var(--light);
       border-radius: 4px;
-      padding: 50px;
       display: flex; align-items: center; justify-content: center;
-      min-height: 280px;
+      padding: 50px 40px; min-height: 300px;
     }
-    .who-logo-box img { width: 160px; object-fit: contain; }
+    .who-logo-side img { width: 180px; object-fit: contain; }
 
-    /* ═══ MISSION & VISION — dark cards on light bg ═══ */
+    /* ══════════════════════════════
+       MISSION & VISION
+       — two dark cards side by side, wave bg
+    ══════════════════════════════ */
     .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .mv-card {
-      background: #1a1a2e;
-      border-radius: 4px;
-      padding: 36px;
-      color: #fff;
+      background: #1c1c2e;
+      border-radius: 6px;
+      padding: 40px 36px;
     }
-    .mv-card-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #aaa; font-weight: 700; margin-bottom: 12px; }
-    .mv-card h3 { font-family: var(--font-display); font-size: 22px; letter-spacing: 2px; color: #fff; margin-bottom: 14px; }
-    .mv-card p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.8; }
+    .mv-card-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: #aaa; margin-bottom: 16px;
+    }
+    .mv-card p { font-size: 14px; color: rgba(255,255,255,0.72); line-height: 1.85; }
 
-    /* ═══ OUR VALUES — white cards with icon circles ═══ */
-    .values-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+    /* ══════════════════════════════
+       OUR VALUES
+       — horizontal card row, circle icon on top, wave bg
+    ══════════════════════════════ */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
     .val-card {
       background: #fff;
       border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 28px 20px;
+      border-radius: 6px;
+      padding: 28px 18px 24px;
       text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
     }
-    .val-icon-circle {
-      width: 52px; height: 52px; border-radius: 50%;
+    .val-circle {
+      width: 54px; height: 54px; border-radius: 50%;
       background: #000;
       display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
-      margin: 0 auto 16px;
+      font-size: 22px; margin: 0 auto 18px;
     }
-    .val-card h4 { font-family: var(--font-display); font-size: 16px; letter-spacing: 1px; color: var(--black); margin-bottom: 10px; }
-    .val-card p { font-size: 13px; color: #777; line-height: 1.7; }
+    .val-card h4 {
+      font-family: var(--font-display); font-size: 16px;
+      letter-spacing: 1px; color: var(--black); margin-bottom: 10px;
+    }
+    .val-card p { font-size: 12px; color: #777; line-height: 1.7; }
 
-    /* ═══ MEET THE FOUNDER ═══ */
-    .founder-grid { display: grid; grid-template-columns: 300px 1fr; gap: 50px; align-items: start; }
-    .founder-photo { border-radius: 2px; overflow: hidden; }
-    .founder-photo img { width: 100%; display: block; }
-    .founder-name { font-family: var(--font-display); font-size: clamp(24px,3vw,36px); letter-spacing: 2px; color: var(--black); margin-bottom: 4px; }
-    .founder-role { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 20px; }
-    .founder-divider { width: 44px; height: 3px; background: var(--black); margin-bottom: 24px; border-radius: 2px; }
-    .founder-bio p { font-size: 15px; color: #555; line-height: 1.9; margin-bottom: 16px; }
+    /* ══════════════════════════════
+       MEET THE FOUNDER
+       — photo left, bio right, wave bg
+       — exactly like Dashing Films layout
+    ══════════════════════════════ */
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 56px; align-items: start;
+    }
+    .founder-photo img { width: 100%; display: block; border-radius: 2px; }
+    .founder-info { padding-top: 8px; }
+    .founder-name {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3.5vw, 40px);
+      letter-spacing: 2px; color: var(--black); margin-bottom: 4px;
+    }
+    .founder-role {
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--muted); font-weight: 700; margin-bottom: 20px;
+    }
+    .founder-divider { width: 44px; height: 3px; background: var(--black); margin-bottom: 28px; border-radius: 2px; }
+    .founder-info p { font-size: 15px; color: #555; line-height: 1.9; margin-bottom: 18px; }
 
-    /* ═══ OUR PRODUCTIONS — portrait cards like movie posters ═══ */
-    .prod-grid { display: flex; gap: 20px; flex-wrap: wrap; }
+    /* ══════════════════════════════
+       OUR PRODUCTIONS
+       — white bg, portrait cards
+       — Desktop: 4 per row | Mobile: 2 per row
+    ══════════════════════════════ */
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
     .prod-card {
-      width: 180px;
-      background: var(--white);
+      display: block;
+      background: #fff;
       border: 1px solid var(--border);
       border-radius: 4px;
       overflow: hidden;
-      display: block;
       transition: transform 0.25s, box-shadow 0.25s;
-      flex-shrink: 0;
     }
-    .prod-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+    .prod-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(0,0,0,0.13); }
     .prod-poster {
       width: 100%; aspect-ratio: 2/3;
-      overflow: hidden; position: relative;
-      background: #1a1a1a;
+      overflow: hidden; position: relative; background: #111;
     }
     .prod-poster img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
     .prod-card:hover .prod-poster img { transform: scale(1.05); }
     .prod-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%);
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 12px;
+      background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, transparent 55%);
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 14px;
     }
     .prod-badge {
-      display: inline-block;
-      background: var(--black);
-      color: #fff;
-      font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-      padding: 3px 8px; border-radius: 2px; margin-bottom: 6px;
-      width: fit-content;
+      display: inline-block; width: fit-content;
+      background: #000; color: #fff;
+      font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 2px; margin-bottom: 6px;
     }
-    .prod-name { font-family: var(--font-display); font-size: 14px; letter-spacing: 1px; color: #fff; line-height: 1.2; }
-    .prod-foot { padding: 10px 12px; }
-    .prod-watch { font-size: 11px; color: var(--muted); font-weight: 600; }
-    .prod-watch:hover { color: var(--black); }
+    .prod-name { font-family: var(--font-display); font-size: 15px; letter-spacing: 1px; color: #fff; line-height: 1.2; }
+    .prod-foot { padding: 10px 14px; }
+    .prod-watch { font-size: 11px; color: #888; font-weight: 600; }
+    .prod-card:hover .prod-watch { color: #000; }
 
-    /* FOOTER */
-    footer { background: var(--black); padding: 60px 40px 30px; }
+    /* ══════════════════════════════
+       FOOTER — BLACK
+    ══════════════════════════════ */
+    footer { background: #000; padding: 60px 40px 30px; }
     .footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
     .footer-brand p { color: #555; font-size: 13px; margin-top: 12px; line-height: 1.7; }
     .footer-logo { display: flex; align-items: center; gap: 12px; }
@@ -166,15 +237,25 @@
     .footer-col ul a:hover { color: #fff; }
     .footer-bottom { max-width: 1160px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; font-size: 12px; color: #444; }
 
-    /* SOCIAL BAR */
+    /* ══════════════════════════════
+       SOCIAL BAR
+    ══════════════════════════════ */
     .social-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; display: flex; height: 52px; }
     .social-bar a { flex: 1; display: flex; align-items: center; justify-content: center; color: #fff; transition: opacity 0.2s; }
     .social-bar a:hover { opacity: 0.85; }
-    .sb-youtube { background: #FF0000; } .sb-facebook { background: #1877F2; }
-    .sb-instagram { background: #C13584; } .sb-tiktok { background: #000; }
-    .sb-whatsapp { background: #25D366; } .sb-linkedin { background: #0A66C2; }
+    .sb-youtube   { background: #FF0000; }
+    .sb-facebook  { background: #1877F2; }
+    .sb-instagram { background: #C13584; }
+    .sb-tiktok    { background: #000000; }
+    .sb-whatsapp  { background: #25D366; }
+    .sb-linkedin  { background: #0A66C2; }
 
-    /* RESPONSIVE */
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
+    @media (max-width: 1024px) {
+      .values-grid { grid-template-columns: repeat(3, 1fr); }
+    }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; flex-direction: column; gap: 0; position: fixed; top: 70px; left: 0; right: 0; background: #000; z-index: 9999; border-bottom: 1px solid rgba(255,255,255,0.08); }
@@ -182,12 +263,21 @@
       .nav-links li { border-bottom: 1px solid rgba(255,255,255,0.06); }
       .nav-links a { display: block; padding: 16px 20px; }
       .nav-toggle { display: flex; }
-      .hero-about { height: 300px; }
-      .inner { padding: 50px 20px; }
-      .who-grid { grid-template-columns: 1fr; gap: 28px; }
+      .about-hero { height: 300px; }
+      .section-inner { padding: 56px 20px; }
+      /* Who We Are */
+      .who-grid { grid-template-columns: 1fr; gap: 30px; }
+      .who-logo-side { min-height: 180px; padding: 30px; }
+      .who-logo-side img { width: 120px; }
+      /* Mission & Vision */
       .mv-grid { grid-template-columns: 1fr; }
+      /* Values */
+      .values-grid { grid-template-columns: repeat(2, 1fr); }
+      /* Founder */
       .founder-grid { grid-template-columns: 1fr; gap: 28px; }
-      .prod-grid { justify-content: center; }
+      /* Productions — 2 per row on mobile */
+      .prod-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      /* Footer */
       .footer-inner { grid-template-columns: 1fr; gap: 28px; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
       footer { padding: 50px 20px 24px; }
@@ -200,7 +290,10 @@
 <nav>
   <a href="index.html" class="nav-logo">
     <img class="nav-logo-img" src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="Mike Savage Studios" />
-    <div class="nav-logo-text"><span>MIKE SAVAGE STUDIOS</span><span>Crafting Stories That Last</span></div>
+    <div class="nav-logo-text">
+      <span class="n1">MIKE SAVAGE STUDIOS</span>
+      <span class="n2">Crafting Stories That Last</span>
+    </div>
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html">Home</a></li>
@@ -213,38 +306,45 @@
   <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- HERO — full width image with dark overlay, white text -->
-<div class="hero-about">
-  <div class="hero-about-content">
+<!-- ════════════════════════════════════
+     HERO — full width image, dark overlay, white centered text
+════════════════════════════════════ -->
+<div class="about-hero">
+  <div class="about-hero-bg"></div>
+  <div class="about-hero-content">
     <h1>About Mike Savage Studios</h1>
     <p>Who we are, what we believe, and why we create</p>
   </div>
 </div>
 
-<!-- WHO WE ARE — white with wave pattern bg -->
-<div class="wave-bg">
-  <div class="inner">
+<!-- ════════════════════════════════════
+     WHO WE ARE — wave bg, text left, logo right
+════════════════════════════════════ -->
+<div class="wave-section">
+  <div class="section-inner">
     <div class="who-grid">
       <div>
         <h2 class="section-title">Who We Are</h2>
-        <div class="section-underline"></div>
-        <p class="lead">Mikesavage Studios is a powerhouse in film, comedy, and original entertainment, dedicated to creating bold, engaging content that resonates with audiences.</p>
-        <p class="body">From laugh-out-loud comedies to boundary-pushing films, the studio brings fresh, fearless storytelling to life with a distinct creative edge. Every project is crafted to entertain, provoke thought, and leave a lasting impression.</p>
-        <p class="body">Whether producing short films, viral skits, or full-length features, Mikesavage Studios stays true to its identity — real, raw, and relentlessly entertaining.</p>
-        <p class="body">Welcome to a world where creativity meets savage energy.</p>
+        <div class="section-line"></div>
+        <p class="lead-text">Mikesavage Studios is a powerhouse in film, comedy, and original entertainment, dedicated to creating bold, engaging content that resonates with audiences.</p>
+        <p class="body-text">From laugh-out-loud comedies to boundary-pushing films, the studio brings fresh, fearless storytelling to life with a distinct creative edge. Every project is crafted to entertain, provoke thought, and leave a lasting impression.</p>
+        <p class="body-text">Whether producing short films, viral skits, or full-length features, Mikesavage Studios stays true to its identity — real, raw, and relentlessly entertaining.</p>
+        <p class="body-text">Welcome to a world where creativity meets savage energy.</p>
       </div>
-      <div class="who-logo-box">
+      <div class="who-logo-side">
         <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="Mike Savage Studios" />
       </div>
     </div>
   </div>
 </div>
 
-<!-- MISSION & VISION — light grey with dark cards -->
-<div style="background:#f2f2f2;">
-  <div class="inner">
+<!-- ════════════════════════════════════
+     MISSION & VISION — wave bg, two dark cards
+════════════════════════════════════ -->
+<div class="wave-section" style="background-color:#fafafa;">
+  <div class="section-inner">
     <h2 class="section-title">Mission &amp; Vision</h2>
-    <div class="section-underline"></div>
+    <div class="section-line"></div>
     <div class="mv-grid">
       <div class="mv-card">
         <div class="mv-card-label">Our Mission</div>
@@ -258,39 +358,36 @@
   </div>
 </div>
 
-<!-- OUR VALUES — white with wave bg, white cards -->
-<div class="wave-bg">
-  <div class="inner">
+<!-- ════════════════════════════════════
+     OUR VALUES — wave bg, cards with black circle icons
+════════════════════════════════════ -->
+<div class="wave-section">
+  <div class="section-inner">
     <h2 class="section-title">Our Values</h2>
-    <div class="section-underline"></div>
+    <div class="section-line"></div>
     <div class="values-grid">
       <div class="val-card">
-        <div class="val-icon-circle">🎬</div>
+        <div class="val-circle">🎬</div>
         <h4>Bold Storytelling</h4>
-        <p>Every project is driven by the courage to tell stories that others won't.</p>
+        <p>Every project is driven by the courage to tell stories others won't.</p>
       </div>
       <div class="val-card">
-        <div class="val-icon-circle">✨</div>
+        <div class="val-circle">✨</div>
         <h4>Creative Excellence</h4>
-        <p>Quality, professionalism, and artistic integrity in every project we produce.</p>
+        <p>Quality, professionalism, and artistic integrity in every project.</p>
       </div>
       <div class="val-card">
-        <div class="val-icon-circle">❤️</div>
+        <div class="val-circle">❤️</div>
         <h4>Raw Authenticity</h4>
         <p>Real, honest stories rooted in genuine human experience.</p>
       </div>
       <div class="val-card">
-        <div class="val-icon-circle">😂</div>
-        <h4>Entertainment First</h4>
-        <p>Whether drama or comedy, entertainment drives everything we do.</p>
-      </div>
-      <div class="val-card">
-        <div class="val-icon-circle">🌍</div>
+        <div class="val-circle">🌍</div>
         <h4>Cultural Impact</h4>
-        <p>Content that reflects culture, sparks conversations, and leaves a lasting mark.</p>
+        <p>Content that reflects culture and leaves a lasting mark on audiences.</p>
       </div>
       <div class="val-card">
-        <div class="val-icon-circle">🤝</div>
+        <div class="val-circle">🤝</div>
         <h4>Collaboration</h4>
         <p>Great content is built through teamwork and shared creative passion.</p>
       </div>
@@ -298,16 +395,18 @@
   </div>
 </div>
 
-<!-- MEET THE FOUNDER — white with wave bg -->
-<div class="wave-bg">
-  <div class="inner">
+<!-- ════════════════════════════════════
+     MEET THE FOUNDER — wave bg, photo left, bio right
+════════════════════════════════════ -->
+<div class="wave-section" style="background-color:#fafafa;">
+  <div class="section-inner">
     <h2 class="section-title">Meet the Founder</h2>
-    <div class="section-underline"></div>
+    <div class="section-line"></div>
     <div class="founder-grid">
       <div class="founder-photo">
-        <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/founder.jpeg" alt="Onaolapo Olaniyi Micheal" />
+        <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/founder.jpeg" alt="Onaolapo Olaniyi Micheal — Founder, Mike Savage Studios" />
       </div>
-      <div class="founder-bio">
+      <div class="founder-info">
         <div class="founder-name">ONAOLAPO OLANIYI MICHEAL</div>
         <div class="founder-role">Founder &amp; Filmmaker</div>
         <div class="founder-divider"></div>
@@ -319,16 +418,19 @@
   </div>
 </div>
 
-<!-- OUR PRODUCTIONS — white, portrait poster cards -->
-<div style="background:#fff;">
-  <div class="inner">
+<!-- ════════════════════════════════════
+     OUR PRODUCTIONS — white bg, portrait cards
+     Desktop: 4 per row | Mobile: 2 per row
+════════════════════════════════════ -->
+<div class="wave-section">
+  <div class="section-inner">
     <h2 class="section-title">Our Productions</h2>
-    <div class="section-underline"></div>
+    <div class="section-line"></div>
     <div class="prod-grid">
 
-      <a href="https://youtu.be/RGkTHHqcBk8?si=H3NijlPKEfJDtuah" target="_blank" class="prod-card">
+      <a href="https://youtu.be/RGkTHHqcBk8" target="_blank" class="prod-card">
         <div class="prod-poster">
-          <img src="https://img.youtube.com/vi/RGkTHHqcBk8/hqdefault.jpg" alt="Love &amp; Betrayal" />
+          <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/poster-love-betrayal.jpeg" alt="Love &amp; Betrayal" />
           <div class="prod-overlay">
             <div class="prod-badge">Film</div>
             <div class="prod-name">LOVE &amp; BETRAYAL</div>
@@ -337,9 +439,9 @@
         <div class="prod-foot"><div class="prod-watch">&#9654; Watch on YouTube</div></div>
       </a>
 
-      <a href="https://youtu.be/NUc4qeGEV5A?si=1GMmDjX0SGj30zcm" target="_blank" class="prod-card">
+      <a href="https://youtu.be/NUc4qeGEV5A" target="_blank" class="prod-card">
         <div class="prod-poster">
-          <img src="https://img.youtube.com/vi/NUc4qeGEV5A/hqdefault.jpg" alt="Mr Caretaker" />
+          <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/poster-mr-caretaker.jpeg" alt="Mr Caretaker" />
           <div class="prod-overlay">
             <div class="prod-badge">Film</div>
             <div class="prod-name">MR CARETAKER</div>
@@ -348,9 +450,9 @@
         <div class="prod-foot"><div class="prod-watch">&#9654; Watch on YouTube</div></div>
       </a>
 
-      <a href="https://youtu.be/Sl76stqg1wA?si=gGVyyOSynREQ4O4i" target="_blank" class="prod-card">
+      <a href="https://youtu.be/Sl76stqg1wA" target="_blank" class="prod-card">
         <div class="prod-poster">
-          <img src="https://img.youtube.com/vi/Sl76stqg1wA/hqdefault.jpg" alt="Flatline" />
+          <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/poster-flatline.jpeg" alt="Flatline" />
           <div class="prod-overlay">
             <div class="prod-badge">Film</div>
             <div class="prod-name">FLATLINE</div>
@@ -358,6 +460,15 @@
         </div>
         <div class="prod-foot"><div class="prod-watch">&#9654; Watch on YouTube</div></div>
       </a>
+
+      <!-- 4th slot — Coming Soon card to fill desktop row of 4 -->
+      <div class="prod-card" style="cursor:default;">
+        <div class="prod-poster" style="background:#1a1a1a; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px;">
+          <span style="font-size:36px; opacity:0.2;">🎬</span>
+          <span style="font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:3px; color:rgba(255,255,255,0.2);">COMING SOON</span>
+        </div>
+        <div class="prod-foot"><div class="prod-watch" style="color:#ccc;">More coming soon</div></div>
+      </div>
 
     </div>
   </div>
@@ -367,24 +478,38 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo"><img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="MS" /><span>MIKE SAVAGE STUDIOS</span></div>
+      <div class="footer-logo">
+        <img src="https://raw.githubusercontent.com/mikesavagewebsite/mikesavageweb/main/logo.jpeg" alt="MS" />
+        <span>MIKE SAVAGE STUDIOS</span>
+      </div>
       <p>Crafting stories through films &amp; series.</p>
     </div>
-    <div class="footer-col"><h4>Navigate</h4><ul>
-      <li><a href="index.html">Home</a></li><li><a href="news.html">News</a></li>
-      <li><a href="about.html">About</a></li><li><a href="auditions.html">Auditions</a></li>
-      <li><a href="index.html#contact">Contact Us</a></li><li><a href="index.html#faq">FAQ</a></li>
-    </ul></div>
-    <div class="footer-col"><h4>Follow Us</h4><ul>
-      <li><a href="https://www.youtube.com/@Mike_savagess" target="_blank">YouTube</a></li>
-      <li><a href="https://www.facebook.com/share/1CFWiWGXnq/" target="_blank">Facebook</a></li>
-      <li><a href="https://www.instagram.com/mikesavage_studios" target="_blank">Instagram</a></li>
-      <li><a href="https://www.tiktok.com/@mikesavagess" target="_blank">TikTok</a></li>
-      <li><a href="https://chat.whatsapp.com/ECAVXKOu3LA3C3oQZrsFTf" target="_blank">WhatsApp</a></li>
-      <li><a href="https://www.linkedin.com/in/mikesavage-studios-8025943b8" target="_blank">LinkedIn</a></li>
-    </ul></div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="auditions.html">Auditions</a></li>
+        <li><a href="index.html#contact">Contact Us</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Follow Us</h4>
+      <ul>
+        <li><a href="https://www.youtube.com/@Mike_savagess" target="_blank">YouTube</a></li>
+        <li><a href="https://www.facebook.com/share/1CFWiWGXnq/" target="_blank">Facebook</a></li>
+        <li><a href="https://www.instagram.com/mikesavage_studios" target="_blank">Instagram</a></li>
+        <li><a href="https://www.tiktok.com/@mikesavagess" target="_blank">TikTok</a></li>
+        <li><a href="https://chat.whatsapp.com/ECAVXKOu3LA3C3oQZrsFTf" target="_blank">WhatsApp</a></li>
+        <li><a href="https://www.linkedin.com/in/mikesavage-studios-8025943b8" target="_blank">LinkedIn</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="footer-bottom"><span>&#169; 2026 Mike Savage Studios. All Rights Reserved.</span></div>
+  <div class="footer-bottom">
+    <span>&#169; 2026 Mike Savage Studios. All Rights Reserved.</span>
+  </div>
 </footer>
 
 <!-- FLOATING SOCIAL BAR -->
@@ -402,7 +527,9 @@
     document.getElementById('navLinks').classList.toggle('open');
   });
   document.querySelectorAll('#navLinks a').forEach(function(a) {
-    a.addEventListener('click', function() { document.getElementById('navLinks').classList.remove('open'); });
+    a.addEventListener('click', function() {
+      document.getElementById('navLinks').classList.remove('open');
+    });
   });
 </script>
 </body>
